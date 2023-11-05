@@ -1,4 +1,5 @@
-import { createMission, newPlateau } from "./modules/mission";
+/*
+import { newPlateau } from "./modules/mission";
 import { createRobot } from "./modules/robot";
 function processInput() {}
 
@@ -7,7 +8,6 @@ const robotData = [
   { start: "33E", move: "LMLMLMLMM" }
 ];
 function start(robotData: any) {
-  createMission("Mars");
   newPlateau([5, 5]);
   for (const data of robotData) {
     console.log(data["start"]);
@@ -16,3 +16,4 @@ function start(robotData: any) {
   }
   start(robotData);
 }
+*/

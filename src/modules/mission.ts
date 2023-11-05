@@ -1,20 +1,20 @@
 import { PlateauCoordinates } from "./plateau";
-import { planetMission } from "../types/mission.type";
+import { PlanetMission } from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
 
 export const mission = (function () {
-  const myMission: planetMission = {
-    id: 0,
+  const myMission: PlanetMission = {
+    id: 1,
     data: { robotArray: [], plateauArray: [] },
-    planet: ""
+    planet: "Mars"
   };
   return {
-    setId: (thisId: planetMission["id"]) => (myMission.id = thisId),
-    getId: (): planetMission["id"] => myMission.id,
-    setPlanet: (thisPlanet: planetMission["planet"]) =>
+    setId: (thisId: PlanetMission["id"]) => (myMission.id = thisId),
+    getId: (): PlanetMission["id"] => myMission.id,
+    setPlanet: (thisPlanet: PlanetMission["planet"]) =>
       (myMission.planet = thisPlanet),
-    getPlanet: (): planetMission["planet"] => myMission.planet,
+    getPlanet: (): PlanetMission["planet"] => myMission.planet,
     addPlateau: (coordinates: PlateauCoordinates) =>
       myMission.data.plateauArray.push(newPlateau(coordinates)),
     getPlateau: (thisId: number): void => findPlateauById(thisId),
@@ -23,7 +23,6 @@ export const mission = (function () {
   };
 })();
 
-export function createMission(planet: string) {}
 export function newPlateau(coordinates: PlateauCoordinates): typeof plateau {
   const thisPlateau = createPlateau(coordinates);
   return thisPlateau;
