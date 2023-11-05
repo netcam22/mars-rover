@@ -1,15 +1,14 @@
-import { PlateauCoordinates } from "./plateau";
-
-class MissionRobot {
-  id: number = 0;
-  name: string = "";
-  style: string = "";
-  position: PlateauCoordinates = [0, 0];
-  direction: string = "E";
-}
+import { PlateauCoordinates } from "../types/plateau.type";
+import { MissionRobot } from "../types/robot.type";
 
 export const robot = (function () {
-  const myRobot = new MissionRobot();
+  const myRobot: MissionRobot = {
+    id: 0,
+    name: "",
+    style: "",
+    position: [0, 0],
+    direction: "E"
+  };
   return {
     setId: (thisId: MissionRobot["id"]) => (myRobot.id = thisId),
     getId: (): MissionRobot["id"] => myRobot.id,
@@ -19,13 +18,26 @@ export const robot = (function () {
     getStyle: (): MissionRobot["style"] => myRobot.style,
     setPosition: (thisPosition: PlateauCoordinates) =>
       (myRobot.position = thisPosition),
-    getPosition: (): MissionRobot["position"] => myRobot.position
+    getPosition: (): MissionRobot["position"] => myRobot.position,
+    setDirection: (thisDirection: string) =>
+      (myRobot.direction = thisDirection),
+    getDirection: (): MissionRobot["direction"] => myRobot.direction
   };
 })();
 
-export function createRobot(): typeof robot {
-  const newRobot = { ...robot };
-  return newRobot;
+export function createRobot(
+  id: number,
+  name: string,
+  style: string,
+  position: PlateauCoordinates,
+  direction: string
+) {
+  robot.setId(id);
+  robot.setName(name);
+  robot.setStyle(style);
+  robot.setPosition(position);
+  robot.setDirection(direction);
+  return robot;
 }
 export function setUpRobot() {}
 export function rotateRobot() {}
