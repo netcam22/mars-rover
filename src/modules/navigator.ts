@@ -4,7 +4,9 @@ import { robot } from "../modules/robot";
 
 export function rotateRobot() {}
 export function moveRobot() {}
-export function getDirection() {}
+export function getDirection(angle: number): string | undefined {
+  return Object.keys(COMPASS).find(point => COMPASS[point] === angle);
+}
 
 export function getAngle(point: string): number {
   return COMPASS[point];
