@@ -27,9 +27,13 @@ describe("test robot object properties", () => {
     expect(robot.getName()).toBe("Mandy");
   });
 });
-describe("test get Robot property by id with reusable callback functions", () => {
+describe("test create robot and then get Robot property by id", () => {
   test("create new robot from mission", () => {
     expect(newRobot(0, "Jane", "green", [8, 8], "S")).toEqual(undefined);
+  });
+
+  test("get robot name", () => {
+    expect(getRobotName(0)).toBe("Jane");
   });
 
   test("set robot name", () => {
@@ -38,5 +42,36 @@ describe("test get Robot property by id with reusable callback functions", () =>
 
   test("get robot name", () => {
     expect(getRobotName(0)).toBe("Janet");
+  });
+  test("create new robot from mission", () => {
+    expect(newRobot(1, "Sam", "green", [9, 9], "S")).toEqual(undefined);
+  });
+
+  test("get robot name", () => {
+    expect(getRobotName(1)).toBe("Sam");
+  });
+
+  test("set robot name", () => {
+    expect(setRobotName(1, "John")).toBe("John");
+  });
+
+  test("get robot name", () => {
+    expect(getRobotName(1)).toBe("John");
+  });
+
+  test("create new robot from mission", () => {
+    expect(newRobot(2, "Bill", "green", [9, 9], "S")).toEqual(undefined);
+  });
+
+  test("get robot name", () => {
+    expect(getRobotName(2)).toBe("Bill");
+  });
+
+  test("create new robot from mission", () => {
+    expect(newRobot(3, "Ben", "green", [9, 9], "S")).toEqual(undefined);
+  });
+
+  test("get robot name", () => {
+    expect(getRobotName(3)).toBe("Ben");
   });
 });

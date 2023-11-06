@@ -33,12 +33,13 @@ export function createRobot(
   position: PlateauCoordinates,
   direction: string
 ) {
-  robot.setId(id);
-  robot.setName(name);
-  robot.setStyle(style);
-  robot.setPosition(position);
-  robot.setDirection(direction);
-  return robot;
+  const myRobot = { ...robot };
+  myRobot.setId(id);
+  myRobot.setName(name);
+  myRobot.setStyle(style);
+  myRobot.setPosition(position);
+  myRobot.setDirection(direction);
+  return myRobot;
 }
 
 function getRobot(thisId: number) {

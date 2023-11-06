@@ -11,22 +11,6 @@ export type PlanetMission = {
   planet: string;
 };
 
-/*
-export function getValueFromId(thisId: number, callback: GetterCallback): any {
-  return callback();
-}
-
-export function setValueFromId(
-  thisId: number,
-  callback: SetterCallback<string | number>,
-  value: string | number
-): any {
-  return callback(value);
-}
-*/
-
-/*
-
 export interface GetterCallback {
   (): string | number;
 }
@@ -34,4 +18,3 @@ export interface GetterCallback {
 export interface SetterCallback<value> {
   (value: string | number): string | number | void;
 }
-*/
