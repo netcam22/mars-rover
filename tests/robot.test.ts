@@ -1,4 +1,10 @@
-import { robot, setRobotName, getRobotName } from "../src/modules/robot";
+import {
+  robot,
+  setRobotName,
+  getRobotName,
+  setRobotStyle,
+  getRobotStyle
+} from "../src/modules/robot";
 import { newRobot } from "../src/modules/mission";
 
 describe("test robot object properties", () => {
@@ -73,5 +79,21 @@ describe("test create robot and then get Robot property by id", () => {
 
   test("get robot name", () => {
     expect(getRobotName(3)).toBe("Ben");
+  });
+
+  test("get robot style", () => {
+    expect(getRobotStyle(3)).toBe("green");
+  });
+
+  test("create new robot from mission", () => {
+    expect(newRobot(2, "John", "pink", [9, 9], "S")).toEqual(undefined);
+  });
+
+  test("set robot style", () => {
+    expect(setRobotStyle(2, "blue")).toBe("blue");
+  });
+
+  test("get robot style", () => {
+    expect(getRobotStyle(2)).toBe("blue");
   });
 });

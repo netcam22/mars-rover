@@ -32,7 +32,6 @@ export function newPlateau(
 ): void {
   const thisPlateau = createPlateau(gridSize, id, name, style);
   mission.addPlateau(thisPlateau);
-  console.log(mission.getPlateauArray()[0].getName());
 }
 
 export function newRobot(
@@ -43,5 +42,4 @@ export function newRobot(
   direction: string
 ): void {
   mission.addRobot(createRobot(id, name, style, position, direction));
-  console.log(mission.getRobotArray()[0].getName());
 }
