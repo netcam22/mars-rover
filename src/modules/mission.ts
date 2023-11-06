@@ -30,8 +30,7 @@ export function newPlateau(
   name: string,
   style: string
 ): void {
-  const thisPlateau = createPlateau(gridSize, id, name, style);
-  mission.addPlateau(thisPlateau);
+  mission.addPlateau(createPlateau(gridSize, id, name, style));
 }
 
 export function newRobot(

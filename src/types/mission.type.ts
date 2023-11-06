@@ -1,6 +1,5 @@
 import { robot } from "../modules/robot";
 import { plateau } from "../modules/plateau";
-import { MissionRobot } from "./robot.type";
 
 export type PlanetMission = {
   id: number;
