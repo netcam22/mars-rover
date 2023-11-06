@@ -3,7 +3,8 @@ import {
   getDirection,
   convertAngles,
   degreesToRadians,
-  radiansToDegrees
+  radiansToDegrees,
+  getVector
 } from "../src/modules/navigator";
 import {
   COMPASS,
@@ -101,7 +102,6 @@ describe("test conversion of between degrees and radians", () => {
   test("test degrees to radians", () => {
     expect(degreesToRadians(270)).toBe(4.71238898038469);
   });
-
   test("test radians to degrees", () => {
     expect(radiansToDegrees(3.141592653589793)).toBe(180);
   });
@@ -113,5 +113,20 @@ describe("test conversion of between degrees and radians", () => {
   });
   test("test radians to degrees", () => {
     expect(radiansToDegrees(0)).toBe(0);
+  });
+});
+
+describe("test creation of vector for move of 1 unit from a given direction", () => {
+  test("test move N", () => {
+    expect(getVector("N")).toEqual(["0", "1"]);
+  });
+  test("test move W", () => {
+    expect(getVector("W")).toEqual(["-1", "0"]);
+  });
+  test("test move W", () => {
+    expect(getVector("E")).toEqual(["1", "0"]);
+  });
+  test("test move S", () => {
+    expect(getVector("S")).toEqual(["0", "-1"]);
   });
 });
