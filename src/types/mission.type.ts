@@ -9,3 +9,15 @@ export type PlanetMission = {
   };
   planet: string;
 };
+
+export interface Callback<T1, T2 = void> {
+  (param: T1): T2;
+}
+
+export interface getterCallback {
+  (): string | number;
+}
+
+export interface setterCallback {
+  (): string | number;
+}

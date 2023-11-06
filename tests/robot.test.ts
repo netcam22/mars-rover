@@ -1,34 +1,28 @@
-import { mission } from "../src/modules/mission";
+import { robot } from "../src/modules/robot";
 
 describe("test robot object properties", () => {
-  test("get mission planet", () => {
-    expect(mission.getPlanet()).toBe("Mars");
+  test("set robot id", () => {
+    expect(robot.setId(2)).toBe(2);
   });
-  test("get mission id", () => {
-    expect(mission.getId()).toBe(1);
+  test("set robot namet", () => {
+    expect(robot.setName("Rowan")).toBe("Rowan");
   });
-  test("set mission id", () => {
-    expect(mission.setId(2)).toBe(2);
+  test("get robot id", () => {
+    expect(robot.getId()).toBe(2);
   });
-  test("set mission planet", () => {
-    expect(mission.setPlanet("Pluto")).toBe("Pluto");
+  test("get robot planet", () => {
+    expect(robot.getName()).toBe("Rowan");
   });
-  test("get mission id", () => {
-    expect(mission.getId()).toBe(2);
+  test("set robot id", () => {
+    expect(robot.setId(1)).toBe(1);
   });
-  test("get mission planet", () => {
-    expect(mission.getPlanet()).toBe("Pluto");
+  test("set robot name", () => {
+    expect(robot.setName("Mandy")).toBe("Mandy");
   });
-  test("set mission id", () => {
-    expect(mission.setId(1)).toBe(1);
+  test("get robot id", () => {
+    expect(robot.getId()).toBe(1);
   });
-  test("set mission planet", () => {
-    expect(mission.setPlanet("Mars")).toBe("Mars");
-  });
-  test("get mission id", () => {
-    expect(mission.getId()).toBe(1);
-  });
-  test("get mission planet", () => {
-    expect(mission.getPlanet()).toBe("Mars");
+  test("get robot planet", () => {
+    expect(robot.getName()).toBe("Mandy");
   });
 });
