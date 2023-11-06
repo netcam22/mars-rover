@@ -1,10 +1,14 @@
-import { getAngle, getDirection } from "../src/modules/navigator";
+import {
+  getAngle,
+  getDirection,
+  makeTrigValid
+} from "../src/modules/navigator";
 import {
   COMPASS,
   MissionCompass,
   CompassTrigKey
 } from "../src/types/compass.type";
-describe("test robot object properties", () => {
+describe("test compass points", () => {
   test("get angle Z from compass point to be undefined", () => {
     expect(getAngle("Z")).toBe(undefined);
   });
@@ -35,5 +39,46 @@ describe("test robot object properties", () => {
 
   test("get direction S from angle 270", () => {
     expect(getDirection(270)).toBe("S");
+  });
+});
+
+describe("test trigonometry", () => {
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(450)).toBe(90);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(-450)).toBe(270);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(-3700)).toBe(260);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(460)).toBe(100);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(0)).toBe(0);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(360)).toBe(0);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(110)).toBe(110);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(-10)).toBe(350);
+  });
+
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(-270)).toBe(90);
+  });
+  test("test modulus to revert angles within 0 - 360 range", () => {
+    expect(makeTrigValid(90)).toBe(90);
   });
 });
