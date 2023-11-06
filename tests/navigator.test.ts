@@ -4,7 +4,8 @@ import {
   convertAngles,
   degreesToRadians,
   radiansToDegrees,
-  getVector
+  getVector,
+  rotateRobot
 } from "../src/modules/navigator";
 import {
   COMPASS,
@@ -128,5 +129,33 @@ describe("test creation of vector for move of 1 unit from a given direction", ()
   });
   test("test move S", () => {
     expect(getVector("S")).toEqual(["0", "-1"]);
+  });
+});
+
+describe("test rotation of Robot from given location and move direction", () => {
+  test("test input R from L from N", () => {
+    expect(rotateRobot("N", "L")).toEqual("W");
+  });
+  test("test input R from N", () => {
+    expect(rotateRobot("N", "R")).toEqual("E");
+  });
+  test("test input L from E", () => {
+    expect(rotateRobot("E", "L")).toEqual("N");
+  });
+  test("test input R from E", () => {
+    expect(rotateRobot("E", "R")).toEqual("S");
+  });
+  test("test input L from S", () => {
+    expect(rotateRobot("S", "L")).toEqual("E");
+  });
+  test("test input R from S", () => {
+    expect(rotateRobot("S", "R")).toEqual("W");
+  });
+
+  test("test input L from W", () => {
+    expect(rotateRobot("W", "L")).toEqual("S");
+  });
+  test("test input W", () => {
+    expect(rotateRobot("W", "R")).toEqual("N");
   });
 });

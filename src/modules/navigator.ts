@@ -3,7 +3,12 @@ import { ROTATOR, MissionRotator } from "../types/rotator.type";
 import { robot } from "../modules/robot";
 type Vector = Array<string>;
 
-export function rotateRobot() {}
+export function rotateRobot(
+  point: string,
+  direction: string
+): string | undefined {
+  return getDirection(convertAngles(COMPASS[point] + ROTATOR[direction]));
+}
 export function moveRobot() {}
 export function getDirection(angle: number): string | undefined {
   return Object.keys(COMPASS).find(point => COMPASS[point] === angle);
