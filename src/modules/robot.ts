@@ -1,28 +1,28 @@
 import { PlateauCoordinates } from "../types/plateau.type";
-import { MissionRobot } from "../types/robot.type";
 import { mission } from "./mission";
 
+class Robot {
+  id: number = 0;
+  name: string = "";
+  style: string = "";
+  position: PlateauCoordinates = [0, 0];
+  direction: string = "E";
+}
 export const robot = (function () {
-  const myRobot: MissionRobot = {
-    id: 0,
-    name: "",
-    style: "",
-    position: [0, 0],
-    direction: "E"
-  };
+  const myRobot = new Robot();
   return {
-    setId: (thisId: MissionRobot["id"]) => (myRobot.id = thisId),
-    getId: (): MissionRobot["id"] => myRobot.id,
-    setName: (thisName: MissionRobot["name"]) => (myRobot.name = thisName),
-    getName: (): MissionRobot["name"] => myRobot.name,
-    setStyle: (thisStyle: MissionRobot["style"]) => (myRobot.style = thisStyle),
-    getStyle: (): MissionRobot["style"] => myRobot.style,
+    setId: (thisId: number) => (myRobot.id = thisId),
+    getId: (): number => myRobot.id,
+    setName: (thisName: string) => (myRobot.name = thisName),
+    getName: (): string => myRobot.name,
+    setStyle: (thisStyle: string) => (myRobot.style = thisStyle),
+    getStyle: (): string => myRobot.style,
     setPosition: (thisPosition: PlateauCoordinates) =>
       (myRobot.position = thisPosition),
-    getPosition: (): MissionRobot["position"] => myRobot.position,
+    getPosition: (): PlateauCoordinates => myRobot.position,
     setDirection: (thisDirection: string) =>
       (myRobot.direction = thisDirection),
-    getDirection: (): MissionRobot["direction"] => myRobot.direction
+    getDirection: (): string => myRobot.direction
   };
 })();
 
@@ -33,13 +33,15 @@ export function createRobot(
   position: PlateauCoordinates,
   direction: string
 ) {
-  const myRobot = { ...robot };
-  myRobot.setId(id);
-  myRobot.setName(name);
-  myRobot.setStyle(style);
-  myRobot.setPosition(position);
-  myRobot.setDirection(direction);
-  return myRobot;
+  robot.setId(id);
+  robot.setName(name);
+  robot.setStyle(style);
+  robot.setPosition(position);
+  robot.setDirection(direction);
+  console.log(
+    `Hello, I am a Rover called ${name} and I am facing direction ${direction} at co-ordinates at map co-ordinates (${position[0]}, ${position[1]}`
+  );
+  return robot;
 }
 
 function getRobot(thisId: number) {
@@ -49,21 +51,15 @@ function getRobot(thisId: number) {
   return thisRobot;
 }
 
-export const setRobotName = (
-  id: number,
-  value: MissionRobot["name"]
-): string | number | undefined => {
-  return getRobot(id)?.setName(value);
+export const setRobotName = (id: number, value: string) => {
+  getRobot(id)?.setName(value);
 };
 
 export const getRobotName = (id: number): string | undefined => {
   return getRobot(id)?.getName();
 };
-export const setRobotStyle = (
-  id: number,
-  value: MissionRobot["style"]
-): string | number | undefined => {
-  return getRobot(id)?.setStyle(value);
+export const setRobotStyle = (id: number, value: string) => {
+  getRobot(id)?.setStyle(value);
 };
 
 export const getRobotStyle = (id: number): string | undefined => {

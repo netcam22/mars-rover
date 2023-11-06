@@ -1,4 +1,4 @@
-type CompassTrigKey = { [point: string]: number };
+export type CompassTrigKey = { [point: string]: number };
 
 export const COMPASS: CompassTrigKey = {
   E: 0,

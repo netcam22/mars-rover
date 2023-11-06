@@ -43,7 +43,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("set robot name", () => {
-    expect(setRobotName(0, "Janet")).toBe("Janet");
+    expect(setRobotName(0, "Janet")).toBe(undefined);
   });
 
   test("get robot name", () => {
@@ -58,7 +58,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("set robot name", () => {
-    expect(setRobotName(1, "John")).toBe("John");
+    expect(setRobotName(1, "John")).toBe(undefined);
   });
 
   test("get robot name", () => {
@@ -90,7 +90,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("set robot style", () => {
-    expect(setRobotStyle(2, "blue")).toBe("blue");
+    expect(setRobotStyle(2, "blue")).toBe(undefined);
   });
 
   test("get robot style", () => {
