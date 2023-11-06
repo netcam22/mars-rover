@@ -1,10 +1,11 @@
-import { robot } from "../src/modules/robot";
+import { robot, setRobotName, getRobotName } from "../src/modules/robot";
+import { newRobot } from "../src/modules/mission";
 
 describe("test robot object properties", () => {
   test("set robot id", () => {
     expect(robot.setId(2)).toBe(2);
   });
-  test("set robot namet", () => {
+  test("set robot name", () => {
     expect(robot.setName("Rowan")).toBe("Rowan");
   });
   test("get robot id", () => {
@@ -24,5 +25,18 @@ describe("test robot object properties", () => {
   });
   test("get robot planet", () => {
     expect(robot.getName()).toBe("Mandy");
+  });
+});
+describe("test get Robot property by id with reusable callback functions", () => {
+  test("create new robot from mission", () => {
+    expect(newRobot(0, "Jane", "green", [8, 8], "S")).toEqual(undefined);
+  });
+
+  test("set robot name", () => {
+    expect(setRobotName(0, "Janet")).toBe("Janet");
+  });
+
+  test("get robot name", () => {
+    expect(getRobotName(0)).toBe("Janet");
   });
 });

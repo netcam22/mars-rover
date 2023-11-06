@@ -1,7 +1,6 @@
-import { getterCallback } from "../types/mission.type";
 import { PlateauCoordinates } from "../types/plateau.type";
 import { MissionRobot } from "../types/robot.type";
-import { mission, getValueFromId } from "./mission";
+import { mission } from "./mission";
 
 export const robot = (function () {
   const myRobot: MissionRobot = {
@@ -49,23 +48,26 @@ function getRobot(thisId: number) {
   return thisRobot;
 }
 
-function getRobotValue(
-  thisRobot: any,
-  callback: getterCallback
-): any | undefined {
-  return getValueFromId(0, thisRobot.callback);
-}
+export const setRobotName = (
+  id: number,
+  value: MissionRobot["name"]
+): string | number | undefined => {
+  return getRobot(id)?.setName(value);
+};
 
-const getRobotName = (id: number): string | undefined =>
-  getRobotValue(getRobot(id), robot.getName);
+export const getRobotName = (id: number): string | undefined => {
+  return getRobot(id)?.getName();
+};
+export const setRobotStyle = (
+  id: number,
+  value: MissionRobot["style"]
+): string | number | undefined => {
+  return getRobot(id)?.setStyle(value);
+};
 
-export function getRobotPosition(thisId: number): any {
-  const thisRobot = getRobot(thisId);
-  const robotPostition = {
-    position: thisRobot?.getPosition()
-  };
-  return robotPostition;
-}
+export const getRobotStyle = (id: number): string | undefined => {
+  return getRobot(id)?.getStyle();
+};
 export function setUpRobot() {}
 export function rotateRobot() {}
 export function moveRobot() {}

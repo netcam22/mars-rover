@@ -1,5 +1,6 @@
 import { robot } from "../modules/robot";
 import { plateau } from "../modules/plateau";
+import { MissionRobot } from "./robot.type";
 
 export type PlanetMission = {
   id: number;
@@ -10,14 +11,27 @@ export type PlanetMission = {
   planet: string;
 };
 
-export interface Callback<T1, T2 = void> {
-  (param: T1): T2;
+/*
+export function getValueFromId(thisId: number, callback: GetterCallback): any {
+  return callback();
 }
 
-export interface getterCallback {
+export function setValueFromId(
+  thisId: number,
+  callback: SetterCallback<string | number>,
+  value: string | number
+): any {
+  return callback(value);
+}
+*/
+
+/*
+
+export interface GetterCallback {
   (): string | number;
 }
 
-export interface setterCallback {
-  (): string | number;
+export interface SetterCallback<value> {
+  (value: string | number): string | number | void;
 }
+*/

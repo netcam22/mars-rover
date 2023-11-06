@@ -1,9 +1,5 @@
 import { Grid, PlateauCoordinates } from "../types/plateau.type";
-import {
-  PlanetMission,
-  getterCallback,
-  setterCallback
-} from "../types/mission.type";
+import { PlanetMission } from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
 
@@ -34,9 +30,7 @@ export function newPlateau(
   name: string,
   style: string
 ): void {
-  const thisPlateau = createPlateau(gridSize, id, name, style);
-  mission.addPlateau(thisPlateau);
-  console.log(mission.getPlateauArray()[0].getName());
+  mission.addPlateau(createPlateau(gridSize, id, name, style));
 }
 
 export function newRobot(
@@ -46,27 +40,5 @@ export function newRobot(
   position: PlateauCoordinates,
   direction: string
 ): void {
-  const thisRobot = createRobot(id, name, style, position, direction);
-  mission.addRobot(thisRobot);
-  console.log(mission.getRobotArray()[0].getName());
-}
-/*
-export function findPlateauById(thisId: number): Grid | undefined {
-  const thisPlateau = mission
-    .getPlateauArray()
-    .find(plateau => plateau.getId() === thisId);
-  console.log(thisPlateau?.getSize());
-  return thisPlateau?.getSize();
-}
-*/
-export function getValueFromId(thisId: number, callback: getterCallback): any {
-  return callback();
-}
-
-export function setValueFromId(
-  thisId: number,
-  callback: setterCallback,
-  value: any | undefined
-): any {
-  return callback();
+  mission.addRobot(createRobot(id, name, style, position, direction));
 }
