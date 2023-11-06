@@ -1,7 +1,9 @@
 import {
   getAngle,
   getDirection,
-  makeTrigValid
+  convertAngles,
+  degreesToRadians,
+  radiansToDegrees
 } from "../src/modules/navigator";
 import {
   COMPASS,
@@ -42,43 +44,74 @@ describe("test compass points", () => {
   });
 });
 
-describe("test trigonometry", () => {
+describe("test conversion of angles outside range", () => {
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(450)).toBe(90);
+    expect(convertAngles(450)).toBe(90);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(-450)).toBe(270);
+    expect(convertAngles(-450)).toBe(270);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(-3700)).toBe(260);
+    expect(convertAngles(-3700)).toBe(260);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(460)).toBe(100);
+    expect(convertAngles(460)).toBe(100);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(0)).toBe(0);
+    expect(convertAngles(0)).toBe(0);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(360)).toBe(0);
+    expect(convertAngles(360)).toBe(0);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(110)).toBe(110);
+    expect(convertAngles(110)).toBe(110);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(-10)).toBe(350);
+    expect(convertAngles(-10)).toBe(350);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(-270)).toBe(90);
+    expect(convertAngles(-270)).toBe(90);
   });
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(makeTrigValid(90)).toBe(90);
+    expect(convertAngles(90)).toBe(90);
+  });
+});
+
+describe("test conversion of between degrees and radians", () => {
+  test("test degrees to radians", () => {
+    expect(degreesToRadians(180)).toBe(3.141592653589793);
+  });
+
+  test("test degrees to radians", () => {
+    expect(degreesToRadians(90)).toBe(1.5707963267948966);
+  });
+
+  test("test degrees to radians", () => {
+    expect(degreesToRadians(0)).toBe(0);
+  });
+
+  test("test degrees to radians", () => {
+    expect(degreesToRadians(270)).toBe(4.71238898038469);
+  });
+
+  test("test radians to degrees", () => {
+    expect(radiansToDegrees(3.141592653589793)).toBe(180);
+  });
+  test("test radians to degrees", () => {
+    expect(radiansToDegrees(1.5707963267948966)).toBe(90);
+  });
+  test("test radians to degrees", () => {
+    expect(radiansToDegrees(4.71238898038469)).toBe(270);
+  });
+  test("test radians to degrees", () => {
+    expect(radiansToDegrees(0)).toBe(0);
   });
 });
