@@ -8,4 +8,5 @@ export interface MissionPlateau {
   style: string;
   size: Grid;
   layout: PlateauLayout;
+  occupied: PlateauCoordinates | undefined;
 }

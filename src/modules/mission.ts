@@ -1,12 +1,12 @@
 import { Grid, PlateauCoordinates } from "../types/plateau.type";
-import { RobotData, PlateauData } from "../types/mission.type";
+import { PlateauData, RobotData } from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
 
 class Mission {
   id: number = 1;
-  robotArray: Array<string> = [];
-  plateauArray: Array<string> = [];
+  robotArray: Array<RobotData> = [];
+  plateauArray: Array<PlateauData> = [];
   planet: string = "Mars";
 }
 
@@ -17,11 +17,10 @@ export const mission = (function () {
     getId: (): number => myMission.id,
     setPlanet: (thisPlanet: string) => (myMission.planet = thisPlanet),
     getPlanet: (): string => myMission.planet,
-    addPlateau: (thisPlateau: string) =>
-      myMission.plateauArray.push(thisPlateau),
-    getPlateauArray: (): Array<string> => myMission.plateauArray,
-    addRobot: (thisRobot: string) => myMission.robotArray.push(thisRobot),
-    getRobotArray: (): Array<string> => myMission.robotArray
+    addPlateau: (plateau: PlateauData) => myMission.plateauArray.push(plateau),
+    getPlateauArray: (): Array<PlateauData> => myMission.plateauArray,
+    addRobot: (thisRobot: RobotData) => myMission.robotArray.push(thisRobot),
+    getRobotArray: (): Array<RobotData> => myMission.robotArray
   };
 })();
 
@@ -32,7 +31,7 @@ export function newPlateau(
   style: string
 ): void {
   createPlateau(gridSize, id, name, style);
-  mission.addPlateau(name);
+  mission.addPlateau({ id: id, name: name });
 }
 
 export function newRobot(
@@ -43,5 +42,10 @@ export function newRobot(
   direction: string
 ): void {
   createRobot(id, name, style, position, direction);
-  mission.addRobot(name);
+  mission.addRobot({ id: id, name: name });
+  const robots: Array<string> = [];
+  mission.getRobotArray().forEach(element => {
+    robots.push(element.name);
+  });
+  console.log(robots);
 }

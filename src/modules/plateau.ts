@@ -7,14 +7,15 @@ import {
 export const plateau = (function () {
   const myPlateau: MissionPlateau = {
     id: 0,
-    name: "Bumpy Moon Surface",
-    style: "rectangle",
+    name: "",
+    style: "",
     size: [0, 0],
     layout: [
       [0, 0, 0],
       [0, 0, 0],
       [0, 0, 0]
-    ]
+    ],
+    occupied: undefined
   };
   return {
     setId: (thisId: number) => (myPlateau.id = thisId),
