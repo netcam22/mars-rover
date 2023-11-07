@@ -33,4 +33,6 @@ export function getVector(point: string): Vector {
 export function convertAngles(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
+
+export function createJourney(move: string) {}
 export function isMoveValid() {}

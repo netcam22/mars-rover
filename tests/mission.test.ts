@@ -34,12 +34,12 @@ describe("test mission object properties", () => {
 });
 describe("test create new plateau", () => {
   test("create new plateau from mission", () => {
-    expect(newPlateau([7, 7], "Bumpy Plateau", "Square")).toEqual(undefined);
+    expect(newPlateau("77")).toEqual(undefined);
   });
 });
 
 describe("test create new robot", () => {
   test("create new robot from mission", () => {
-    expect(newRobot("Jane", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 });

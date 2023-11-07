@@ -36,12 +36,13 @@ export const plateau = (function () {
 })();
 
 export function createPlateau(
-  gridSize: Grid,
+  gridSize: string,
   id: number,
   name: string,
   style: string
 ) {
-  plateau.setSize(gridSize);
+  const grid: Grid = [];
+  plateau.setSize(grid);
   plateau.setId(id);
   plateau.setName(name);
   plateau.setStyle(style);

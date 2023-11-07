@@ -3,10 +3,12 @@ import {
   PlateauData,
   RobotData,
   RobotStart,
-  Journey
+  Journey,
+  RobotInput
 } from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
+import { createJourney } from "./navigator";
 class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
@@ -28,10 +30,19 @@ export const mission = (function () {
   };
 })();
 
-export function newPlateau(gridSize: Grid, name: string, style: string): void {
+export function start(gridSize: string, robotInput: RobotInput) {
+  newPlateau(gridSize);
+  robotInput.forEach(robotInfo =>
+    newRobot(robotInfo[0], robotInfo[1], robotInfo[2])
+  );
+}
+
+export function newPlateau(gridSize: string): void {
+  const name = "Bumpy ground",
+    style: string = "rectangle";
   const id = mission.getRobotArray.length;
   createPlateau(gridSize, id, name, style);
-  mission.addPlateau({ name: name, gridSize: gridSize });
+  mission.addPlateau({ name, gridSize });
 }
 
 function processRobotStart(start: string): RobotStart {
@@ -40,16 +51,13 @@ function processRobotStart(start: string): RobotStart {
   return { position, direction };
 }
 
-export function newRobot(
-  name: string,
-  style: string,
-  start: string,
-  move: string
-): void {
+export function newRobot(name: string, start: string, move: string): void {
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;
+  const style = "turn-left-at-obstacle";
   createRobot(id, name, style, position, direction);
+  const myJourney = createJourney(move);
   const journey: Journey = [];
   mission.addRobot({ name, start, move, journey });
   /*

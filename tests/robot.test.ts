@@ -29,7 +29,7 @@ describe("test robot object properties", () => {
 });
 describe("test create robot and then get Robot property by id", () => {
   test("create new robot from mission", () => {
-    expect(newRobot("Jane", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
   test("get robot name", () => {
     expect(robot.getName()).toBe("Jane");
@@ -43,7 +43,7 @@ describe("test create robot and then get Robot property by id", () => {
     expect(robot.getName()).toBe("Janet");
   });
   test("create new robot from mission", () => {
-    expect(newRobot("Sam", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Sam", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
@@ -59,7 +59,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot("Bill", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Bill", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
@@ -67,7 +67,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot("Ben", "green", "33E", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Ben", "33E", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
@@ -75,18 +75,20 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("get robot style", () => {
-    expect(robot.getStyle()).toBe("green");
+    expect(robot.getStyle()).toBe("turn-left-at-obstacle");
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot("John", "pink", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("John", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("set robot style", () => {
-    expect(robot.setStyle("blue")).toBe("blue");
+    expect(robot.setStyle("turn-right-at-obstacle")).toBe(
+      "turn-right-at-obstacle"
+    );
   });
 
   test("get robot style", () => {
-    expect(robot.getStyle()).toBe("blue");
+    expect(robot.getStyle()).toBe("turn-right-at-obstacle");
   });
 });
