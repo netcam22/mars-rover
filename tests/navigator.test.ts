@@ -6,7 +6,8 @@ import {
   radiansToDegrees,
   getVector,
   rotateRobot,
-  rotator
+  rotator,
+  createMoves
 } from "../src/modules/navigator";
 describe("test compass points", () => {
   test("get angle Z from compass point to be undefined", () => {
@@ -178,8 +179,16 @@ describe("test if value is Rotator", () => {
   test("test input W", () => {
     expect(rotator("W")).toBe(undefined);
   });
-
   test("test input empty string", () => {
     expect(rotator("")).toBe(undefined);
+  });
+});
+
+describe("test creating a moves from a string", () => {
+  test("test input 12N LMLMLMLMM", () => {
+    expect(createMoves([1, 2], "N", "LMLMLMLMM")).toBe("13N");
+  });
+  test("test input 33E MMRMMRMRRM", () => {
+    expect(createMoves([3, 3], "E", "MMRMMRMRRM")).toBe("51E");
   });
 });

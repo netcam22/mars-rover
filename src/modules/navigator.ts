@@ -2,6 +2,7 @@ import { COMPASS } from "../types/compass.type";
 import { ROTATOR, Rotator, RotatorKey } from "../types/rotator.type";
 import { Journey } from "../types/robot.type";
 import { PlateauCoordinates } from "../types/plateau.type";
+import { plateau } from "./plateau";
 type Vector = Array<number>;
 
 export function rotateRobot(
@@ -10,7 +11,9 @@ export function rotateRobot(
 ): string | undefined {
   return getDirection(convertAngles(COMPASS[point] + ROTATOR[direction]));
 }
+
 export function moveRobot() {}
+
 export function getDirection(angle: number): string | undefined {
   return Object.keys(COMPASS).find(point => COMPASS[point] === angle);
 }
@@ -38,20 +41,62 @@ export function getVector(point: string): Vector {
 export function convertAngles(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
-
+/*
 export function createMoves(
   position: PlateauCoordinates,
   direction: string,
   move: string
 ): Journey {
   const journeyArray: Journey = [];
+  let dir = direction, [a, b] = [...position];
+  journeyArray.push(position);
   for (const char of move) {
-    {
-      if (rotator(char)) {
-        console.log(char);
-      }
-    }
+    if (char === "M") {
+      const [x, y] = getVector(dir);
+      
   }
+  return journeyArray;
+}
+*/
+
+export function createMoves(
+  position: PlateauCoordinates,
+  direction: string,
+  move: string
+): Journey {
+  const pos = [...position];
+  let dir = direction;
+  const thisJourney = `0${move}`
+    .split("")
+    .map(
+      (char: string, i: number, array: Array<string>): PlateauCoordinates => {
+        if (i === 0) {
+          return pos;
+        } else if (char === "M") {
+          return getVector(dir);
+        } else if (rotator(char)) {
+          const newDir = rotateRobot(dir, char);
+          dir = newDir ? newDir : dir;
+          return [0, 0];
+        } else {
+          return [0, 0];
+        }
+      }
+    );
+  console.log(thisJourney);
+  const final = thisJourney.reduce(
+    (acc: PlateauCoordinates, item: PlateauCoordinates): PlateauCoordinates => {
+      if (Array.isArray(item)) {
+        const [a, b] = item,
+          [x, y] = acc;
+        return [a + x, b + y];
+      }
+      return [0, 0];
+    },
+    [0, 0]
+  );
+  console.log(final);
+  const journeyArray: Journey = [];
   return journeyArray;
 }
 
