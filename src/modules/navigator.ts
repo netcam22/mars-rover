@@ -1,5 +1,7 @@
 import { COMPASS } from "../types/compass.type";
-import { ROTATOR } from "../types/rotator.type";
+import { ROTATOR, Rotator, RotatorKey } from "../types/rotator.type";
+import { Journey } from "../types/robot.type";
+import { PlateauCoordinates } from "../types/plateau.type";
 type Vector = Array<number>;
 
 export function rotateRobot(
@@ -34,5 +36,32 @@ export function convertAngles(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
 
-export function createJourney(move: string) {}
+export function createMoves(
+  position: PlateauCoordinates,
+  direction: string,
+  move: string
+): Journey {
+  const journeyArray: Journey = [];
+  for (const char of move) {
+    {
+      if (rotator(char)) {
+        console.log(char);
+      }
+    }
+  }
+  return journeyArray;
+}
+
+function rotator(char: string): number | undefined {
+  if (ROTATOR.hasOwnProperty(char)) {
+    return ROTATOR[char];
+  }
+  return undefined;
+}
+function compassPoint(char: string): number | undefined {
+  if (COMPASS.hasOwnProperty(char)) {
+    return COMPASS[char];
+  }
+  return undefined;
+}
 export function isMoveValid() {}

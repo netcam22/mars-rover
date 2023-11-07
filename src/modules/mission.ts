@@ -3,12 +3,10 @@ import {
   PlateauData,
   RobotData,
   RobotStart,
-  Journey,
   RobotInput
 } from "../types/mission.type";
-import { createPlateau, plateau } from "./plateau";
-import { createRobot, robot } from "./robot";
-import { createJourney } from "./navigator";
+import { createPlateau } from "./plateau";
+import { createRobot, createJourney } from "./robot";
 class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
@@ -46,19 +44,20 @@ export function newPlateau(gridSize: string): void {
 }
 
 function processRobotStart(start: string): RobotStart {
-  const direction = start[0],
-    position: PlateauCoordinates = [parseInt(start[1]), parseInt(start[2])];
+  const position: PlateauCoordinates = [parseInt(start[0]), parseInt(start[1])],
+    direction = start[2];
   return { position, direction };
 }
 
 export function newRobot(name: string, start: string, move: string): void {
+  console.log(name, start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
+  console.log(position, direction);
   const id = mission.getRobotArray.length;
   const style = "turn-left-at-obstacle";
   createRobot(id, name, style, position, direction);
-  const myJourney = createJourney(move);
-  const journey: Journey = [];
+  const journey = createJourney(position, direction, move);
   mission.addRobot({ name, start, move, journey });
   /*
   const robots: Array<string> = [];

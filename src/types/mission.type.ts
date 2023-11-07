@@ -1,9 +1,6 @@
-import { robot } from "../modules/robot";
-import { plateau } from "../modules/plateau";
-import { Grid, PlateauCoordinates } from "./plateau.type";
-import { RotatorKey } from "./rotator.type";
+import { PlateauCoordinates } from "./plateau.type";
 export type RobotInput = Array<Array<string>>;
-export type Journey = Array<PlateauCoordinates | string>;
+import { Journey } from "./robot.type";
 export type RobotData = {
   name: string;
   start: string;

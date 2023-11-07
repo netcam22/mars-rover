@@ -1,5 +1,6 @@
 import { PlateauCoordinates } from "../types/plateau.type";
-
+import { createMoves } from "./navigator";
+import { Journey } from "../types/robot.type";
 class Robot {
   id: number = 0;
   name: string = "";
@@ -38,8 +39,16 @@ export function createRobot(
   robot.setPosition(position);
   robot.setDirection(direction);
   console.log(
-    `Hello, I am a Rover called ${name} and I am facing direction ${direction} at co-ordinates at map co-ordinates (${position[0]}, ${position[1]}`
+    `Hello, I am a Rover called ${name} and I am facing direction ${direction} at map co-ordinates (${position[0]}, ${position[1]})`
   );
+}
+
+export function createJourney(
+  position: PlateauCoordinates,
+  direction: string,
+  move: string
+): Journey {
+  return createMoves(position, direction, move);
 }
 export function setUpRobot() {}
 export function rotateRobot() {}

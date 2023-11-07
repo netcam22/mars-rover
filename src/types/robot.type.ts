@@ -6,3 +6,5 @@ export interface MissionRobot {
   position: PlateauCoordinates;
   direction: string;
 }
+
+export type Journey = Array<PlateauCoordinates | string>;
