@@ -5,7 +5,8 @@ import {
   degreesToRadians,
   radiansToDegrees,
   getVector,
-  rotateRobot
+  rotateRobot,
+  rotator
 } from "../src/modules/navigator";
 describe("test compass points", () => {
   test("get angle Z from compass point to be undefined", () => {
@@ -129,28 +130,56 @@ describe("test creation of vector for move of 1 unit from a given direction", ()
 
 describe("test rotation of Robot from given location and move direction", () => {
   test("test input R from L from N", () => {
-    expect(rotateRobot("N", "L")).toEqual("W");
+    expect(rotateRobot("N", "L")).toBe("W");
   });
   test("test input R from N", () => {
-    expect(rotateRobot("N", "R")).toEqual("E");
+    expect(rotateRobot("N", "R")).toBe("E");
   });
   test("test input L from E", () => {
-    expect(rotateRobot("E", "L")).toEqual("N");
+    expect(rotateRobot("E", "L")).toBe("N");
   });
   test("test input R from E", () => {
-    expect(rotateRobot("E", "R")).toEqual("S");
+    expect(rotateRobot("E", "R")).toBe("S");
   });
   test("test input L from S", () => {
-    expect(rotateRobot("S", "L")).toEqual("E");
+    expect(rotateRobot("S", "L")).toBe("E");
   });
   test("test input R from S", () => {
-    expect(rotateRobot("S", "R")).toEqual("W");
+    expect(rotateRobot("S", "R")).toBe("W");
   });
 
   test("test input L from W", () => {
-    expect(rotateRobot("W", "L")).toEqual("S");
+    expect(rotateRobot("W", "L")).toBe("S");
   });
   test("test input W", () => {
-    expect(rotateRobot("W", "R")).toEqual("N");
+    expect(rotateRobot("W", "R")).toBe("N");
+  });
+});
+
+describe("test if value is Rotator", () => {
+  test("test input L", () => {
+    expect(rotator("L")).toBe(90);
+  });
+  test("test input R", () => {
+    expect(rotator("R")).toBe(-90);
+  });
+  test("test input M", () => {
+    expect(rotator("M")).toBe(undefined);
+  });
+  test("test input N", () => {
+    expect(rotator("N")).toBe(undefined);
+  });
+  test("test input S", () => {
+    expect(rotator("S")).toBe(undefined);
+  });
+  test("test input E", () => {
+    expect(rotator("E")).toBe(undefined);
+  });
+  test("test input W", () => {
+    expect(rotator("W")).toBe(undefined);
+  });
+
+  test("test input empty string", () => {
+    expect(rotator("")).toBe(undefined);
   });
 });

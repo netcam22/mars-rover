@@ -22,8 +22,10 @@ export function radiansToDegrees(radians: number) {
   return Math.round((radians * 180) / Math.PI);
 }
 
-export function getAngle(point: string): number {
-  return COMPASS[point];
+export function getAngle(point: string): number | undefined {
+  if (COMPASS.hasOwnProperty(point)) {
+    return COMPASS[point];
+  }
 }
 export function getVector(point: string): Vector {
   const XVector = Math.round(Math.cos(degreesToRadians(COMPASS[point])));
@@ -32,6 +34,7 @@ export function getVector(point: string): Vector {
   const Y = YVector === -0 ? Math.abs(YVector) : YVector;
   return [X, Y];
 }
+
 export function convertAngles(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
@@ -52,16 +55,11 @@ export function createMoves(
   return journeyArray;
 }
 
-function rotator(char: string): number | undefined {
+export function rotator(char: string): number | undefined {
   if (ROTATOR.hasOwnProperty(char)) {
     return ROTATOR[char];
   }
   return undefined;
 }
-function compassPoint(char: string): number | undefined {
-  if (COMPASS.hasOwnProperty(char)) {
-    return COMPASS[char];
-  }
-  return undefined;
-}
+
 export function isMoveValid() {}
