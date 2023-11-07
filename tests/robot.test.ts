@@ -1,10 +1,4 @@
-import {
-  robot,
-  setRobotName,
-  getRobotName,
-  setRobotStyle,
-  getRobotStyle
-} from "../src/modules/robot";
+import { robot } from "../src/modules/robot";
 import { newRobot } from "../src/modules/mission";
 
 describe("test robot object properties", () => {
@@ -35,64 +29,64 @@ describe("test robot object properties", () => {
 });
 describe("test create robot and then get Robot property by id", () => {
   test("create new robot from mission", () => {
-    expect(newRobot(0, "Jane", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Jane", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
   test("get robot name", () => {
-    expect(getRobotName(0)).toBe("Jane");
+    expect(robot.getName()).toBe("Jane");
   });
 
   test("set robot name", () => {
-    expect(setRobotName(0, "Janet")).toBe(undefined);
+    expect(robot.setName("Janet")).toBe("Janet");
   });
 
   test("get robot name", () => {
-    expect(getRobotName(0)).toBe("Janet");
+    expect(robot.getName()).toBe("Janet");
   });
   test("create new robot from mission", () => {
-    expect(newRobot(1, "Sam", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Sam", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
-    expect(getRobotName(1)).toBe("Sam");
+    expect(robot.getName()).toBe("Sam");
   });
 
   test("set robot name", () => {
-    expect(setRobotName(1, "John")).toBe(undefined);
+    expect(robot.setName("John")).toBe("John");
   });
 
   test("get robot name", () => {
-    expect(getRobotName(1)).toBe("John");
+    expect(robot.getName()).toBe("John");
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot(2, "Bill", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Bill", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
-    expect(getRobotName(2)).toBe("Bill");
+    expect(robot.getName()).toBe("Bill");
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot(3, "Ben", "green", "33E", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Ben", "green", "33E", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
-    expect(getRobotName(3)).toBe("Ben");
+    expect(robot.getName()).toBe("Ben");
   });
 
   test("get robot style", () => {
-    expect(getRobotStyle(3)).toBe("green");
+    expect(robot.getStyle()).toBe("green");
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot(2, "John", "pink", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("John", "pink", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("set robot style", () => {
-    expect(setRobotStyle(2, "blue")).toBe(undefined);
+    expect(robot.setStyle("blue")).toBe("blue");
   });
 
   test("get robot style", () => {
-    expect(getRobotStyle(2)).toBe("blue");
+    expect(robot.getStyle()).toBe("blue");
   });
 });

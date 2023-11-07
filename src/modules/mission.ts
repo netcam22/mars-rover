@@ -2,7 +2,6 @@ import { Grid, PlateauCoordinates } from "../types/plateau.type";
 import { PlateauData, RobotData, RobotStart } from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
-import { CompassTrigKey } from "../types/compass.type";
 class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
@@ -24,14 +23,10 @@ export const mission = (function () {
   };
 })();
 
-export function newPlateau(
-  gridSize: Grid,
-  id: number,
-  name: string,
-  style: string
-): void {
+export function newPlateau(gridSize: Grid, name: string, style: string): void {
+  const id = mission.getRobotArray.length;
   createPlateau(gridSize, id, name, style);
-  mission.addPlateau({ id: id, name: name });
+  mission.addPlateau({ name: name, gridSize: gridSize });
 }
 
 function processRobotStart(start: string): RobotStart {
@@ -41,7 +36,6 @@ function processRobotStart(start: string): RobotStart {
 }
 
 export function newRobot(
-  id: number,
   name: string,
   style: string,
   start: string,
@@ -49,8 +43,9 @@ export function newRobot(
 ): void {
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
+  const id = mission.getRobotArray.length;
   createRobot(id, name, style, position, direction);
-  mission.addRobot({ id, name, start, move });
+  mission.addRobot({ name, start, move });
   /*
   const robots: Array<string> = [];
   mission.getRobotArray().forEach(element => {
@@ -58,4 +53,9 @@ export function newRobot(
   });
   console.log(robots);
   */
+}
+
+function getRobot(thisId: number) {
+  const robots = mission.getRobotArray();
+  return robots[thisId];
 }

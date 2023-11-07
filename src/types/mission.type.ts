@@ -1,15 +1,14 @@
 import { robot } from "../modules/robot";
 import { plateau } from "../modules/plateau";
-import { PlateauCoordinates } from "./plateau.type";
+import { Grid, PlateauCoordinates } from "./plateau.type";
 import { CompassTrigKey } from "./compass.type";
 
 export type RobotData = {
-  id: number;
   name: string;
   start: string;
   move: string;
 };
-export type PlateauData = { id: number; name: string };
+export type PlateauData = { name: string; gridSize: Grid };
 export type RobotStart = {
   position: PlateauCoordinates;
   direction: string;

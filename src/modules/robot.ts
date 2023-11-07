@@ -1,5 +1,4 @@
 import { PlateauCoordinates } from "../types/plateau.type";
-import { mission } from "./mission";
 
 class Robot {
   id: number = 0;
@@ -42,26 +41,6 @@ export function createRobot(
     `Hello, I am a Rover called ${name} and I am facing direction ${direction} at co-ordinates at map co-ordinates (${position[0]}, ${position[1]}`
   );
 }
-
-function getRobot(thisId: number) {
-  // const thisRobot = mission.getRobotArray().find(robot => robot.id === thisId);
-  //return thisRobot;
-}
-
-export const setRobotName = (id: number, value: string) => {
-  robot.setName(value);
-};
-
-export const getRobotName = (id: number): string | undefined => {
-  return robot.getName();
-};
-export const setRobotStyle = (id: number, value: string) => {
-  robot.setStyle(value);
-};
-
-export const getRobotStyle = (id: number): string | undefined => {
-  return robot.getStyle();
-};
 export function setUpRobot() {}
 export function rotateRobot() {}
 export function moveRobot() {}
