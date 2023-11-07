@@ -1,7 +1,6 @@
 import { COMPASS, MissionCompass, CompassTrigKey } from "../types/compass.type";
 import { ROTATOR, MissionRotator } from "../types/rotator.type";
-import { robot } from "../modules/robot";
-type Vector = Array<string>;
+type Vector = Array<number>;
 
 export function rotateRobot(
   point: string,
@@ -27,8 +26,8 @@ export function getAngle(point: string): number {
 export function getVector(point: string): Vector {
   const XVector = Math.round(Math.cos(degreesToRadians(COMPASS[point])));
   const YVector = Math.round(Math.sin(degreesToRadians(COMPASS[point])));
-  const X = XVector === -0 ? Math.abs(XVector).toString() : XVector.toString();
-  const Y = YVector === -0 ? Math.abs(YVector).toString() : YVector.toString();
+  const X = XVector === -0 ? Math.abs(XVector) : XVector;
+  const Y = YVector === -0 ? Math.abs(YVector) : YVector;
   return [X, Y];
 }
 export function convertAngles(angle: number) {

@@ -7,11 +7,6 @@ import {
   getVector,
   rotateRobot
 } from "../src/modules/navigator";
-import {
-  COMPASS,
-  MissionCompass,
-  CompassTrigKey
-} from "../src/types/compass.type";
 describe("test compass points", () => {
   test("get angle Z from compass point to be undefined", () => {
     expect(getAngle("Z")).toBe(undefined);
@@ -119,16 +114,16 @@ describe("test conversion of between degrees and radians", () => {
 
 describe("test creation of vector for move of 1 unit from a given direction", () => {
   test("test move N", () => {
-    expect(getVector("N")).toEqual(["0", "1"]);
+    expect(getVector("N")).toEqual([0, 1]);
   });
   test("test move W", () => {
-    expect(getVector("W")).toEqual(["-1", "0"]);
+    expect(getVector("W")).toEqual([-1, 0]);
   });
   test("test move W", () => {
-    expect(getVector("E")).toEqual(["1", "0"]);
+    expect(getVector("E")).toEqual([1, 0]);
   });
   test("test move S", () => {
-    expect(getVector("S")).toEqual(["0", "-1"]);
+    expect(getVector("S")).toEqual([0, -1]);
   });
 });
 
