@@ -35,9 +35,7 @@ describe("test robot object properties", () => {
 });
 describe("test create robot and then get Robot property by id", () => {
   test("create new robot from mission", () => {
-    expect(
-      newRobot(0, "Jane", "green", [8, 8], "S", "12N", "LMLMLMLMM")
-    ).toEqual(undefined);
+    expect(newRobot(0, "Jane", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
   test("get robot name", () => {
     expect(getRobotName(0)).toBe("Jane");
@@ -51,9 +49,7 @@ describe("test create robot and then get Robot property by id", () => {
     expect(getRobotName(0)).toBe("Janet");
   });
   test("create new robot from mission", () => {
-    expect(
-      newRobot(1, "Sam", "green", [9, 9], "S", "12N", "LMLMLMLMM")
-    ).toEqual(undefined);
+    expect(newRobot(1, "Sam", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
@@ -69,9 +65,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(
-      newRobot(2, "Bill", "green", [9, 9], "S", "12N", "LMLMLMLMM")
-    ).toEqual(undefined);
+    expect(newRobot(2, "Bill", "green", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
@@ -79,9 +73,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(
-      newRobot(3, "Ben", "green", [9, 9], "S", "33E", "LMLMLMLMM")
-    ).toEqual(undefined);
+    expect(newRobot(3, "Ben", "green", "33E", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("get robot name", () => {
@@ -93,9 +85,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(
-      newRobot(2, "John", "pink", [9, 9], "S", "12N", "LMLMLMLMM")
-    ).toEqual(undefined);
+    expect(newRobot(2, "John", "pink", "12N", "LMLMLMLMM")).toEqual(undefined);
   });
 
   test("set robot style", () => {

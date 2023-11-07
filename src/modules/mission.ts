@@ -1,8 +1,8 @@
 import { Grid, PlateauCoordinates } from "../types/plateau.type";
-import { PlateauData, RobotData } from "../types/mission.type";
+import { PlateauData, RobotData, RobotStart } from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
-
+import { CompassTrigKey } from "../types/compass.type";
 class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
@@ -34,20 +34,28 @@ export function newPlateau(
   mission.addPlateau({ id: id, name: name });
 }
 
+function processRobotStart(start: string): RobotStart {
+  const direction = start[0],
+    position: PlateauCoordinates = [parseInt(start[1]), parseInt(start[2])];
+  return { position, direction };
+}
+
 export function newRobot(
   id: number,
   name: string,
   style: string,
-  position: PlateauCoordinates,
-  direction: string,
   start: string,
   move: string
 ): void {
+  const robotStart = processRobotStart(start);
+  const { position, direction } = robotStart;
   createRobot(id, name, style, position, direction);
   mission.addRobot({ id, name, start, move });
+  /*
   const robots: Array<string> = [];
   mission.getRobotArray().forEach(element => {
     robots.push(element.name);
   });
   console.log(robots);
+  */
 }
