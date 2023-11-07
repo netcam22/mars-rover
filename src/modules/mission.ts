@@ -1,5 +1,10 @@
 import { Grid, PlateauCoordinates } from "../types/plateau.type";
-import { PlateauData, RobotData, RobotStart } from "../types/mission.type";
+import {
+  PlateauData,
+  RobotData,
+  RobotStart,
+  Journey
+} from "../types/mission.type";
 import { createPlateau, plateau } from "./plateau";
 import { createRobot, robot } from "./robot";
 class Mission {
@@ -45,7 +50,8 @@ export function newRobot(
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;
   createRobot(id, name, style, position, direction);
-  mission.addRobot({ name, start, move });
+  const journey: Journey = [];
+  mission.addRobot({ name, start, move, journey });
   /*
   const robots: Array<string> = [];
   mission.getRobotArray().forEach(element => {

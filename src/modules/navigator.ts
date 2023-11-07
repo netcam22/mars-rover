@@ -1,5 +1,5 @@
-import { COMPASS, MissionCompass, CompassTrigKey } from "../types/compass.type";
-import { ROTATOR, MissionRotator } from "../types/rotator.type";
+import { COMPASS } from "../types/compass.type";
+import { ROTATOR } from "../types/rotator.type";
 type Vector = Array<number>;
 
 export function rotateRobot(
