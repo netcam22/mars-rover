@@ -40,6 +40,8 @@ describe("test create new plateau", () => {
 
 describe("test create new robot", () => {
   test("create new robot from mission", () => {
-    expect(newRobot(0, "Jane", "green", [8, 8], "S")).toEqual(undefined);
+    expect(
+      newRobot(0, "Jane", "green", [8, 8], "S", "12N", "LMLMLMLMM")
+    ).toEqual(undefined);
   });
 });

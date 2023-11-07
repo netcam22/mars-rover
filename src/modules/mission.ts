@@ -39,10 +39,12 @@ export function newRobot(
   name: string,
   style: string,
   position: PlateauCoordinates,
-  direction: string
+  direction: string,
+  start: string,
+  move: string
 ): void {
   createRobot(id, name, style, position, direction);
-  mission.addRobot({ id: id, name: name });
+  mission.addRobot({ id, name, start, move });
   const robots: Array<string> = [];
   mission.getRobotArray().forEach(element => {
     robots.push(element.name);
