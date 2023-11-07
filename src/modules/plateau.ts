@@ -18,14 +18,15 @@ export const plateau = (function () {
   };
   return {
     setId: (thisId: number) => (myPlateau.id = thisId),
-    getId: (): MissionPlateau["id"] => myPlateau.id,
-    setSize: (thisSize: MissionPlateau["size"]) => (myPlateau.size = thisSize),
-    getSize: (): MissionPlateau["size"] => myPlateau.size,
-    setName: (thisName: MissionPlateau["name"]) => (myPlateau.name = thisName),
-    getName: (): MissionPlateau["name"] => myPlateau.name,
-    setStyle: (thisStyle: MissionPlateau["style"]) =>
-      (myPlateau.style = thisStyle),
-    getStyle: (): MissionPlateau["style"] => myPlateau.style,
+    getId: (): number => myPlateau.id,
+    setSize: (thisSize: Grid) => (myPlateau.size = thisSize),
+    getSize: (): Grid => myPlateau.size,
+    setName: (thisName: string) => (myPlateau.name = thisName),
+    getName: (): string => myPlateau.name,
+    setStyle: (thisStyle: string) => (myPlateau.style = thisStyle),
+    getStyle: (): string => myPlateau.style,
+    setLayout: (layout: PlateauLayout) => (myPlateau.layout = layout),
+    getLayout: (): PlateauLayout => myPlateau.layout,
     setOccupied: (newPosition: PlateauCoordinates) =>
       setOccupiedPosition(newPosition),
     isOccupied: (thisPosition: PlateauCoordinates): boolean =>
@@ -43,9 +44,9 @@ export function createPlateau(
   plateau.setId(id);
   plateau.setName(name);
   plateau.setStyle(style);
-  return plateau;
 }
 export function setLayout() {}
+export function getLayout() {}
 export function setOccupiedPosition(position: PlateauCoordinates) {}
 export function isPositionOccupied(position: PlateauCoordinates): boolean {
   return false;

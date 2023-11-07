@@ -1,14 +1,8 @@
 import { robot } from "../modules/robot";
 import { plateau } from "../modules/plateau";
 
-export type PlanetMission = {
-  id: number;
-  data: {
-    robotArray: Array<typeof robot>;
-    plateauArray: Array<typeof plateau>;
-  };
-  planet: string;
-};
+export type RobotData = { id: number; name: string };
+export type PlateauData = { id: number; name: string };
 
 export interface GetterCallback {
   (): string | number;

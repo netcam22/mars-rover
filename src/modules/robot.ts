@@ -41,29 +41,26 @@ export function createRobot(
   console.log(
     `Hello, I am a Rover called ${name} and I am facing direction ${direction} at co-ordinates at map co-ordinates (${position[0]}, ${position[1]}`
   );
-  return robot;
 }
 
 function getRobot(thisId: number) {
-  const thisRobot = mission
-    .getRobotArray()
-    .find(robot => robot.getId() === thisId);
-  return thisRobot;
+  // const thisRobot = mission.getRobotArray().find(robot => robot.id === thisId);
+  //return thisRobot;
 }
 
 export const setRobotName = (id: number, value: string) => {
-  getRobot(id)?.setName(value);
+  robot.setName(value);
 };
 
 export const getRobotName = (id: number): string | undefined => {
-  return getRobot(id)?.getName();
+  return robot.getName();
 };
 export const setRobotStyle = (id: number, value: string) => {
-  getRobot(id)?.setStyle(value);
+  robot.setStyle(value);
 };
 
 export const getRobotStyle = (id: number): string | undefined => {
-  return getRobot(id)?.getStyle();
+  return robot.getStyle();
 };
 export function setUpRobot() {}
 export function rotateRobot() {}
