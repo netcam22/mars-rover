@@ -33,7 +33,7 @@ export const plateau = (function () {
     setOccupied: (position: PlateauCoordinates) =>
       setOccupiedPosition(position),
     isOccupied: (thisPosition: PlateauCoordinates): boolean =>
-      positionIsOccupied(thisPosition)
+      positionIsAvailable(thisPosition)
   };
 })();
 
@@ -95,14 +95,18 @@ export function makeGridSize(string: string): GridSize {
 }
 
 export function setOccupiedPosition([x, y]: PlateauCoordinates) {
-  let layout = plateau.getLayout();
-  layout[x][y] = 1;
-  plateau.setLayout(layout);
-}
-export function positionIsOccupied([x, y]: PlateauCoordinates): boolean {
-  const layout = plateau.getLayout();
-  if (layout[x][y] === 0) {
-    return false;
+  if (positionIsAvailable([x, y])) {
+    const layout = plateau.getLayout();
+    console.log(layout);
+    layout[x][y] = 1;
+    plateau.setLayout(layout);
   }
-  return true;
+}
+export function positionIsAvailable([x, y]: PlateauCoordinates): boolean {
+  if (x < 0 || y < 0) return false;
+  const layout = plateau.getLayout();
+  if (x < layout.length && y < layout[x].length && layout[x][y] === 0) {
+    return true;
+  }
+  return false;
 }

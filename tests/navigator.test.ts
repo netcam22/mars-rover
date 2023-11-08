@@ -214,13 +214,3 @@ describe("test creating a moves from a string", () => {
     ]);
   });
 });
-/*
-describe("test creating an end position from string input", () => {
-  test("test input 12N LMLMLMLMM", () => {
-    expect(robotJourney([1, 2], "N", "LMLMLMLMM")).toBe("13N");
-  });
-  test("test input 33E MMRMMRMRRM", () => {
-    expect(robotJourney([3, 3], "E", "MMRMMRMRRM")).toBe("51E");
-  });
-});
-*/
