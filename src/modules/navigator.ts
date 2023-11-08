@@ -59,6 +59,8 @@ export function createMoves(
 }
 */
 
+export function createSingleMove() {}
+
 export function createMoves(
   position: PlateauCoordinates,
   direction: string,
@@ -95,9 +97,13 @@ export function createMoves(
     },
     [0, 0]
   );
-  console.log(final);
+  console.log(journeyEndString(final, dir));
   const journeyArray: Journey = [];
   return journeyArray;
+}
+
+export function journeyEndString([x, y]: PlateauCoordinates, dir: string) {
+  return `${x}${y}${dir}`;
 }
 
 export function rotator(char: string): number | undefined {
