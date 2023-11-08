@@ -65,7 +65,7 @@ export function createMoves(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): Journey {
+): string {
   const pos = [...position];
   let dir = direction;
   const thisJourney = `0${move}`
@@ -99,7 +99,8 @@ export function createMoves(
   );
   console.log(journeyEndString(final, dir));
   const journeyArray: Journey = [];
-  return journeyArray;
+  //return journeyArray;
+  return journeyEndString(final, dir);
 }
 
 export function journeyEndString([x, y]: PlateauCoordinates, dir: string) {

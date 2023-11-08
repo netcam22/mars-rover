@@ -47,7 +47,7 @@ export function createJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): Journey {
+): string {
   return createMoves(position, direction, move);
 }
 export function setUpRobot() {}

@@ -58,7 +58,7 @@ export function newRobot(name: string, start: string, move: string): void {
   const style = "turn-left-at-obstacle";
   createRobot(id, name, style, position, direction);
   const journey = createJourney(position, direction, move);
-  mission.addRobot({ name, start, move, journey });
+  //mission.addRobot({ name, start, move, journey });
   /*
   const robots: Array<string> = [];
   mission.getRobotArray().forEach(element => {
