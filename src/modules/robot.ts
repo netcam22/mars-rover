@@ -1,5 +1,5 @@
 import { PlateauCoordinates } from "../types/plateau.type";
-import { createMoves } from "./navigator";
+import { createMoves, journeyEndPosition } from "./navigator";
 import { Journey } from "../types/robot.type";
 class Robot {
   id: number = 0;
@@ -48,7 +48,7 @@ export function createJourney(
   direction: string,
   move: string
 ): string {
-  return createMoves(position, direction, move);
+  return journeyEndPosition(position, direction, move);
 }
 export function setUpRobot() {}
 export function rotateRobot() {}

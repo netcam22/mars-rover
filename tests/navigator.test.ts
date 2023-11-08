@@ -7,7 +7,8 @@ import {
   getVector,
   rotateRobot,
   rotator,
-  createMoves
+  createMoves,
+  journeyEndPosition
 } from "../src/modules/navigator";
 describe("test compass points", () => {
   test("get angle Z from compass point to be undefined", () => {
@@ -186,9 +187,41 @@ describe("test if value is Rotator", () => {
 
 describe("test creating a moves from a string", () => {
   test("test input 12N LMLMLMLMM", () => {
-    expect(createMoves([1, 2], "N", "LMLMLMLMM")).toBe("13N");
+    expect(createMoves([1, 2], "N", "LMLMLMLMM")).toEqual([
+      [1, 2],
+      [0, 0],
+      [-1, 0],
+      [0, 0],
+      [0, -1],
+      [0, 0],
+      [1, 0],
+      [0, 0],
+      [0, 1],
+      [0, 1]
+    ]);
   });
   test("test input 33E MMRMMRMRRM", () => {
-    expect(createMoves([3, 3], "E", "MMRMMRMRRM")).toBe("51E");
+    expect(createMoves([3, 3], "E", "MMRMMRMRRM")).toEqual([
+      [3, 3],
+      [1, 0],
+      [1, 0],
+      [0, 0],
+      [0, -1],
+      [0, -1],
+      [0, 0],
+      [-1, 0],
+      [0, 0],
+      [0, 0],
+      [1, 0]
+    ]);
+  });
+});
+
+describe("test creating an end position from string input", () => {
+  test("test input 12N LMLMLMLMM", () => {
+    expect(journeyEndPosition([1, 2], "N", "LMLMLMLMM")).toBe("13N");
+  });
+  test("test input 33E MMRMMRMRRM", () => {
+    expect(journeyEndPosition([3, 3], "E", "MMRMMRMRRM")).toBe("51E");
   });
 });

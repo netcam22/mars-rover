@@ -65,7 +65,7 @@ export function createMoves(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): string {
+): Array<PlateauCoordinates> {
   const pos = [...position];
   let dir = direction;
   const thisJourney = `0${move}`
@@ -86,7 +86,13 @@ export function createMoves(
       }
     );
   console.log(thisJourney);
-  const final = thisJourney.reduce(
+  return thisJourney;
+}
+
+export function createJourneyresult(
+  thisJourney: Array<PlateauCoordinates>
+): PlateauCoordinates {
+  const journeyEnd = thisJourney.reduce(
     (acc: PlateauCoordinates, item: PlateauCoordinates): PlateauCoordinates => {
       if (Array.isArray(item)) {
         const [a, b] = item,
@@ -97,14 +103,18 @@ export function createMoves(
     },
     [0, 0]
   );
-  console.log(journeyEndString(final, dir));
-  const journeyArray: Journey = [];
-  //return journeyArray;
-  return journeyEndString(final, dir);
+  return journeyEnd;
 }
 
-export function journeyEndString([x, y]: PlateauCoordinates, dir: string) {
-  return `${x}${y}${dir}`;
+export function journeyEndPosition(
+  position: PlateauCoordinates,
+  direction: string,
+  move: string
+): string {
+  const thisJourney = createMoves(position, direction, move);
+  const journeyEnd = createJourneyresult(thisJourney);
+  const [x, y] = journeyEnd;
+  return `${x}${y}${direction}`;
 }
 
 export function rotator(char: string): number | undefined {
