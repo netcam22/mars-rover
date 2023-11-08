@@ -1,8 +1,9 @@
 import {
   PlateauLayout,
   PlateauCoordinates,
-  Grid,
-  MissionPlateau
+  GridSize,
+  MissionPlateau,
+  GridStyle
 } from "../types/plateau.type";
 export const plateau = (function () {
   const myPlateau: MissionPlateau = {
@@ -20,8 +21,8 @@ export const plateau = (function () {
   return {
     setId: (thisId: number) => (myPlateau.id = thisId),
     getId: (): number => myPlateau.id,
-    setSize: (thisSize: Grid) => (myPlateau.size = thisSize),
-    getSize: (): Grid => myPlateau.size,
+    setSize: (thisSize: GridSize) => (myPlateau.size = thisSize),
+    getSize: (): GridSize => myPlateau.size,
     setName: (thisName: string) => (myPlateau.name = thisName),
     getName: (): string => myPlateau.name,
     setStyle: (thisStyle: string) => (myPlateau.style = thisStyle),
@@ -41,13 +42,30 @@ export function createPlateau(
   name: string,
   style: string
 ) {
-  const grid: Grid = [];
-  plateau.setSize(grid);
   plateau.setId(id);
   plateau.setName(name);
   plateau.setStyle(style);
+  plateau.setSize(makeGridSize(gridSize));
+  plateau.setLayout(makeRectangularGrid(makeCoordinates(gridSize)));
 }
-export function setLayout() {}
+
+export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
+  const grid = new Array(x);
+  for (let i = 0; i < x; i++) {
+    grid[i] = new Array(y).fill(0);
+  }
+  console.log(grid);
+  return grid;
+}
+
+export function makeCoordinates(string: string): PlateauCoordinates {
+  return [parseInt(string[0]), parseInt(string[1])];
+}
+
+export function makeGridSize(string: string): GridSize {
+  return [parseInt(string[0]), parseInt(string[1])];
+}
+
 export function getLayout() {}
 export function setOccupiedPosition(position: PlateauCoordinates) {}
 export function isPositionOccupied(position: PlateauCoordinates): boolean {

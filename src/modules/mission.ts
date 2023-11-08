@@ -1,11 +1,11 @@
-import { Grid, PlateauCoordinates } from "../types/plateau.type";
+import { PlateauCoordinates } from "../types/plateau.type";
 import {
   PlateauData,
   RobotData,
   RobotStart,
   RobotInput
 } from "../types/mission.type";
-import { createPlateau } from "./plateau";
+import { createPlateau, makeCoordinates } from "./plateau";
 import { createRobot, createJourney } from "./robot";
 class Mission {
   id: number = 1;
@@ -44,7 +44,7 @@ export function newPlateau(gridSize: string): void {
 }
 
 function processRobotStart(start: string): RobotStart {
-  const position: PlateauCoordinates = [parseInt(start[0]), parseInt(start[1])],
+  const position: PlateauCoordinates = makeCoordinates(start),
     direction = start[2];
   return { position, direction };
 }
