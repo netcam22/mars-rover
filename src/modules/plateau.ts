@@ -55,7 +55,6 @@ export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
   for (let i = 0; i < x; i++) {
     grid[i] = new Array(y).fill(0);
   }
-  console.log(grid);
   return grid;
 }
 
@@ -66,7 +65,6 @@ export function makeCircularGrid(radius: number): PlateauLayout {
     yVal = j < radius ? yVal + 1 : yVal - 1;
     grid[j] = new Array(yVal).fill(0);
   }
-  console.log(grid);
   return grid;
 }
 

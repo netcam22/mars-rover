@@ -67,22 +67,23 @@ export function createMoves(
   move: string
 ): Array<PlateauCoordinates> {
   const pos = [...position];
-  let dir = direction;
+  let thisDirection = direction;
   const thisJourney = `0${move}`
     .split("")
     .map(
       (char: string, i: number, array: Array<string>): PlateauCoordinates => {
         if (i === 0) {
           return pos;
-        } else if (char === "M") {
-          return getVector(dir);
-        } else if (rotator(char)) {
-          const newDir = rotateRobot(dir, char);
-          dir = newDir ? newDir : dir;
-          return [0, 0];
-        } else {
-          return [0, 0];
         }
+        const newDirection = rotateRobot(thisDirection, char);
+        if (newDirection) {
+          if (thisDirection === newDirection) {
+            return getVector(thisDirection);
+          } else {
+            thisDirection = newDirection;
+          }
+        }
+        return [0, 0];
       }
     );
   console.log(thisJourney);
