@@ -47,7 +47,7 @@ export function createPlateau(
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
   plateau.setLayout(makeRectangularGrid(makeCoordinates(gridSize)));
-  plateau.setLayout(makeCircularGrid(5));
+  //plateau.setLayout(makeCircularGrid(5));
 }
 
 export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {

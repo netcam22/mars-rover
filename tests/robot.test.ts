@@ -75,7 +75,7 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("get robot style", () => {
-    expect(robot.getStyle()).toBe("turn-left-at-obstacle");
+    expect(robot.getStyle()).toBe("reversing");
   });
 
   test("create new robot from mission", () => {

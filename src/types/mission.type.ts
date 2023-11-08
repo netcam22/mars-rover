@@ -1,11 +1,12 @@
 import { PlateauCoordinates } from "./plateau.type";
 export type RobotInput = Array<Array<string>>;
-import { Journey } from "./robot.type";
+import { Move } from "./navigator.type";
 export type RobotData = {
   name: string;
   start: string;
   move: string;
-  journey: Journey;
+  destination: string;
+  journey: Array<Move>;
 };
 export type PlateauData = { name: string; gridSize: string };
 export type RobotStart = {

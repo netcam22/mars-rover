@@ -5,8 +5,9 @@ import {
   RobotStart,
   RobotInput
 } from "../types/mission.type";
-import { createPlateau, makeCoordinates } from "./plateau";
+import { createPlateau, makeCoordinates, plateau } from "./plateau";
 import { createRobot, createJourney } from "./robot";
+import { Journey } from "../types/robot.type";
 class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
@@ -38,9 +39,14 @@ export function start(gridSize: string, robotInput: RobotInput) {
 export function newPlateau(gridSize: string): void {
   const name = "Bumpy ground",
     style: string = "rectangle";
-  const id = mission.getRobotArray.length;
+  const id = mission.getPlateauArray().length;
   createPlateau(gridSize, id, name, style);
   mission.addPlateau({ name, gridSize });
+  /*
+  mission.getPlateauArray().forEach(plateau => {
+    console.log(plateau);
+  });
+  */
 }
 
 function processRobotStart(start: string): RobotStart {
@@ -50,22 +56,17 @@ function processRobotStart(start: string): RobotStart {
 }
 
 export function newRobot(name: string, start: string, move: string): void {
-  console.log(name, start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
-  console.log(position, direction);
   const id = mission.getRobotArray.length;
-  const style = "turn-left-at-obstacle";
+  const style = "reversing";
   createRobot(id, name, style, position, direction);
-  const journey = createJourney(position, direction, move);
-  //mission.addRobot({ name, start, move, journey });
-  /*
-  const robots: Array<string> = [];
-  mission.getRobotArray().forEach(element => {
-    robots.push(element.name);
+  const myJourney: Journey = createJourney(position, direction, move);
+  const { journey, destination } = myJourney;
+  mission.addRobot({ name, start, move, destination, journey });
+  mission.getRobotArray().forEach(robots => {
+    console.log(robots);
   });
-  console.log(robots);
-  */
 }
 
 function getRobot(thisId: number) {

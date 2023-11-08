@@ -1,5 +1,5 @@
 import { PlateauCoordinates } from "../types/plateau.type";
-import { createMoves, journeyEndPosition } from "./navigator";
+import { createMoves, robotJourney } from "./navigator";
 import { Journey } from "../types/robot.type";
 class Robot {
   id: number = 0;
@@ -47,8 +47,13 @@ export function createJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): string {
-  return journeyEndPosition(position, direction, move);
+): Journey {
+  const myJourney = robotJourney(position, direction, move);
+  console.log(
+    `I arrived at ${myJourney.destination} after going through the following moves:}`,
+    myJourney.journey
+  );
+  return myJourney;
 }
 export function setUpRobot() {}
 export function rotateRobot() {}
