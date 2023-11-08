@@ -42,11 +42,6 @@ export function newPlateau(gridSize: string): void {
   const id = mission.getPlateauArray().length;
   createPlateau(gridSize, id, name, style);
   mission.addPlateau({ name, gridSize });
-  /*
-  mission.getPlateauArray().forEach(plateau => {
-    console.log(plateau);
-  });
-  */
 }
 
 function processRobotStart(start: string): RobotStart {
@@ -64,9 +59,6 @@ export function newRobot(name: string, start: string, move: string): void {
   const myJourney: Journey = createJourney(position, direction, move);
   const { journey, destination } = myJourney;
   mission.addRobot({ name, start, move, destination, journey });
-  mission.getRobotArray().forEach(robots => {
-    console.log(robots);
-  });
 }
 
 function getRobot(thisId: number) {

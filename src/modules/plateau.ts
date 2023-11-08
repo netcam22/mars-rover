@@ -2,8 +2,9 @@ import {
   PlateauLayout,
   PlateauCoordinates,
   GridSize,
+  GridStyle,
   MissionPlateau,
-  GridStyle
+  GRIDSTYLE
 } from "../types/plateau.type";
 export const plateau = (function () {
   const myPlateau: MissionPlateau = {
@@ -46,8 +47,25 @@ export function createPlateau(
   plateau.setName(name);
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
-  plateau.setLayout(makeRectangularGrid(makeCoordinates(gridSize)));
-  //plateau.setLayout(makeCircularGrid(5));
+  selectGrid(style, makeCoordinates(gridSize));
+}
+
+function isGridStyle(style: string): style is GridStyle {
+  return (GRIDSTYLE as ReadonlyArray<string>).includes(style);
+}
+
+export function selectGrid(
+  style: string,
+  [x, y]: GridSize
+): PlateauLayout | undefined {
+  if (isGridStyle(style)) {
+    if (style === "rectangle") {
+      return makeRectangularGrid([x, y]);
+    } else if (style === "circle") {
+      return makeCircularGrid(x);
+    }
+    return undefined;
+  }
 }
 
 export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
@@ -77,7 +95,9 @@ export function makeGridSize(string: string): GridSize {
 }
 
 export function getLayout() {}
-export function setOccupiedPosition(position: PlateauCoordinates) {}
-export function isPositionOccupied(position: PlateauCoordinates): boolean {
+export function setOccupiedPosition([x, y]: PlateauCoordinates) {}
+export function isPositionOccupied([x, y]: PlateauCoordinates): boolean {
+  const layout = plateau.getLayout();
+  console.log(layout[x][y]);
   return false;
 }

@@ -40,7 +40,14 @@ export function createSingleMove(thisDirection: string, char: string): Move {
   const d = rotateRobot(thisDirection, char);
   const thisAngle = getAngle(d);
   const vector = getVector(thisDirection);
-  return { vector: vector, direction: d, angle: thisAngle };
+  const rotate = rotator(char);
+  const rotateAngle = rotate && rotate !== 0 ? rotate * -1 : 0;
+  return {
+    vector: vector,
+    rotate: rotateAngle,
+    direction: d,
+    angle: thisAngle
+  };
 }
 
 export function createMoves(
@@ -56,6 +63,7 @@ export function createMoves(
       move.direction !== undefined ? move.direction : thisDirection;
     return {
       vector: move.vector,
+      rotate: move.rotate,
       direction: thisDirection,
       angle: getAngle(thisDirection)
     };
@@ -83,9 +91,10 @@ export function robotJourney(
   direction: string,
   move: string
 ): Journey {
+  const startPosition = [...position];
   const thisJourney = createMoves(position, direction, move);
   const finalDirection = thisJourney[thisJourney.length - 1].direction;
-  const journeyEnd = createJourneyresult(thisJourney, position);
+  const journeyEnd = createJourneyresult(thisJourney, startPosition);
   const [a, b] = journeyEnd;
   return { journey: thisJourney, destination: `${a}${b}${finalDirection}` };
 }

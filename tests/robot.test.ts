@@ -83,12 +83,10 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("set robot style", () => {
-    expect(robot.setStyle("turn-right-at-obstacle")).toBe(
-      "turn-right-at-obstacle"
-    );
+    expect(robot.setStyle("stop-at-obstacle")).toBe("stop-at-obstacle");
   });
 
   test("get robot style", () => {
-    expect(robot.getStyle()).toBe("turn-right-at-obstacle");
+    expect(robot.getStyle()).toBe("stop-at-obstacle");
   });
 });

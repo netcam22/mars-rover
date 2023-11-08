@@ -188,29 +188,29 @@ describe("test if value is Rotator", () => {
 describe("test creating a moves from a string", () => {
   test("test input 12N LMLMLMLMM", () => {
     expect(createMoves([1, 2], "N", "LMLMLMLMM")).toEqual([
-      { vector: [0, 1], direction: "W", angle: 180 },
-      { vector: [-1, 0], direction: "W", angle: 180 },
-      { vector: [-1, 0], direction: "S", angle: 270 },
-      { vector: [0, -1], direction: "S", angle: 270 },
-      { vector: [0, -1], direction: "E", angle: 0 },
-      { vector: [1, 0], direction: "E", angle: 0 },
-      { vector: [1, 0], direction: "N", angle: 90 },
-      { vector: [0, 1], direction: "N", angle: 90 },
-      { vector: [0, 1], direction: "N", angle: 90 }
+      { vector: [0, 1], rotate: -90, direction: "W", angle: 180 },
+      { vector: [-1, 0], rotate: 0, direction: "W", angle: 180 },
+      { vector: [-1, 0], rotate: -90, direction: "S", angle: 270 },
+      { vector: [0, -1], rotate: 0, direction: "S", angle: 270 },
+      { vector: [0, -1], rotate: -90, direction: "E", angle: 0 },
+      { vector: [1, 0], rotate: 0, direction: "E", angle: 0 },
+      { vector: [1, 0], rotate: -90, direction: "N", angle: 90 },
+      { vector: [0, 1], rotate: 0, direction: "N", angle: 90 },
+      { vector: [0, 1], rotate: 0, direction: "N", angle: 90 }
     ]);
   });
   test("test input 33E MMRMMRMRRM", () => {
     expect(createMoves([3, 3], "E", "MMRMMRMRRM")).toEqual([
-      { vector: [1, 0], direction: "E", angle: 0 },
-      { vector: [1, 0], direction: "E", angle: 0 },
-      { vector: [1, 0], direction: "S", angle: 270 },
-      { vector: [0, -1], direction: "S", angle: 270 },
-      { vector: [0, -1], direction: "S", angle: 270 },
-      { vector: [0, -1], direction: "W", angle: 180 },
-      { vector: [-1, 0], direction: "W", angle: 180 },
-      { vector: [-1, 0], direction: "N", angle: 90 },
-      { vector: [0, 1], direction: "E", angle: 0 },
-      { vector: [1, 0], direction: "E", angle: 0 }
+      { vector: [1, 0], rotate: 0, direction: "E", angle: 0 },
+      { vector: [1, 0], rotate: 0, direction: "E", angle: 0 },
+      { vector: [1, 0], rotate: 90, direction: "S", angle: 270 },
+      { vector: [0, -1], rotate: 0, direction: "S", angle: 270 },
+      { vector: [0, -1], rotate: 0, direction: "S", angle: 270 },
+      { vector: [0, -1], rotate: 90, direction: "W", angle: 180 },
+      { vector: [-1, 0], rotate: 0, direction: "W", angle: 180 },
+      { vector: [-1, 0], rotate: 90, direction: "N", angle: 90 },
+      { vector: [0, 1], rotate: 90, direction: "E", angle: 0 },
+      { vector: [1, 0], rotate: 0, direction: "E", angle: 0 }
     ]);
   });
 });
