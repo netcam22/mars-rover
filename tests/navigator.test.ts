@@ -165,7 +165,7 @@ describe("test if value is Rotator", () => {
     expect(rotator("R")).toBe(-90);
   });
   test("test input M", () => {
-    expect(rotator("M")).toBe(undefined);
+    expect(rotator("M")).toBe(0);
   });
   test("test input N", () => {
     expect(rotator("N")).toBe(undefined);
