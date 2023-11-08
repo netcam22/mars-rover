@@ -30,10 +30,10 @@ export const plateau = (function () {
     getStyle: (): string => myPlateau.style,
     setLayout: (layout: PlateauLayout) => (myPlateau.layout = layout),
     getLayout: (): PlateauLayout => myPlateau.layout,
-    setOccupied: (newPosition: PlateauCoordinates) =>
-      setOccupiedPosition(newPosition),
+    setOccupied: (position: PlateauCoordinates) =>
+      setOccupiedPosition(position),
     isOccupied: (thisPosition: PlateauCoordinates): boolean =>
-      isPositionOccupied(thisPosition)
+      positionIsOccupied(thisPosition)
   };
 })();
 
@@ -94,10 +94,15 @@ export function makeGridSize(string: string): GridSize {
   return [parseInt(string[0]), parseInt(string[1])];
 }
 
-export function getLayout() {}
-export function setOccupiedPosition([x, y]: PlateauCoordinates) {}
-export function isPositionOccupied([x, y]: PlateauCoordinates): boolean {
+export function setOccupiedPosition([x, y]: PlateauCoordinates) {
+  let layout = plateau.getLayout();
+  layout[x][y] = 1;
+  plateau.setLayout(layout);
+}
+export function positionIsOccupied([x, y]: PlateauCoordinates): boolean {
   const layout = plateau.getLayout();
-  console.log(layout[x][y]);
-  return false;
+  if (layout[x][y] === 0) {
+    return false;
+  }
+  return true;
 }
