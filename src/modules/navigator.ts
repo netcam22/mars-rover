@@ -4,6 +4,7 @@ import { Journey } from "../types/robot.type";
 import { PlateauCoordinates } from "../types/plateau.type";
 import { plateau } from "./plateau";
 type Vector = Array<number>;
+type Move = { vector: Vector; direction: string | undefined };
 
 export function rotateRobot(
   point: string,
@@ -41,40 +42,30 @@ export function getVector(point: string): Vector {
 export function convertAngles(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
-/*
-export function createMoves(
-  position: PlateauCoordinates,
-  direction: string,
-  move: string
-): Journey {
-  const journeyArray: Journey = [];
-  let dir = direction, [a, b] = [...position];
-  journeyArray.push(position);
-  for (const char of move) {
-    if (char === "M") {
-      const [x, y] = getVector(dir);
-      
-  }
-  return journeyArray;
+export function createSingleMove(thisDirection: string, char: string): Move {
+  const d = rotateRobot(thisDirection, char);
+  const vector = getVector(thisDirection);
+  return { vector: vector, direction: d };
 }
-*/
-
-export function createSingleMove() {}
 
 export function createMoves(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): Array<PlateauCoordinates> {
-  const pos = [...position];
+): Array<Move> {
+  const start: Vector = [...position];
   let thisDirection = direction;
   const thisJourney = `0${move}`
     .split("")
-    .map(
-      (char: string, i: number, array: Array<string>): PlateauCoordinates => {
-        if (i === 0) {
-          return pos;
-        }
+    .map((char: string, i: number): Move => {
+      if (i === 0) {
+        return { vector: start, direction: direction };
+      }
+      const move = createSingleMove(thisDirection, char);
+      thisDirection =
+        move.direction !== undefined ? move.direction : thisDirection;
+      return { vector: move.vector, direction: thisDirection };
+      /*
         const newDirection = rotateRobot(thisDirection, char);
         if (newDirection) {
           if (thisDirection === newDirection) {
@@ -83,24 +74,21 @@ export function createMoves(
             thisDirection = newDirection;
           }
         }
-        return [0, 0];
-      }
-    );
+        */
+      //return [0, 0];
+    });
   console.log(thisJourney);
   return thisJourney;
 }
 
 export function createJourneyresult(
-  thisJourney: Array<PlateauCoordinates>
+  thisJourney: Array<Move>
 ): PlateauCoordinates {
   const journeyEnd = thisJourney.reduce(
-    (acc: PlateauCoordinates, item: PlateauCoordinates): PlateauCoordinates => {
-      if (Array.isArray(item)) {
-        const [a, b] = item,
-          [x, y] = acc;
-        return [a + x, b + y];
-      }
-      return [0, 0];
+    (acc: PlateauCoordinates, item: Move): any => {
+      const [a, b] = item.vector,
+        [x, y] = acc;
+      return [a + x, b + y];
     },
     [0, 0]
   );
@@ -113,9 +101,11 @@ export function journeyEndPosition(
   move: string
 ): string {
   const thisJourney = createMoves(position, direction, move);
+  const finalDirection = thisJourney[thisJourney.length - 1].direction;
   const journeyEnd = createJourneyresult(thisJourney);
-  const [x, y] = journeyEnd;
-  return `${x}${y}${direction}`;
+  console.log(journeyEnd);
+  const [a, b] = journeyEnd;
+  return `${a}${b}${finalDirection}`;
 }
 
 export function rotator(char: string): number | undefined {

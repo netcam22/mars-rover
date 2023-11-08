@@ -188,31 +188,31 @@ describe("test if value is Rotator", () => {
 describe("test creating a moves from a string", () => {
   test("test input 12N LMLMLMLMM", () => {
     expect(createMoves([1, 2], "N", "LMLMLMLMM")).toEqual([
-      [1, 2],
-      [0, 0],
-      [-1, 0],
-      [0, 0],
-      [0, -1],
-      [0, 0],
-      [1, 0],
-      [0, 0],
-      [0, 1],
-      [0, 1]
+      { vector: [1, 2], direction: "N" },
+      { vector: [0, 1], direction: "W" },
+      { vector: [-1, 0], direction: "W" },
+      { vector: [-1, 0], direction: "S" },
+      { vector: [0, -1], direction: "S" },
+      { vector: [0, -1], direction: "E" },
+      { vector: [1, 0], direction: "E" },
+      { vector: [1, 0], direction: "N" },
+      { vector: [0, 1], direction: "N" },
+      { vector: [0, 1], direction: "N" }
     ]);
   });
   test("test input 33E MMRMMRMRRM", () => {
     expect(createMoves([3, 3], "E", "MMRMMRMRRM")).toEqual([
-      [3, 3],
-      [1, 0],
-      [1, 0],
-      [0, 0],
-      [0, -1],
-      [0, -1],
-      [0, 0],
-      [-1, 0],
-      [0, 0],
-      [0, 0],
-      [1, 0]
+      { vector: [3, 3], direction: "E" },
+      { vector: [1, 0], direction: "E" },
+      { vector: [1, 0], direction: "E" },
+      { vector: [1, 0], direction: "S" },
+      { vector: [0, -1], direction: "S" },
+      { vector: [0, -1], direction: "S" },
+      { vector: [0, -1], direction: "W" },
+      { vector: [-1, 0], direction: "W" },
+      { vector: [-1, 0], direction: "N" },
+      { vector: [0, 1], direction: "E" },
+      { vector: [1, 0], direction: "E" }
     ]);
   });
 });
