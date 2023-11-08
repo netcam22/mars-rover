@@ -47,12 +47,24 @@ export function createPlateau(
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
   plateau.setLayout(makeRectangularGrid(makeCoordinates(gridSize)));
+  plateau.setLayout(makeCircularGrid(5));
 }
 
 export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
   const grid = new Array(x);
   for (let i = 0; i < x; i++) {
     grid[i] = new Array(y).fill(0);
+  }
+  console.log(grid);
+  return grid;
+}
+
+export function makeCircularGrid(radius: number): PlateauLayout {
+  const grid = new Array(2 * radius - 1);
+  let yVal = 0;
+  for (let j = 0; j < 2 * radius - 1; j++) {
+    yVal = j < radius ? yVal + 1 : yVal - 1;
+    grid[j] = new Array(yVal).fill(0);
   }
   console.log(grid);
   return grid;
