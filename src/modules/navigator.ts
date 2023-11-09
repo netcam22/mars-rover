@@ -42,14 +42,27 @@ export function createSingleMove(
   char: string,
   current: PlateauCoordinates
 ): Move {
-  const d = rotateRobot(thisDirection, char);
+  let d = rotateRobot(thisDirection, char);
   const thisAngle = getAngle(d);
-  const vector = getVector(thisDirection);
+  let vector = getVector(thisDirection);
+  let newPosition = current;
   const [a, b] = vector,
     [x, y] = current;
   const rotate = rotator(char);
   const rotateAngle = rotate && rotate !== 0 ? rotate * -1 : 0;
-  const newPosition = rotate === 0 ? [a + x, b + y] : current;
+  const potentialPosition = [a + x, b + y];
+  if (rotate === 0) {
+    const valid = positionIsAvailable(potentialPosition);
+    if (valid) {
+      newPosition = potentialPosition;
+      console.log(newPosition, valid);
+    } else {
+      let originalAngle = getAngle(thisDirection);
+      originalAngle = originalAngle ? originalAngle + 180 : 180;
+      d = getDirection(convertAngles(originalAngle));
+      vector = [0, 0];
+    }
+  }
   return {
     vector: vector,
     rotate: rotateAngle,

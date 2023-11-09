@@ -47,7 +47,10 @@ export function createPlateau(
   plateau.setName(name);
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
-  selectGrid(style, makeCoordinates(gridSize));
+  const newGrid = selectGrid(style, makeCoordinates(gridSize));
+  if (newGrid !== undefined) {
+    plateau.setLayout(newGrid);
+  }
 }
 
 function isGridStyle(style: string): style is GridStyle {
@@ -60,9 +63,9 @@ export function selectGrid(
 ): PlateauLayout | undefined {
   if (isGridStyle(style)) {
     if (style === "rectangle") {
-      return makeRectangularGrid([x, y]);
+      return makeRectangularGrid([x + 1, y + 1]);
     } else if (style === "circle") {
-      return makeCircularGrid(x);
+      return makeCircularGrid(x + 1);
     }
     return undefined;
   }
@@ -97,7 +100,6 @@ export function makeGridSize(string: string): GridSize {
 export function setOccupiedPosition([x, y]: PlateauCoordinates) {
   if (positionIsAvailable([x, y])) {
     const layout = plateau.getLayout();
-    console.log(layout);
     layout[x][y] = 1;
     plateau.setLayout(layout);
   }
@@ -105,6 +107,7 @@ export function setOccupiedPosition([x, y]: PlateauCoordinates) {
 export function positionIsAvailable([x, y]: PlateauCoordinates): boolean {
   if (x < 0 || y < 0) return false;
   const layout = plateau.getLayout();
+  console.log(layout);
   if (x < layout.length && y < layout[x].length && layout[x][y] === 0) {
     return true;
   }

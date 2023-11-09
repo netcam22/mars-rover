@@ -51,6 +51,7 @@ function processRobotStart(start: string): RobotStart {
 }
 
 export function newRobot(name: string, start: string, move: string): void {
+  console.log(start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;

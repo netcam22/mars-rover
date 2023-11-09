@@ -43,7 +43,6 @@ export function createRobot(
     `Hello, I am a Rover called ${name} and I am facing direction ${direction} at map co-ordinates (${position[0]}, ${position[1]})`
   );
 }
-
 export function createJourney(
   position: PlateauCoordinates,
   direction: string,
