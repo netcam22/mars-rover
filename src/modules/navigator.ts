@@ -55,7 +55,6 @@ export function createSingleMove(
     const valid = positionIsAvailable(potentialPosition);
     if (valid) {
       newPosition = potentialPosition;
-      console.log(newPosition, valid);
     } else {
       let originalAngle = getAngle(thisDirection);
       originalAngle = originalAngle ? originalAngle + 180 : 180;
@@ -81,12 +80,6 @@ export function createMoves(
     thisDirection = direction;
   const thisJourney = move.split("").map((char: string, i: number): Move => {
     let move = createSingleMove(thisDirection, char, current);
-    if (!positionIsAvailable) {
-      const angle = getAngle(thisDirection);
-      const newAngle = angle === undefined ? 180 : convertAngles(angle + 180);
-      thisDirection = getDirection(newAngle);
-      move = createSingleMove(thisDirection, char, current);
-    }
     thisDirection =
       move.direction !== undefined ? move.direction : thisDirection;
     current = move.coordinates;
@@ -101,31 +94,14 @@ export function createMoves(
   return thisJourney;
 }
 
-export function createJourneyresult(
-  thisJourney: Array<Move>,
-  position: PlateauCoordinates
-): PlateauCoordinates {
-  const journeyEnd = thisJourney.reduce(
-    (acc: PlateauCoordinates, item: Move): any => {
-      const [a, b] = item.vector,
-        [x, y] = acc;
-      return [a + x, b + y];
-    },
-    position
-  );
-  return journeyEnd;
-}
-
 export function robotJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
 ): Journey {
-  const startPosition = [...position];
   const thisJourney = createMoves(position, direction, move);
   const finalDirection = thisJourney[thisJourney.length - 1].direction;
-  const journeyEnd = createJourneyresult(thisJourney, startPosition);
-  const [a, b] = journeyEnd;
+  const [a, b] = thisJourney[thisJourney.length - 1].coordinates;
   return { journey: thisJourney, destination: `${a}${b}${finalDirection}` };
 }
 
@@ -135,5 +111,3 @@ export function rotator(char: string): number | undefined {
   }
   return undefined;
 }
-
-export function isMoveValid() {}
