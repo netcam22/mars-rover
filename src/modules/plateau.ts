@@ -6,6 +6,7 @@ import {
   MissionPlateau,
   GRIDSTYLE
 } from "../types/plateau.type";
+import { robot } from "./robot";
 export const plateau = (function () {
   const myPlateau: MissionPlateau = {
     id: 0,
@@ -100,14 +101,13 @@ export function makeGridSize(string: string): GridSize {
 export function setOccupiedPosition([x, y]: PlateauCoordinates) {
   if (positionIsAvailable([x, y])) {
     const layout = plateau.getLayout();
-    layout[x][y] = 1;
+    layout[x][y] = robot.getName()[0];
     plateau.setLayout(layout);
   }
 }
 export function positionIsAvailable([x, y]: PlateauCoordinates): boolean {
   if (x < 0 || y < 0) return false;
   const layout = plateau.getLayout();
-  console.log(layout);
   if (x < layout.length && y < layout[x].length && layout[x][y] === 0) {
     return true;
   }

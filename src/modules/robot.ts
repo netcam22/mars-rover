@@ -1,6 +1,8 @@
 import { PlateauCoordinates } from "../types/plateau.type";
 import { robotJourney } from "./navigator";
 import { Journey } from "../types/robot.type";
+import { plateau } from "./plateau";
+import { reverse } from "dns";
 class Robot {
   id: number = 0;
   name: string = "";
@@ -43,17 +45,22 @@ export function createRobot(
     `Hello, I am a Rover called ${name} and I am facing direction ${direction} at map co-ordinates (${position[0]}, ${position[1]})`
   );
 }
+
 export function createJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
 ): Journey {
   const myJourney = robotJourney(position, direction, move);
-
+  const { journey, destination } = myJourney;
+  const finalPosition = journey[journey.length - 1].coordinates;
+  plateau.setOccupied(finalPosition);
+  const layout = plateau.getLayout();
+  const reversed = [...layout].map(row => row.reverse()).reverse();
   console.log(
-    `I arrived at ${myJourney.destination} after going through the following moves:`,
-    myJourney.journey
+    `I arrived at ${destination} after going through the following moves:`,
+    myJourney.journey,
+    reversed
   );
-
   return myJourney;
 }

@@ -61,6 +61,8 @@ export function createSingleMove(
       d = getDirection(convertAngles(originalAngle));
       vector = [0, 0];
     }
+  } else {
+    vector = [0, 0];
   }
   return {
     vector: vector,

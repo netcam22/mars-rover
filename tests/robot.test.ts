@@ -1,5 +1,6 @@
-import { robot } from "../src/modules/robot";
+import { robot, createJourney } from "../src/modules/robot";
 import { newRobot } from "../src/modules/mission";
+import { plateau } from "../src/modules/plateau";
 
 describe("test robot object properties", () => {
   test("set robot id", () => {
