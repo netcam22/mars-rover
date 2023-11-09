@@ -3,6 +3,7 @@ import { ROTATOR } from "../types/rotator.type";
 import { PlateauCoordinates } from "../types/plateau.type";
 import { Vector, Move } from "../types/navigator.type";
 import { Journey } from "../types/robot.type";
+import { positionIsAvailable } from "./plateau";
 
 export function rotateRobot(point: string, direction: string): string {
   return getDirection(convertAngles(COMPASS[point] + ROTATOR[direction]));
@@ -38,7 +39,7 @@ export function convertAngles(angle: number) {
 }
 export function createSingleMove(thisDirection: string, char: string): Move {
   const d = rotateRobot(thisDirection, char);
-  const thisAngle = getAngle(d);
+  let thisAngle = getAngle(d);
   const vector = getVector(thisDirection);
   const rotate = rotator(char);
   const rotateAngle = rotate && rotate !== 0 ? rotate * -1 : 0;
@@ -55,10 +56,14 @@ export function createMoves(
   direction: string,
   move: string
 ): Array<Move> {
-  const start: Vector = [...position];
+  let current: PlateauCoordinates = [...position];
   let thisDirection = direction;
   const thisJourney = move.split("").map((char: string, i: number): Move => {
     const move = createSingleMove(thisDirection, char);
+    if (!positionIsAvailable(move.vector)) {
+      const newAngle = move.angle === undefined ? 180 : (move.angle += 180);
+      thisDirection = getDirection(newAngle);
+    }
     thisDirection =
       move.direction !== undefined ? move.direction : thisDirection;
     return {

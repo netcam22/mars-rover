@@ -38,11 +38,10 @@ export function createRobot(
   robot.setStyle(style);
   robot.setPosition(position);
   robot.setDirection(direction);
-  /*
+
   console.log(
     `Hello, I am a Rover called ${name} and I am facing direction ${direction} at map co-ordinates (${position[0]}, ${position[1]})`
   );
-  */
 }
 
 export function createJourney(
@@ -51,11 +50,11 @@ export function createJourney(
   move: string
 ): Journey {
   const myJourney = robotJourney(position, direction, move);
-  /*
+
   console.log(
     `I arrived at ${myJourney.destination} after going through the following moves:`,
     myJourney.journey
   );
-*/
+
   return myJourney;
 }
