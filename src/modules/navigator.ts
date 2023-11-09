@@ -3,7 +3,6 @@ import { ROTATOR } from "../types/rotator.type";
 import { PlateauCoordinates } from "../types/plateau.type";
 import { Vector, Move } from "../types/navigator.type";
 import { Journey } from "../types/robot.type";
-import { positionIsAvailable } from "./plateau";
 
 export function rotateRobot(point: string, direction: string): string {
   return getDirection(convertAngles(COMPASS[point] + ROTATOR[direction]));
@@ -37,17 +36,24 @@ export function getVector(point: string): Vector {
 export function convertAngles(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
-export function createSingleMove(thisDirection: string, char: string): Move {
+export function createSingleMove(
+  thisDirection: string,
+  char: string,
+  current: PlateauCoordinates
+): Move {
   const d = rotateRobot(thisDirection, char);
-  let thisAngle = getAngle(d);
+  const thisAngle = getAngle(d);
   const vector = getVector(thisDirection);
+  const [a, b] = vector,
+    [x, y] = current;
   const rotate = rotator(char);
   const rotateAngle = rotate && rotate !== 0 ? rotate * -1 : 0;
   return {
     vector: vector,
     rotate: rotateAngle,
     direction: d,
-    angle: thisAngle
+    angle: thisAngle,
+    coordinates: [a + x, b + y]
   };
 }
 
@@ -56,21 +62,19 @@ export function createMoves(
   direction: string,
   move: string
 ): Array<Move> {
-  let current: PlateauCoordinates = [...position];
-  let thisDirection = direction;
+  let current = position,
+    thisDirection = direction;
   const thisJourney = move.split("").map((char: string, i: number): Move => {
-    const move = createSingleMove(thisDirection, char);
-    if (!positionIsAvailable(move.vector)) {
-      const newAngle = move.angle === undefined ? 180 : (move.angle += 180);
-      thisDirection = getDirection(newAngle);
-    }
+    const move = createSingleMove(thisDirection, char, current);
     thisDirection =
       move.direction !== undefined ? move.direction : thisDirection;
+    current = move.coordinates;
     return {
       vector: move.vector,
       rotate: move.rotate,
       direction: thisDirection,
-      angle: getAngle(thisDirection)
+      angle: getAngle(thisDirection),
+      coordinates: current
     };
   });
   return thisJourney;

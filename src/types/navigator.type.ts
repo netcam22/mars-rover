@@ -6,4 +6,5 @@ export type Move = {
   rotate: number | undefined;
   direction: string;
   angle: number | undefined;
+  coordinates: PlateauCoordinates;
 };
