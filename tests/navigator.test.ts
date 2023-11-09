@@ -193,42 +193,42 @@ describe("test creating a moves from a string", () => {
         rotate: -90,
         direction: "W",
         angle: 180,
-        coordinates: [1, 3]
+        coordinates: [1, 2]
       },
       {
         vector: [-1, 0],
         rotate: 0,
         direction: "W",
         angle: 180,
-        coordinates: [0, 3]
+        coordinates: [0, 2]
       },
       {
         vector: [-1, 0],
         rotate: -90,
         direction: "S",
         angle: 270,
-        coordinates: [-1, 3]
+        coordinates: [0, 2]
       },
       {
         vector: [0, -1],
         rotate: 0,
         direction: "S",
         angle: 270,
-        coordinates: [-1, 2]
+        coordinates: [0, 1]
       },
       {
         vector: [0, -1],
         rotate: -90,
         direction: "E",
         angle: 0,
-        coordinates: [-1, 1]
+        coordinates: [0, 1]
       },
       {
         vector: [1, 0],
         rotate: 0,
         direction: "E",
         angle: 0,
-        coordinates: [0, 1]
+        coordinates: [1, 1]
       },
       {
         vector: [1, 0],
@@ -274,42 +274,42 @@ describe("test creating a moves from a string", () => {
         rotate: 90,
         direction: "S",
         angle: 270,
-        coordinates: [6, 3]
+        coordinates: [5, 3]
       },
       {
         vector: [0, -1],
         rotate: 0,
         direction: "S",
         angle: 270,
-        coordinates: [6, 2]
+        coordinates: [5, 2]
       },
       {
         vector: [0, -1],
         rotate: 0,
         direction: "S",
         angle: 270,
-        coordinates: [6, 1]
+        coordinates: [5, 1]
       },
       {
         vector: [0, -1],
         rotate: 90,
         direction: "W",
         angle: 180,
-        coordinates: [6, 0]
+        coordinates: [5, 1]
       },
       {
         vector: [-1, 0],
         rotate: 0,
         direction: "W",
         angle: 180,
-        coordinates: [5, 0]
+        coordinates: [4, 1]
       },
       {
         vector: [-1, 0],
         rotate: 90,
         direction: "N",
         angle: 90,
-        coordinates: [4, 0]
+        coordinates: [4, 1]
       },
       {
         vector: [0, 1],

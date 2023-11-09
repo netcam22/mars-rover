@@ -49,12 +49,13 @@ export function createSingleMove(
     [x, y] = current;
   const rotate = rotator(char);
   const rotateAngle = rotate && rotate !== 0 ? rotate * -1 : 0;
+  const newPosition = rotate === 0 ? [a + x, b + y] : current;
   return {
     vector: vector,
     rotate: rotateAngle,
     direction: d,
     angle: thisAngle,
-    coordinates: [a + x, b + y]
+    coordinates: newPosition
   };
 }
 
