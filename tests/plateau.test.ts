@@ -27,7 +27,17 @@ describe("make rectangular matrix", () => {
 
 describe("make circular matrix", () => {
   test("make 5 radius matrix", () => {
-    expect(makeCircularGrid(5)).toEqual(undefined);
+    expect(makeCircularGrid(5)).toEqual([
+      [0],
+      [0, 0],
+      [0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0],
+      [0, 0],
+      [0]
+    ]);
   });
 });
 
