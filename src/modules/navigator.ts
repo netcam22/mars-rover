@@ -42,8 +42,8 @@ export function createSingleMove(
   char: string,
   current: PlateauCoordinates
 ): Move {
-  let d = rotateRobot(thisDirection, char);
-  const thisAngle = getAngle(d);
+  let newDirection = rotateRobot(thisDirection, char);
+  const thisAngle = getAngle(newDirection);
   let vector = getVector(thisDirection);
   let newPosition = current;
   const [a, b] = vector,
@@ -58,7 +58,7 @@ export function createSingleMove(
     } else {
       let originalAngle = getAngle(thisDirection);
       originalAngle = originalAngle ? originalAngle + 180 : 180;
-      d = getDirection(convertAngles(originalAngle));
+      newDirection = getDirection(convertAngles(originalAngle));
       vector = [0, 0];
     }
   } else {
@@ -67,7 +67,7 @@ export function createSingleMove(
   return {
     vector: vector,
     rotate: rotateAngle,
-    direction: d,
+    direction: newDirection,
     angle: thisAngle,
     coordinates: newPosition
   };

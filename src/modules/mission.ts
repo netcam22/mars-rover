@@ -8,7 +8,6 @@ import {
 import { createPlateau, makeCoordinates, plateau } from "./plateau";
 import { createRobot, createJourney } from "./robot";
 import { Journey } from "../types/robot.type";
-import { Move } from "../types/navigator.type";
 class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
@@ -39,7 +38,6 @@ export function start(
     const myRobot = newRobot(robot[0], robot[1], robot[2]);
     return myRobot;
   });
-  robots.forEach(robot => console.log(robot.destination));
   return { plateau, robots };
 }
 
