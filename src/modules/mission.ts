@@ -54,7 +54,6 @@ export function newPlateau(
   gridSize: string,
   style: string
 ): PlateauLayout | undefined {
-  console.log("Plateau style:", style);
   const name = "Bumpy ground";
   const id = mission.getPlateauArray().length;
   const myPlateau = createPlateau(gridSize, id, name, style);
