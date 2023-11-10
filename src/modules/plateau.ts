@@ -11,7 +11,7 @@ export const plateau = (function () {
   const myPlateau: MissionPlateau = {
     id: 0,
     name: "",
-    style: "",
+    style: "rectangle",
     size: [0, 0],
     layout: [
       [0, 0, 0],
