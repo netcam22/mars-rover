@@ -33,11 +33,19 @@ export function start(
   gridSize: string,
   plateauStyle: string,
   robotInput: RobotInput
-): { plateau: PlateauLayout | undefined; robots: Array<Journey> } {
+): {
+  plateau: PlateauLayout | undefined;
+  robots: Array<Journey | undefined>;
+} {
   const plateau = newPlateau(gridSize, plateauStyle);
   const robots = robotInput.map(robot => {
     const myRobot = newRobot(robot[0], robot[1], robot[2]);
-    return myRobot;
+    if (myRobot) {
+      return myRobot;
+    } else
+      console.log(
+        `The coordinates input for ${robot[0]} were occupied so ${robot[0]} will need to try again with a new starting point.`
+      );
   });
   return { plateau, robots };
 }
@@ -60,17 +68,27 @@ function processRobotStart(start: string): RobotStart {
   return { position, direction };
 }
 
-export function newRobot(name: string, start: string, move: string): Journey {
+export function newRobot(
+  name: string,
+  start: string,
+  move: string
+): Journey | undefined {
   console.log("Robot input:", name, start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;
   const style = "reversing";
   createRobot(id, name, style, position, direction);
-  const myJourney: Journey = createJourney(position, direction, move);
-  const { journey, destination } = myJourney;
-  mission.addRobot({ name, start, move, destination, journey });
-  return myJourney;
+  const myJourney: Journey | undefined = createJourney(
+    position,
+    direction,
+    move
+  );
+  if (myJourney) {
+    const { journey, destination } = myJourney;
+    mission.addRobot({ name, start, move, destination, journey });
+    return myJourney;
+  }
 }
 
 function getRobot(thisId: number) {

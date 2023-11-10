@@ -1,7 +1,7 @@
 import { PlateauCoordinates } from "../types/plateau.type";
 import { robotJourney } from "./navigator";
 import { Journey } from "../types/robot.type";
-import { plateau } from "./plateau";
+import { plateau, positionIsAvailable } from "./plateau";
 class Robot {
   id: number = 0;
   name: string = "";
@@ -48,15 +48,18 @@ export function createJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): Journey {
-  const myJourney = robotJourney(position, direction, move);
-  const { journey, destination } = myJourney;
-  const finalPosition = journey[journey.length - 1].coordinates;
-  const [x, y] = finalPosition;
-  plateau.setOccupied(finalPosition);
-  console.log(
-    `I arrived at ${destination}, coordinates (${x}, ${y}).`,
-    plateau.getLayout()
-  );
-  return myJourney;
+): Journey | undefined {
+  if (positionIsAvailable(position)) {
+    const myJourney = robotJourney(position, direction, move);
+    const { journey, destination } = myJourney;
+    const finalPosition = journey[journey.length - 1].coordinates;
+    const [x, y] = finalPosition;
+    plateau.setOccupied(finalPosition);
+    console.log(
+      `I arrived at ${destination}, coordinates (${x}, ${y}).`,
+      plateau.getLayout()
+    );
+    return myJourney;
+  }
+  return undefined;
 }

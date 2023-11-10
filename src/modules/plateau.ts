@@ -11,12 +11,15 @@ export const plateau = (function () {
   const myPlateau: MissionPlateau = {
     id: 0,
     name: "",
-    style: "rectangle",
+    style: "",
     size: [0, 0],
     layout: [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0]
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
     ],
     occupied: undefined
   };
@@ -69,8 +72,8 @@ export function selectGrid(
     } else if (style === "circle") {
       return makeCircularGrid(x);
     }
-    return undefined;
   }
+  return makeRectangularGrid([x, y]);
 }
 
 export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
