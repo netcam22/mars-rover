@@ -1,6 +1,5 @@
 import { robot, createJourney } from "../src/modules/robot";
 import { newRobot } from "../src/modules/mission";
-import { plateau } from "../src/modules/plateau";
 
 describe("test robot object properties", () => {
   test("set robot id", () => {
@@ -12,7 +11,7 @@ describe("test robot object properties", () => {
   test("get robot id", () => {
     expect(robot.getId()).toBe(2);
   });
-  test("get robot planet", () => {
+  test("get robot name", () => {
     expect(robot.getName()).toBe("Rowan");
   });
   test("set robot id", () => {
@@ -24,12 +23,12 @@ describe("test robot object properties", () => {
   test("get robot id", () => {
     expect(robot.getId()).toBe(1);
   });
-  test("get robot planet", () => {
+  test("get robot name", () => {
     expect(robot.getName()).toBe("Mandy");
   });
 });
-describe("test create robot and then get Robot property by id", () => {
-  test("create new robot from mission", () => {
+describe("test create robot", () => {
+  test("create new robot Jane", () => {
     expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual({
       destination: "12S",
       journey: [
@@ -110,7 +109,7 @@ describe("test create robot and then get Robot property by id", () => {
   test("get robot name", () => {
     expect(robot.getName()).toBe("Janet");
   });
-  test("create new robot from mission", () => {
+  test("create new robot Sam", () => {
     expect(newRobot("Sam", "12N", "LMLMLMLMM")).toEqual({
       destination: "10S",
       journey: [
@@ -193,7 +192,7 @@ describe("test create robot and then get Robot property by id", () => {
     expect(robot.getName()).toBe("John");
   });
 
-  test("create new robot from mission", () => {
+  test("create new robot Bill", () => {
     expect(newRobot("Bill", "12N", "LMLMLMLMM")).toEqual({
       destination: "11N",
       journey: [
@@ -268,7 +267,7 @@ describe("test create robot and then get Robot property by id", () => {
     expect(robot.getName()).toBe("Bill");
   });
 
-  test("create new robot from mission", () => {
+  test("create new robot Ben", () => {
     expect(newRobot("Ben", "33E", "LMLMLMLMM")).toEqual({
       destination: "33W",
       journey: [
