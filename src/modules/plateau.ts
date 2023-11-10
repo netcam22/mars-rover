@@ -107,7 +107,6 @@ export function setOccupiedPosition([x, y]: PlateauCoordinates) {
   if (positionIsAvailable([x, y])) {
     const layout = [...plateau.getLayout()];
     const yAxis = layout.length;
-    const xAxis = layout[y].length;
     const robotInitial = robot.getName()[0];
     const yVal = yAxis - y - 1;
     const newLayout = layout.map((row, rowIndex) =>
