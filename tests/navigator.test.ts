@@ -6,9 +6,7 @@ import {
   radiansToDegrees,
   getVector,
   rotateRobot,
-  rotator,
-  createMoves,
-  robotJourney
+  rotator
 } from "../src/modules/navigator";
 describe("test compass points", () => {
   test("get angle Z from compass point to be undefined", () => {
