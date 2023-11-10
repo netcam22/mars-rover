@@ -31,9 +31,10 @@ export const mission = (function () {
 
 export function start(
   gridSize: string,
+  plateauStyle: string,
   robotInput: RobotInput
 ): { plateau: PlateauLayout | undefined; robots: Array<Journey> } {
-  const plateau = newPlateau(gridSize);
+  const plateau = newPlateau(gridSize, plateauStyle);
   const robots = robotInput.map(robot => {
     const myRobot = newRobot(robot[0], robot[1], robot[2]);
     return myRobot;
@@ -41,9 +42,12 @@ export function start(
   return { plateau, robots };
 }
 
-export function newPlateau(gridSize: string): PlateauLayout | undefined {
-  const name = "Bumpy ground",
-    style: string = "rectangle";
+export function newPlateau(
+  gridSize: string,
+  style: string
+): PlateauLayout | undefined {
+  console.log("Plateau style:", style);
+  const name = "Bumpy ground";
   const id = mission.getPlateauArray().length;
   const myPlateau = createPlateau(gridSize, id, name, style);
   mission.addPlateau({ name, gridSize });
@@ -57,7 +61,7 @@ function processRobotStart(start: string): RobotStart {
 }
 
 export function newRobot(name: string, start: string, move: string): Journey {
-  console.log(start, move);
+  console.log("Robot input:", name, start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;

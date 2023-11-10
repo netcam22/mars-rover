@@ -78,20 +78,18 @@ export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
   const row = arrayRow.fill(0, 0, x);
   const columnArray = new Array(y);
   const grid = columnArray.fill(row);
-  console.log(grid);
   return grid;
 }
 
-export function makeCircularGrid(radius: number): undefined {
+export function makeCircularGrid(radius: number): PlateauLayout {
   const arrayLength = 2 * radius - 1;
-  const rows = new Array(arrayLength);
-  const grid = rows.map((column, index): Array<number> => {
-    const length = index <= radius ? index : arrayLength - index;
-    const arrayRow = new Array(length);
-    const rowContents = arrayRow.fill(0, 0, length);
-    return rowContents;
-  });
-  return undefined;
+  const grid = new Array(2 * radius - 1);
+  let yVal = 0;
+  for (let y = 0; y < 2 * radius - 1; y++) {
+    yVal = y < radius ? y + 1 : arrayLength - y;
+    grid[y] = new Array(yVal).fill(0);
+  }
+  return grid;
 }
 
 export function makeCoordinates(string: string): PlateauCoordinates {
@@ -103,29 +101,18 @@ export function makeGridSize(string: string): GridSize {
 }
 
 export function setOccupiedPosition([x, y]: PlateauCoordinates) {
-  console.log("intended end position:", x, y);
   if (positionIsAvailable([x, y])) {
-    console.log("YES");
     const layout = [...plateau.getLayout()];
-    console.log("layout:", layout);
     const yAxis = layout.length;
     const xAxis = layout[y].length;
-    console.log("y axis length:", yAxis);
-    console.log("x axis length:", xAxis);
     const robotInitial = robot.getName()[0];
-    console.log("name initial:", robotInitial);
-    console.log("grid coords", x, y);
     const yVal = yAxis - y - 1;
-    console.log("empty coord current value", layout[yVal][x]);
-    console.log("add at row index", yVal, "position index:", x);
     const newLayout = layout.map((row, rowIndex) =>
       row.map((col, colIndex) =>
         rowIndex === yVal && colIndex === x ? robotInitial : col
       )
     );
-    console.log("filled coord value", layout[yVal][x]);
     plateau.setLayout(newLayout);
-    console.log(plateau.getLayout());
   }
 }
 export function positionIsAvailable([x, y]: PlateauCoordinates): boolean {
