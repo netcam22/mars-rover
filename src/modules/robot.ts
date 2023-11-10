@@ -56,11 +56,10 @@ export function createJourney(
   const finalPosition = journey[journey.length - 1].coordinates;
   plateau.setOccupied(finalPosition);
   const layout = plateau.getLayout();
-  const reversed = [...layout].map(row => row.reverse()).reverse();
   console.log(
     `I arrived at ${destination} after going through the following moves:`,
     myJourney.journey,
-    reversed
+    layout
   );
   return myJourney;
 }

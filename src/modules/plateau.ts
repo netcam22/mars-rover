@@ -43,15 +43,16 @@ export function createPlateau(
   id: number,
   name: string,
   style: string
-) {
+): PlateauLayout | undefined {
   plateau.setId(id);
   plateau.setName(name);
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
   const newGrid = selectGrid(style, makeCoordinates(gridSize));
   if (newGrid !== undefined) {
-    plateau.setLayout(newGrid);
+    return plateau.setLayout(newGrid);
   }
+  return undefined;
 }
 
 function isGridStyle(style: string): style is GridStyle {
