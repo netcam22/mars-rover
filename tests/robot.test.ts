@@ -30,7 +30,74 @@ describe("test robot object properties", () => {
 });
 describe("test create robot and then get Robot property by id", () => {
   test("create new robot from mission", () => {
-    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual({
+      destination: "12S",
+      journey: [
+        {
+          angle: 180,
+          coordinates: [1, 2],
+          direction: "W",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [0, 2],
+          direction: "W",
+          rotate: 0,
+          vector: [-1, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 2],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        },
+        {
+          angle: 0,
+          coordinates: [0, 1],
+          direction: "E",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 0,
+          coordinates: [1, 1],
+          direction: "E",
+          rotate: 0,
+          vector: [1, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 1],
+          direction: "N",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 2],
+          direction: "N",
+          rotate: 0,
+          vector: [0, 1]
+        },
+        {
+          angle: 270,
+          coordinates: [1, 2],
+          direction: "S",
+          rotate: 0,
+          vector: [0, 0]
+        }
+      ]
+    });
   });
   test("get robot name", () => {
     expect(robot.getName()).toBe("Jane");
@@ -44,7 +111,74 @@ describe("test create robot and then get Robot property by id", () => {
     expect(robot.getName()).toBe("Janet");
   });
   test("create new robot from mission", () => {
-    expect(newRobot("Sam", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Sam", "12N", "LMLMLMLMM")).toEqual({
+      destination: "10S",
+      journey: [
+        {
+          angle: 180,
+          coordinates: [1, 2],
+          direction: "W",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [0, 2],
+          direction: "W",
+          rotate: 0,
+          vector: [-1, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 2],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        },
+        {
+          angle: 0,
+          coordinates: [0, 1],
+          direction: "E",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 0,
+          coordinates: [1, 1],
+          direction: "E",
+          rotate: 0,
+          vector: [1, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 1],
+          direction: "N",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [1, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [1, 0],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        }
+      ]
+    });
   });
 
   test("get robot name", () => {
@@ -60,7 +194,74 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot("Bill", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Bill", "12N", "LMLMLMLMM")).toEqual({
+      destination: "11N",
+      journey: [
+        {
+          angle: 180,
+          coordinates: [1, 2],
+          direction: "W",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [0, 2],
+          direction: "W",
+          rotate: 0,
+          vector: [-1, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 2],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        },
+        {
+          angle: 0,
+          coordinates: [0, 1],
+          direction: "E",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 0,
+          coordinates: [1, 1],
+          direction: "E",
+          rotate: 0,
+          vector: [1, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 1],
+          direction: "N",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [1, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 1],
+          direction: "N",
+          rotate: 0,
+          vector: [0, 0]
+        }
+      ]
+    });
   });
 
   test("get robot name", () => {
@@ -68,7 +269,74 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot("Ben", "33E", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Ben", "33E", "LMLMLMLMM")).toEqual({
+      destination: "33W",
+      journey: [
+        {
+          angle: 90,
+          coordinates: [3, 3],
+          direction: "N",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [3, 3],
+          direction: "S",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 0,
+          coordinates: [3, 3],
+          direction: "E",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [3, 3],
+          direction: "W",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [3, 3],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [3, 3],
+          direction: "N",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [3, 3],
+          direction: "W",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 0,
+          coordinates: [3, 3],
+          direction: "E",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [3, 3],
+          direction: "W",
+          rotate: 0,
+          vector: [0, 0]
+        }
+      ]
+    });
   });
 
   test("get robot name", () => {
@@ -80,7 +348,74 @@ describe("test create robot and then get Robot property by id", () => {
   });
 
   test("create new robot from mission", () => {
-    expect(newRobot("John", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("John", "12N", "LMLMLMLMM")).toEqual({
+      destination: "00N",
+      journey: [
+        {
+          angle: 180,
+          coordinates: [1, 2],
+          direction: "W",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [0, 2],
+          direction: "W",
+          rotate: 0,
+          vector: [-1, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 2],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        },
+        {
+          angle: 0,
+          coordinates: [0, 1],
+          direction: "E",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [0, 1],
+          direction: "W",
+          rotate: 0,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 1],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 0],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        },
+        {
+          angle: 90,
+          coordinates: [0, 0],
+          direction: "N",
+          rotate: 0,
+          vector: [0, 0]
+        }
+      ]
+    });
   });
 
   test("set robot style", () => {

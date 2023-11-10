@@ -40,7 +40,6 @@ export function createRobot(
   robot.setStyle(style);
   robot.setPosition(position);
   robot.setDirection(direction);
-
   console.log(
     `Hello, I am a Rover called ${name} and I am facing direction ${direction} at map co-ordinates (${position[0]}, ${position[1]})`
   );
@@ -54,13 +53,8 @@ export function createJourney(
   const myJourney = robotJourney(position, direction, move);
   const { journey, destination } = myJourney;
   const finalPosition = journey[journey.length - 1].coordinates;
+  const [x, y] = finalPosition;
   plateau.setOccupied(finalPosition);
-  const layout = plateau.getLayout();
-  const reversed = [...layout].map(row => row.reverse()).reverse();
-  console.log(
-    `I arrived at ${destination} after going through the following moves:`,
-    myJourney.journey,
-    reversed
-  );
+  console.log(`I arrived at ${destination}, coordinates (${x}, ${y}).`);
   return myJourney;
 }

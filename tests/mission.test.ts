@@ -34,12 +34,89 @@ describe("test mission object properties", () => {
 });
 describe("test create new plateau", () => {
   test("create new plateau from mission", () => {
-    expect(newPlateau("77")).toEqual(undefined);
+    expect(newPlateau("59")).toEqual([
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0]
+    ]);
   });
 });
 
 describe("test create new robot", () => {
   test("create new robot from mission", () => {
-    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual(undefined);
+    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual({
+      destination: "13N",
+      journey: [
+        {
+          angle: 180,
+          coordinates: [1, 2],
+          direction: "W",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 180,
+          coordinates: [0, 2],
+          direction: "W",
+          rotate: 0,
+          vector: [-1, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 2],
+          direction: "S",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 270,
+          coordinates: [0, 1],
+          direction: "S",
+          rotate: 0,
+          vector: [0, -1]
+        },
+        {
+          angle: 0,
+          coordinates: [0, 1],
+          direction: "E",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 0,
+          coordinates: [1, 1],
+          direction: "E",
+          rotate: 0,
+          vector: [1, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 1],
+          direction: "N",
+          rotate: -90,
+          vector: [0, 0]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 2],
+          direction: "N",
+          rotate: 0,
+          vector: [0, 1]
+        },
+        {
+          angle: 90,
+          coordinates: [1, 3],
+          direction: "N",
+          rotate: 0,
+          vector: [0, 1]
+        }
+      ]
+    });
   });
 });

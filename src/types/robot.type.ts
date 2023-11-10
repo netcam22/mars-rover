@@ -1,5 +1,5 @@
 import { PlateauCoordinates } from "./plateau.type";
-import { Move, Vector } from "./navigator.type";
+import { Move } from "./navigator.type";
 export interface MissionRobot {
   id: number;
   name: string;

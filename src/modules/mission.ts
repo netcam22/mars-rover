@@ -1,4 +1,4 @@
-import { PlateauCoordinates } from "../types/plateau.type";
+import { PlateauCoordinates, PlateauLayout } from "../types/plateau.type";
 import {
   PlateauData,
   RobotData,
@@ -29,19 +29,25 @@ export const mission = (function () {
   };
 })();
 
-export function start(gridSize: string, robotInput: RobotInput) {
-  newPlateau(gridSize);
-  robotInput.forEach(robotInfo =>
-    newRobot(robotInfo[0], robotInfo[1], robotInfo[2])
-  );
+export function start(
+  gridSize: string,
+  robotInput: RobotInput
+): { plateau: PlateauLayout | undefined; robots: Array<Journey> } {
+  const plateau = newPlateau(gridSize);
+  const robots = robotInput.map(robot => {
+    const myRobot = newRobot(robot[0], robot[1], robot[2]);
+    return myRobot;
+  });
+  return { plateau, robots };
 }
 
-export function newPlateau(gridSize: string): void {
+export function newPlateau(gridSize: string): PlateauLayout | undefined {
   const name = "Bumpy ground",
     style: string = "rectangle";
   const id = mission.getPlateauArray().length;
-  createPlateau(gridSize, id, name, style);
+  const myPlateau = createPlateau(gridSize, id, name, style);
   mission.addPlateau({ name, gridSize });
+  return myPlateau;
 }
 
 function processRobotStart(start: string): RobotStart {
@@ -50,7 +56,7 @@ function processRobotStart(start: string): RobotStart {
   return { position, direction };
 }
 
-export function newRobot(name: string, start: string, move: string): void {
+export function newRobot(name: string, start: string, move: string): Journey {
   console.log(start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
@@ -60,6 +66,7 @@ export function newRobot(name: string, start: string, move: string): void {
   const myJourney: Journey = createJourney(position, direction, move);
   const { journey, destination } = myJourney;
   mission.addRobot({ name, start, move, destination, journey });
+  return myJourney;
 }
 
 function getRobot(thisId: number) {

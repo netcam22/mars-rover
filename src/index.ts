@@ -1,6 +1,6 @@
 import { start } from "./modules/mission";
 
-start("55", [
+start("59", [
   ["Fred", "12N", "LMLMLMLMM"],
   ["Bob", "33E", "MMRMMRMRRM"],
   ["Sam", "33E", "MMMMMMMRM"]
