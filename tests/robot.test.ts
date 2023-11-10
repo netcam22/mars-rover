@@ -26,80 +26,94 @@ describe("test robot object properties", () => {
   test("get robot name", () => {
     expect(robot.getName()).toBe("Mandy");
   });
+  test("set robot style", () => {
+    expect(robot.setStyle("reversing")).toBe("reversing");
+  });
+
+  test("get robot style", () => {
+    expect(robot.getStyle()).toBe("reversing");
+  });
+  test("set robot style", () => {
+    expect(robot.setStyle("stop-at-obstacle")).toBe("stop-at-obstacle");
+  });
+
+  test("get robot style", () => {
+    expect(robot.getStyle()).toBe("stop-at-obstacle");
+  });
 });
-describe("test create robot", () => {
-  test("create new robot Jane", () => {
-    expect(newRobot("Jane", "12N", "LMLMLMLMM")).toEqual({
-      destination: "12S",
+describe("test create robots with default suare 6x6 grid", () => {
+  test("create new robot Fred", () => {
+    expect(newRobot("Fred", "12N", "LMLMLMLMM")).toEqual({
+      destination: "13N",
       journey: [
         {
-          angle: 180,
-          coordinates: [1, 2],
+          vector: [0, 0],
+          rotate: -90,
           direction: "W",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
           angle: 180,
-          coordinates: [0, 2],
+          coordinates: [1, 2]
+        },
+        {
+          vector: [-1, 0],
+          rotate: 0,
           direction: "W",
-          rotate: 0,
-          vector: [-1, 0]
+          angle: 180,
+          coordinates: [0, 2]
         },
         {
-          angle: 270,
-          coordinates: [0, 2],
-          direction: "S",
+          vector: [0, 0],
           rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 1],
           direction: "S",
-          rotate: 0,
-          vector: [0, -1]
+          angle: 270,
+          coordinates: [0, 2]
         },
         {
-          angle: 0,
-          coordinates: [0, 1],
+          vector: [0, -1],
+          rotate: 0,
+          direction: "S",
+          angle: 270,
+          coordinates: [0, 1]
+        },
+        {
+          vector: [0, 0],
+          rotate: -90,
           direction: "E",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
           angle: 0,
-          coordinates: [1, 1],
+          coordinates: [0, 1]
+        },
+        {
+          vector: [1, 0],
+          rotate: 0,
           direction: "E",
-          rotate: 0,
-          vector: [1, 0]
+          angle: 0,
+          coordinates: [1, 1]
         },
         {
-          angle: 90,
-          coordinates: [1, 1],
-          direction: "N",
+          vector: [0, 0],
           rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 90,
-          coordinates: [1, 2],
           direction: "N",
-          rotate: 0,
-          vector: [0, 1]
+          angle: 90,
+          coordinates: [1, 1]
         },
         {
-          angle: 270,
-          coordinates: [1, 2],
-          direction: "S",
+          vector: [0, 1],
           rotate: 0,
-          vector: [0, 0]
+          direction: "N",
+          angle: 90,
+          coordinates: [1, 2]
+        },
+        {
+          vector: [0, 1],
+          rotate: 0,
+          direction: "N",
+          angle: 90,
+          coordinates: [1, 3]
         }
       ]
     });
   });
   test("get robot name", () => {
-    expect(robot.getName()).toBe("Jane");
+    expect(robot.getName()).toBe("Fred");
   });
 
   test("set robot name", () => {
@@ -109,79 +123,88 @@ describe("test create robot", () => {
   test("get robot name", () => {
     expect(robot.getName()).toBe("Janet");
   });
-  test("create new robot Sam", () => {
-    expect(newRobot("Sam", "12N", "LMLMLMLMM")).toEqual({
-      destination: "10S",
+});
+describe("test create robot 2", () => {
+  test("create new robot Bob", () => {
+    expect(newRobot("Bob", "33E", "MMRMMRMRRM")).toEqual({
+      destination: "51E",
       journey: [
         {
-          angle: 180,
-          coordinates: [1, 2],
-          direction: "W",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [0, 2],
-          direction: "W",
+          vector: [1, 0],
           rotate: 0,
-          vector: [-1, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 2],
-          direction: "S",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 1],
-          direction: "S",
-          rotate: 0,
-          vector: [0, -1]
-        },
-        {
-          angle: 0,
-          coordinates: [0, 1],
           direction: "E",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
           angle: 0,
-          coordinates: [1, 1],
-          direction: "E",
-          rotate: 0,
-          vector: [1, 0]
+          coordinates: [4, 3]
         },
         {
-          angle: 90,
-          coordinates: [1, 1],
+          vector: [1, 0],
+          rotate: 0,
+          direction: "E",
+          angle: 0,
+          coordinates: [5, 3]
+        },
+        {
+          vector: [0, 0],
+          rotate: 90,
+          direction: "S",
+          angle: 270,
+          coordinates: [5, 3]
+        },
+        {
+          vector: [0, -1],
+          rotate: 0,
+          direction: "S",
+          angle: 270,
+          coordinates: [5, 2]
+        },
+        {
+          vector: [0, -1],
+          rotate: 0,
+          direction: "S",
+          angle: 270,
+          coordinates: [5, 1]
+        },
+        {
+          vector: [0, 0],
+          rotate: 90,
+          direction: "W",
+          angle: 180,
+          coordinates: [5, 1]
+        },
+        {
+          vector: [-1, 0],
+          rotate: 0,
+          direction: "W",
+          angle: 180,
+          coordinates: [4, 1]
+        },
+        {
+          vector: [0, 0],
+          rotate: 90,
           direction: "N",
-          rotate: -90,
-          vector: [0, 0]
+          angle: 90,
+          coordinates: [4, 1]
         },
         {
-          angle: 270,
-          coordinates: [1, 1],
-          direction: "S",
-          rotate: 0,
-          vector: [0, 0]
+          vector: [0, 0],
+          rotate: 90,
+          direction: "E",
+          angle: 0,
+          coordinates: [4, 1]
         },
         {
-          angle: 270,
-          coordinates: [1, 0],
-          direction: "S",
+          vector: [1, 0],
           rotate: 0,
-          vector: [0, -1]
+          direction: "E",
+          angle: 0,
+          coordinates: [5, 1]
         }
       ]
     });
   });
 
   test("get robot name", () => {
-    expect(robot.getName()).toBe("Sam");
+    expect(robot.getName()).toBe("Bob");
   });
 
   test("set robot name", () => {
@@ -190,238 +213,5 @@ describe("test create robot", () => {
 
   test("get robot name", () => {
     expect(robot.getName()).toBe("John");
-  });
-
-  test("create new robot Bill", () => {
-    expect(newRobot("Bill", "12N", "LMLMLMLMM")).toEqual({
-      destination: "11N",
-      journey: [
-        {
-          angle: 180,
-          coordinates: [1, 2],
-          direction: "W",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [0, 2],
-          direction: "W",
-          rotate: 0,
-          vector: [-1, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 2],
-          direction: "S",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 1],
-          direction: "S",
-          rotate: 0,
-          vector: [0, -1]
-        },
-        {
-          angle: 0,
-          coordinates: [0, 1],
-          direction: "E",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 0,
-          coordinates: [1, 1],
-          direction: "E",
-          rotate: 0,
-          vector: [1, 0]
-        },
-        {
-          angle: 90,
-          coordinates: [1, 1],
-          direction: "N",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [1, 1],
-          direction: "S",
-          rotate: 0,
-          vector: [0, 0]
-        },
-        {
-          angle: 90,
-          coordinates: [1, 1],
-          direction: "N",
-          rotate: 0,
-          vector: [0, 0]
-        }
-      ]
-    });
-  });
-
-  test("get robot name", () => {
-    expect(robot.getName()).toBe("Bill");
-  });
-
-  test("create new robot Ben", () => {
-    expect(newRobot("Ben", "33E", "LMLMLMLMM")).toEqual({
-      destination: "33W",
-      journey: [
-        {
-          angle: 90,
-          coordinates: [3, 3],
-          direction: "N",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [3, 3],
-          direction: "S",
-          rotate: 0,
-          vector: [0, 0]
-        },
-        {
-          angle: 0,
-          coordinates: [3, 3],
-          direction: "E",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [3, 3],
-          direction: "W",
-          rotate: 0,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [3, 3],
-          direction: "S",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 90,
-          coordinates: [3, 3],
-          direction: "N",
-          rotate: 0,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [3, 3],
-          direction: "W",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 0,
-          coordinates: [3, 3],
-          direction: "E",
-          rotate: 0,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [3, 3],
-          direction: "W",
-          rotate: 0,
-          vector: [0, 0]
-        }
-      ]
-    });
-  });
-
-  test("get robot name", () => {
-    expect(robot.getName()).toBe("Ben");
-  });
-
-  test("get robot style", () => {
-    expect(robot.getStyle()).toBe("reversing");
-  });
-
-  test("create new robot from mission", () => {
-    expect(newRobot("John", "12N", "LMLMLMLMM")).toEqual({
-      destination: "00N",
-      journey: [
-        {
-          angle: 180,
-          coordinates: [1, 2],
-          direction: "W",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [0, 2],
-          direction: "W",
-          rotate: 0,
-          vector: [-1, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 2],
-          direction: "S",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 1],
-          direction: "S",
-          rotate: 0,
-          vector: [0, -1]
-        },
-        {
-          angle: 0,
-          coordinates: [0, 1],
-          direction: "E",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 180,
-          coordinates: [0, 1],
-          direction: "W",
-          rotate: 0,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 1],
-          direction: "S",
-          rotate: -90,
-          vector: [0, 0]
-        },
-        {
-          angle: 270,
-          coordinates: [0, 0],
-          direction: "S",
-          rotate: 0,
-          vector: [0, -1]
-        },
-        {
-          angle: 90,
-          coordinates: [0, 0],
-          direction: "N",
-          rotate: 0,
-          vector: [0, 0]
-        }
-      ]
-    });
-  });
-
-  test("set robot style", () => {
-    expect(robot.setStyle("stop-at-obstacle")).toBe("stop-at-obstacle");
-  });
-
-  test("get robot style", () => {
-    expect(robot.getStyle()).toBe("stop-at-obstacle");
   });
 });

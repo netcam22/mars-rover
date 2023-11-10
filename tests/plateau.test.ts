@@ -61,9 +61,6 @@ describe("set occupied position", () => {
     expect(positionIsAvailable([2, 2])).toEqual(true);
   });
   test("get occupied posision", () => {
-    expect(positionIsAvailable([3, 3])).toEqual(false);
-  });
-  test("get occupied posision", () => {
     expect(positionIsAvailable([1, 1])).toEqual(true);
   });
   test("get occupied posision", () => {
