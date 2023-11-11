@@ -12,7 +12,7 @@ class Mission {
   id: number = 1;
   robotArray: Array<RobotData> = [];
   plateauArray: Array<PlateauData> = [];
-  planet: string = "Mars";
+  location: string = "Mars";
 }
 
 export const mission = (function () {
@@ -20,8 +20,8 @@ export const mission = (function () {
   return {
     setId: (thisId: number) => (myMission.id = thisId),
     getId: (): number => myMission.id,
-    setPlanet: (thisPlanet: string) => (myMission.planet = thisPlanet),
-    getPlanet: (): string => myMission.planet,
+    setLocation: (thisLocation: string) => (myMission.location = thisLocation),
+    getLocation: (): string => myMission.location,
     addPlateau: (plateau: PlateauData) => myMission.plateauArray.push(plateau),
     getPlateauArray: (): Array<PlateauData> => myMission.plateauArray,
     addRobot: (thisRobot: RobotData) => myMission.robotArray.push(thisRobot),
@@ -41,11 +41,16 @@ export function start(
   const robots = robotInput.map(robot => {
     const myRobot = newRobot(robot[0], robot[1], robot[2]);
     if (myRobot) {
+      console.log(
+        `Hello, I am a Rover called ${robot[0]} and I am facing direction ${robot[1][0]} at map co-ordinates (${robot[1][1]}, ${robot[1][2]})`
+      );
       return myRobot;
-    } else
+    } else {
       console.log(
         `The coordinates input for ${robot[0]} were occupied so ${robot[0]} will need to try again with a new starting point.`
       );
+      return undefined;
+    }
   });
   return { plateau, robots };
 }
@@ -72,11 +77,11 @@ export function newRobot(
   start: string,
   move: string
 ): Journey | undefined {
-  console.log("Robot input:", name, start, move);
+  console.log("Input data:", name, start, move);
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;
-  const style = "reversing";
+  const style = "Rover";
   createRobot(id, name, style, position, direction);
   const myJourney: Journey | undefined = createJourney(
     position,
@@ -85,7 +90,9 @@ export function newRobot(
   );
   if (myJourney) {
     const { journey, destination } = myJourney;
-    mission.addRobot({ name, start, move, destination, journey });
+    const layout = plateau.getLayout();
+    console.log(`I arrived at ${destination} after my journey.`, layout);
+    mission.addRobot({ name, start, move, destination, layout, journey });
     return myJourney;
   }
 }

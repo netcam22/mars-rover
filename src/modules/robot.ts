@@ -7,7 +7,7 @@ class Robot {
   name: string = "";
   style: string = "";
   position: PlateauCoordinates = [0, 0];
-  direction: string = "E";
+  direction: string = "";
 }
 export const robot = (function () {
   const myRobot = new Robot();
@@ -39,9 +39,6 @@ export function createRobot(
   robot.setStyle(style);
   robot.setPosition(position);
   robot.setDirection(direction);
-  console.log(
-    `Hello, I am a Rover called ${name} and I am facing direction ${direction} at map co-ordinates (${position[0]}, ${position[1]})`
-  );
 }
 
 export function createJourney(
@@ -55,10 +52,6 @@ export function createJourney(
     const finalPosition = journey[journey.length - 1].coordinates;
     const [x, y] = finalPosition;
     plateau.setOccupied(finalPosition);
-    console.log(
-      `I arrived at ${destination}, coordinates (${x}, ${y}).`,
-      plateau.getLayout()
-    );
     return myJourney;
   }
   return undefined;
