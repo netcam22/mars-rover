@@ -43,7 +43,10 @@ describe("test robot object properties", () => {
 });
 describe("test create robots with default suare 6x6 grid", () => {
   test("create new robot Fred", () => {
-    expect(newRobot("Fred", "12N", "LMLMLMLMM")).toEqual({
+    expect(newRobot("Fred", "12N")).toBe(true);
+  });
+  test("create journey for new robot Fred", () => {
+    expect(createJourney([1, 2], "N", "LMLMLMLMM")).toEqual({
       destination: "13N",
       journey: [
         {
@@ -124,9 +127,12 @@ describe("test create robots with default suare 6x6 grid", () => {
     expect(robot.getName()).toBe("Janet");
   });
 });
+test("create new robot Bob", () => {
+  expect(newRobot("Bob", "33E")).toBe(true);
+});
 describe("test create robot 2", () => {
   test("create new robot Bob", () => {
-    expect(newRobot("Bob", "33E", "MMRMMRMRRM")).toEqual({
+    expect(createJourney([3, 3], "E", "MMRMMRMRRM")).toEqual({
       destination: "51E",
       journey: [
         {

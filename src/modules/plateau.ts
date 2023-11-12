@@ -11,7 +11,7 @@ export const plateau = (function () {
   const myPlateau: MissionPlateau = {
     id: 0,
     name: "",
-    style: "",
+    style: "rectangle",
     size: [0, 0],
     layout: [
       [0, 0, 0, 0, 0, 0],
@@ -46,26 +46,20 @@ export function createPlateau(
   id: number,
   name: string,
   style: string
-): PlateauLayout | undefined {
+): PlateauLayout {
   plateau.setId(id);
   plateau.setName(name);
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
   const newGrid = selectGrid(style, makeCoordinates(gridSize));
-  if (newGrid !== undefined) {
-    return plateau.setLayout(newGrid);
-  }
-  return undefined;
+  return plateau.setLayout(newGrid);
 }
 
 function isGridStyle(style: string): style is GridStyle {
   return (GRIDSTYLE as ReadonlyArray<string>).includes(style);
 }
 
-export function selectGrid(
-  style: string,
-  [x, y]: GridSize
-): PlateauLayout | undefined {
+export function selectGrid(style: string, [x, y]: GridSize): PlateauLayout {
   if (isGridStyle(style)) {
     if (style === "rectangle") {
       return makeRectangularGrid([x, y]);

@@ -8,6 +8,7 @@ class Robot {
   style: string = "";
   position: PlateauCoordinates = [0, 0];
   direction: string = "";
+  move: string = "";
 }
 export const robot = (function () {
   const myRobot = new Robot();
@@ -23,7 +24,9 @@ export const robot = (function () {
     getPosition: (): PlateauCoordinates => myRobot.position,
     setDirection: (thisDirection: string) =>
       (myRobot.direction = thisDirection),
-    getDirection: (): string => myRobot.direction
+    getDirection: (): string => myRobot.direction,
+    setMove: (thisMove: string) => (myRobot.move = thisMove),
+    getMove: (): string => myRobot.move
   };
 })();
 
@@ -33,26 +36,33 @@ export function createRobot(
   style: string,
   position: PlateauCoordinates,
   direction: string
-) {
-  robot.setId(id);
-  robot.setName(name);
-  robot.setStyle(style);
-  robot.setPosition(position);
-  robot.setDirection(direction);
+): boolean {
+  if (
+    (robot.setId(id),
+    robot.setName(name),
+    robot.setStyle(style),
+    robot.setPosition(position),
+    robot.setDirection(direction))
+  ) {
+    return true;
+  }
+  return false;
 }
 
 export function createJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): Journey | undefined {
+): Journey {
   if (positionIsAvailable(position)) {
-    const myJourney = robotJourney(position, direction, move);
-    const { journey, destination } = myJourney;
-    const finalPosition = journey[journey.length - 1].coordinates;
-    const [x, y] = finalPosition;
-    plateau.setOccupied(finalPosition);
-    return myJourney;
+    const journey = robotJourney(position, direction, move);
+    const [a, b] = journey[journey.length - 1].coordinates;
+    const d = journey[journey.length - 1].direction;
+    const destination = `${a}${b}${d}`;
+    plateau.setOccupied([a, b]);
+    robot.setPosition([a, b]);
+    robot.setDirection(d);
+    return { journey, destination };
   }
-  return undefined;
+  return { journey: undefined, destination: undefined };
 }
