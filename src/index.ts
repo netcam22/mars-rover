@@ -1,4 +1,4 @@
-import { RobotData, RobotInput } from "./types/mission.type";
+import { RobotData } from "./types/mission.type";
 import { PlateauLayout } from "./types/plateau.type";
 import { createRobotJourney, newPlateau } from "./modules/mission";
 import { newRobot } from "./modules/mission";

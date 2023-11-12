@@ -63,8 +63,8 @@ export function selectGrid(style: string, [x, y]: GridSize): PlateauLayout {
   if (isGridStyle(style)) {
     if (style === "rectangle") {
       return makeRectangularGrid([x, y]);
-    } else if (style === "circle") {
-      return makeCircularGrid(x);
+    } else if (style === "kite") {
+      return makeKiteGrid(x);
     }
   }
   return makeRectangularGrid([x, y]);
@@ -78,11 +78,11 @@ export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
   return grid;
 }
 
-export function makeCircularGrid(radius: number): PlateauLayout {
+export function makeKiteGrid(radius: number): PlateauLayout {
   const arrayLength = 2 * radius - 1;
-  const grid = new Array(2 * radius - 1);
+  const grid = new Array(arrayLength);
   let yVal = 0;
-  for (let y = 0; y < 2 * radius - 1; y++) {
+  for (let y = 0; y < arrayLength; y++) {
     yVal = y < radius ? y + 1 : arrayLength - y;
     grid[y] = new Array(yVal).fill(0);
   }

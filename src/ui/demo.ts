@@ -16,9 +16,9 @@ const rectangleDemo: InputData = {
   ]
 };
 
-const circleDemo = {
+const kiteDemo = {
   gridSize: "5",
-  gridStyle: "circle",
+  gridStyle: "kite",
   inputs: [
     ["Fred", "12N", "LMLMLMLMM"],
     ["Bob", "33E", "MMRMMRMRRM"],
@@ -28,7 +28,7 @@ const circleDemo = {
 
 const multipleDemo = {
   gridSize: "5",
-  gridStyle: "circle",
+  gridStyle: "kite",
   inputs: [
     ["A", "12N", "LMLMLMLMM"],
     ["B", "33E", "MMRMMRMRRM"],
@@ -81,5 +81,5 @@ function start(demoData: InputData): Array<RobotData | undefined> {
 }
 
 start(rectangleDemo);
-start(circleDemo);
+start(kiteDemo);
 start(multipleDemo);
