@@ -1,15 +1,20 @@
 import { PlateauCoordinates, PlateauLayout } from "./plateau.type";
-export type RobotInput = Array<Array<string>>;
+export type RobotInput = Array<string>;
 import { Move } from "./navigator.type";
 export type RobotData = {
   name: string;
-  start: string;
+  position: PlateauCoordinates;
+  direction: string;
   move: string;
-  destination: string;
+  destination: string | undefined;
   layout: PlateauLayout;
-  journey: Array<Move>;
+  journey: Array<Move> | undefined;
 };
-export type PlateauData = { name: string; gridSize: string };
+export type PlateauData = {
+  name: string;
+  gridSize: string;
+  plateau: PlateauLayout;
+};
 export type RobotStart = {
   position: PlateauCoordinates;
   direction: string;

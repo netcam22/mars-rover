@@ -2,7 +2,6 @@ import { COMPASS } from "../types/compass.type";
 import { ROTATOR } from "../types/rotator.type";
 import { PlateauCoordinates } from "../types/plateau.type";
 import { Vector, Move } from "../types/navigator.type";
-import { Journey } from "../types/robot.type";
 import { positionIsAvailable } from "./plateau";
 
 export function rotateRobot(point: string, direction: string): string {
@@ -100,11 +99,8 @@ export function robotJourney(
   position: PlateauCoordinates,
   direction: string,
   move: string
-): Journey {
-  const thisJourney = createMoves(position, direction, move);
-  const finalDirection = thisJourney[thisJourney.length - 1].direction;
-  const [a, b] = thisJourney[thisJourney.length - 1].coordinates;
-  return { journey: thisJourney, destination: `${a}${b}${finalDirection}` };
+): Array<Move> {
+  return createMoves(position, direction, move);
 }
 
 export function rotator(char: string): number | undefined {

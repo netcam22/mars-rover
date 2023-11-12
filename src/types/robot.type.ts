@@ -1,4 +1,4 @@
-import { PlateauCoordinates } from "./plateau.type";
+import { PlateauCoordinates, PlateauLayout } from "./plateau.type";
 import { Move } from "./navigator.type";
 export interface MissionRobot {
   id: number;
@@ -8,4 +8,7 @@ export interface MissionRobot {
   direction: string;
 }
 
-export type Journey = { journey: Array<Move>; destination: string };
+export type Journey = {
+  journey: Array<Move> | undefined;
+  destination: string | undefined;
+};
