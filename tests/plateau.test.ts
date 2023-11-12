@@ -1,6 +1,6 @@
 import {
   makeRectangularGrid,
-  makeCircularGrid,
+  makeKiteGrid,
   setOccupiedPosition,
   positionIsAvailable
 } from "../src/modules/plateau";
@@ -25,9 +25,9 @@ describe("make rectangular matrix", () => {
   });
 });
 
-describe("make circular matrix", () => {
+describe("make kite matrix", () => {
   test("make 5 radius matrix", () => {
-    expect(makeCircularGrid(5)).toEqual([
+    expect(makeKiteGrid(5)).toEqual([
       [0],
       [0, 0],
       [0, 0, 0],

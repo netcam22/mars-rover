@@ -41,7 +41,7 @@ describe("test robot object properties", () => {
     expect(robot.getStyle()).toBe("stop-at-obstacle");
   });
 });
-describe("test create robots with default suare 6x6 grid", () => {
+describe("test create robots with default square 6x6 grid", () => {
   test("create new robot Fred", () => {
     expect(newRobot("Fred", "12N")).toBe(true);
   });
