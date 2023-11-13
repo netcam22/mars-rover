@@ -9,5 +9,5 @@ export interface MissionPlateau {
   layout: PlateauLayout;
   occupied: PlateauCoordinates | undefined;
 }
-export const GRIDSTYLE = ["rectangle", "kite"] as const;
+export const GRIDSTYLE = ["rectangle", "kite", "circle"] as const;
 export type GridStyle = (typeof GRIDSTYLE)[number];
