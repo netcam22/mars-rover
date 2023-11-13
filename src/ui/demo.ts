@@ -26,20 +26,20 @@ const kiteDemo = {
   ]
 };
 
-const multipleDemo = {
-  gridSize: "5",
-  gridStyle: "kite",
+const circleDemo = {
+  gridSize: "2",
+  gridStyle: "circle",
   inputs: [
     ["A", "12N", "LMLMLMLMM"],
-    ["B", "33E", "MMRMMRMRRM"],
-    ["C", "33E", "MMMMMMMRM"],
-    ["D", "12N", "LMLMLMLMM"],
-    ["E", "33E", "MMRMMRMRRM"],
-    ["F", "33E", "MMMMMMMRM"],
-    ["G", "33E", "MMRMMRMRRM"],
+    ["B", "32E", "MMRMMRMRRM"],
+    ["C", "13E", "MMMMMMMRM"],
+    ["D", "42N", "LMLMLMLMM"],
+    ["E", "31E", "MMRMMRMRRM"],
+    ["F", "55W", "MMMMMMMRM"],
+    ["G", "00S", "MMRMMRMRRM"],
     ["H", "33E", "MMMMMMMRM"],
-    ["I", "33E", "MMRMMRMRRM"],
-    ["J", "33E", "MMMMMMMRM"]
+    ["I", "42E", "MMRMMRMRRM"],
+    ["J", "11N", "MMMMMMMRM"]
   ]
 };
 
@@ -53,7 +53,7 @@ function start(demoData: InputData): Array<RobotData | undefined> {
     const [name, start, moveInput] = input;
     console.log("Instructions:", input[2]);
     console.log(
-      `Hello, I am a Rover called ${name} and I plan to start at direction ${start[0]} at map co-ordinates (${start[1]}, ${start[2]})`
+      `Hello, I am a Rover called ${name} and I plan to start at direction ${start[2]} at map co-ordinates (${start[0]}, ${start[1]})`
     );
     const robotMade = makeRobot(name, start);
     if (robotMade) {
@@ -62,6 +62,7 @@ function start(demoData: InputData): Array<RobotData | undefined> {
         console.log(
           `Hello again, I am ${output.name} and I have moved ${output.move} and arrived at ${output.destination}`
         );
+        console.log("I moved:");
         console.log(output.layout);
         output.journey?.forEach((robotMove: Move) => {
           const { vector, rotate, direction, angle, coordinates } = robotMove;
@@ -71,7 +72,7 @@ function start(demoData: InputData): Array<RobotData | undefined> {
         });
       } else {
         console.log(
-          `Hello again, I am ${name} and I was unable to make my journey as the start position ${start} was occupied.`
+          `Hello again, I am ${name} and I was unable to make my journey as the start position ${start} was not available.`
         );
       }
       return output;
@@ -82,4 +83,4 @@ function start(demoData: InputData): Array<RobotData | undefined> {
 
 start(rectangleDemo);
 start(kiteDemo);
-start(multipleDemo);
+start(circleDemo);
