@@ -8,8 +8,7 @@ export const robot = (function () {
     id: "",
     name: "",
     position: [],
-    direction: "",
-    move: ""
+    direction: ""
   };
   return {
     setId: (thisId: string) => (myRobot.id = thisId),
@@ -21,9 +20,7 @@ export const robot = (function () {
     getPosition: (): PlateauCoordinates => myRobot.position,
     setDirection: (thisDirection: string) =>
       (myRobot.direction = thisDirection),
-    getDirection: (): string => myRobot.direction,
-    setMove: (thisMove: string) => (myRobot.move = thisMove),
-    getMove: (): string => myRobot.move
+    getDirection: (): string => myRobot.direction
   };
 })();
 
