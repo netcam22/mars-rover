@@ -28,8 +28,6 @@ export const plateau = (function () {
     getId: (): number => myPlateau.id,
     setSize: (thisSize: GridSize) => (myPlateau.size = thisSize),
     getSize: (): GridSize => myPlateau.size,
-    setName: (thisName: string) => (myPlateau.name = thisName),
-    getName: (): string => myPlateau.name,
     setStyle: (thisStyle: string) => (myPlateau.style = thisStyle),
     getStyle: (): string => myPlateau.style,
     setLayout: (layout: PlateauLayout) => (myPlateau.layout = layout),
@@ -44,11 +42,9 @@ export const plateau = (function () {
 export function createPlateau(
   gridSize: string,
   id: number,
-  name: string,
   style: string
 ): PlateauLayout {
   plateau.setId(id);
-  plateau.setName(name);
   plateau.setStyle(style);
   plateau.setSize(makeGridSize(gridSize));
   const newGrid = selectGrid(style, makeCoordinates(gridSize));
