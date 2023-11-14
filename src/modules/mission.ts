@@ -61,13 +61,12 @@ export function createRobotJourney(
   const myJourney: Journey = createJourney(
     robot.getPosition(),
     robot.getDirection(),
-    move,
-    robotId
+    move
   );
-  if (myJourney) {
+  if (myJourney && robotId === robot.getId()) {
     const { journey, destination } = myJourney;
     const robotData: RobotData = {
-      id: robot.getId(),
+      id: robotId,
       name: robot.getName(),
       position: robot.getPosition(),
       direction: robot.getDirection(),
