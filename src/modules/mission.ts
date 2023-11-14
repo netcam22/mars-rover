@@ -4,19 +4,13 @@ import { createPlateau, makeCoordinates, plateau } from "./plateau";
 import { robot, createRobot, createJourney } from "./robot";
 import { Journey } from "../types/robot.type";
 class Mission {
-  id: number = 1;
   robotArray: Array<RobotData> = [];
   plateauArray: Array<PlateauData> = [];
-  location: string = "Mars";
 }
 
 export const mission = (function () {
   const myMission = new Mission();
   return {
-    setId: (thisId: number) => (myMission.id = thisId),
-    getId: (): number => myMission.id,
-    setLocation: (thisLocation: string) => (myMission.location = thisLocation),
-    getLocation: (): string => myMission.location,
     addPlateau: (plateau: PlateauData) => myMission.plateauArray.push(plateau),
     getPlateauArray: (): Array<PlateauData> => myMission.plateauArray,
     addRobot: (thisRobot: RobotData) => myMission.robotArray.push(thisRobot),

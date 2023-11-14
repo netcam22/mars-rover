@@ -1,34 +1,35 @@
-import { mission } from "../src/modules/mission";
+import { newPlateau } from "../src/modules/mission";
 
 describe("test mission object properties", () => {
-  test("get mission Location", () => {
-    expect(mission.getLocation()).toBe("Mars");
+  test("new circle plateau from mission", () => {
+    expect(newPlateau("2", "circle")).toEqual([
+      [1, 1, 0, 1, 1],
+      [1, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 1],
+      [1, 1, 0, 1, 1]
+    ]);
   });
-  test("get mission id", () => {
-    expect(mission.getId()).toBe(1);
+
+  test("new rectangle plateau from mission", () => {
+    expect(newPlateau("65", "rectangle")).toEqual([
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ]);
   });
-  test("set mission id", () => {
-    expect(mission.setId(2)).toBe(2);
-  });
-  test("set mission Location", () => {
-    expect(mission.setLocation("Pluto")).toBe("Pluto");
-  });
-  test("get mission id", () => {
-    expect(mission.getId()).toBe(2);
-  });
-  test("get mission Location", () => {
-    expect(mission.getLocation()).toBe("Pluto");
-  });
-  test("set mission id", () => {
-    expect(mission.setId(1)).toBe(1);
-  });
-  test("set mission Location", () => {
-    expect(mission.setLocation("Mars")).toBe("Mars");
-  });
-  test("get mission id", () => {
-    expect(mission.getId()).toBe(1);
-  });
-  test("get mission Location", () => {
-    expect(mission.getLocation()).toBe("Mars");
+
+  test("new kite plateau from mission", () => {
+    expect(newPlateau("4", "kite")).toEqual([
+      [0],
+      [0, 0],
+      [0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0],
+      [0, 0],
+      [0]
+    ]);
   });
 });
