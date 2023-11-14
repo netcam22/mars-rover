@@ -6,6 +6,7 @@ export type InputData = {
   gridStyle: string;
   inputs: Array<Array<string>>;
 };
+const robotType = "Rover" as const;
 
 const rectangleDemo: InputData = {
   gridSize: "66",
@@ -53,7 +54,7 @@ function start(demoData: InputData): Array<RobotData | undefined> {
     const [name, start, moveInput] = input;
     console.log("Instructions:", input[2]);
     console.log(
-      `Hello, I am a Rover called ${name} and I plan to start at direction ${start[2]} at map co-ordinates (${start[0]}, ${start[1]})`
+      `Hello, I am a ${robotType} called ${name} and I plan to start at direction ${start[2]} at map co-ordinates (${start[0]}, ${start[1]})`
     );
     const robotMade = makeRobot(name, start);
     if (robotMade) {

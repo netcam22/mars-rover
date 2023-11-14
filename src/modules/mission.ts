@@ -33,8 +33,7 @@ export function newRobot(name: string, start: string) {
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;
-  const style = "Rover";
-  return createRobot(id, name, style, position, direction);
+  return createRobot(id, name, position, direction);
 }
 
 export function createRobotJourney(move: string): RobotData | undefined {

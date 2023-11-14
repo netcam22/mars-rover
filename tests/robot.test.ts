@@ -26,20 +26,6 @@ describe("test robot object properties", () => {
   test("get robot name", () => {
     expect(robot.getName()).toBe("Mandy");
   });
-  test("set robot style", () => {
-    expect(robot.setStyle("reversing")).toBe("reversing");
-  });
-
-  test("get robot style", () => {
-    expect(robot.getStyle()).toBe("reversing");
-  });
-  test("set robot style", () => {
-    expect(robot.setStyle("stop-at-obstacle")).toBe("stop-at-obstacle");
-  });
-
-  test("get robot style", () => {
-    expect(robot.getStyle()).toBe("stop-at-obstacle");
-  });
 });
 describe("test create robots with default square 6x6 grid", () => {
   test("create new robot Fred", () => {
