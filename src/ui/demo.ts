@@ -1,7 +1,6 @@
 import { makePlateau, makeRobot, moveRobot } from "..";
 import { RobotData } from "../types/mission.type";
 import { Move } from "../types/navigator.type";
-import { Journey } from "../types/robot.type";
 export type InputData = {
   gridSize: string;
   gridStyle: string;
