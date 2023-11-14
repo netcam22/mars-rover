@@ -25,7 +25,7 @@ export const mission = (function () {
 export function newPlateau(gridSize: string, style: string): PlateauLayout {
   const id = mission.getPlateauArray().length;
   const plateau = createPlateau(gridSize, id, style);
-  mission.addPlateau({ gridSize, plateau });
+  mission.addPlateau({ gridSize, plateau, style });
   return plateau;
 }
 
@@ -33,8 +33,7 @@ export function newRobot(name: string, start: string) {
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
   const id = mission.getRobotArray.length;
-  const style = "Rover";
-  return createRobot(id, name, style, position, direction);
+  return createRobot(id, name, position, direction);
 }
 
 export function createRobotJourney(move: string): RobotData | undefined {
@@ -68,4 +67,9 @@ function processRobotStart(start: string): RobotStart {
 function getRobot(thisId: number) {
   const robots = mission.getRobotArray();
   return robots[thisId];
+}
+
+function getPlateaus(thisId: number) {
+  const plateaus = mission.getPlateauArray();
+  return plateaus[thisId];
 }

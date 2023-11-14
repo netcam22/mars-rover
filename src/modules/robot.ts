@@ -5,7 +5,6 @@ import { plateau, positionIsAvailable } from "./plateau";
 class Robot {
   id: number = 0;
   name: string = "";
-  style: string = "";
   position: PlateauCoordinates = [0, 0];
   direction: string = "";
   move: string = "";
@@ -17,8 +16,6 @@ export const robot = (function () {
     getId: (): number => myRobot.id,
     setName: (thisName: string) => (myRobot.name = thisName),
     getName: (): string => myRobot.name,
-    setStyle: (thisStyle: string) => (myRobot.style = thisStyle),
-    getStyle: (): string => myRobot.style,
     setPosition: (thisPosition: PlateauCoordinates) =>
       (myRobot.position = thisPosition),
     getPosition: (): PlateauCoordinates => myRobot.position,
@@ -33,14 +30,12 @@ export const robot = (function () {
 export function createRobot(
   id: number,
   name: string,
-  style: string,
   position: PlateauCoordinates,
   direction: string
 ): boolean {
   if (
     (robot.setId(id),
     robot.setName(name),
-    robot.setStyle(style),
     robot.setPosition(position),
     robot.setDirection(direction))
   ) {
