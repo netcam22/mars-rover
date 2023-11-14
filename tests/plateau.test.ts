@@ -95,19 +95,19 @@ describe("make circle matrix", () => {
 
 describe("set occupied position", () => {
   test("set occupied posision", () => {
-    expect(setOccupiedPosition([0, 0])).toEqual(undefined);
+    expect(setOccupiedPosition([0, 0], [])).toEqual(undefined);
   });
   test("get occupied posision", () => {
-    expect(positionIsAvailable([0, 0])).toEqual(false);
+    expect(positionIsAvailable([0, 0])).toEqual(true);
   });
   test("get occupied posision", () => {
     expect(positionIsAvailable([0, 1])).toEqual(true);
   });
   test("set occupied posision", () => {
-    expect(setOccupiedPosition([1, 2])).toEqual(undefined);
+    expect(setOccupiedPosition([1, 2], [])).toEqual(undefined);
   });
   test("get occupied posision", () => {
-    expect(positionIsAvailable([1, 2])).toEqual(false);
+    expect(positionIsAvailable([1, 2])).toEqual(true);
   });
   test("get occupied posision", () => {
     expect(positionIsAvailable([2, 2])).toEqual(true);
