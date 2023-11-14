@@ -12,6 +12,7 @@ export type RobotData = {
 };
 export type PlateauData = {
   gridSize: string;
+  style: string;
   plateau: PlateauLayout;
 };
 export type Mission = {
