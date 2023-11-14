@@ -1,4 +1,4 @@
-import { PlateauCoordinates, PlateauLayout } from "./plateau.type";
+import { PlateauCoordinates } from "./plateau.type";
 import { Move } from "./navigator.type";
 export type MissionRobot = {
   id: string;
