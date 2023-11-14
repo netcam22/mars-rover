@@ -1,16 +1,16 @@
 import { PlateauCoordinates } from "../types/plateau.type";
 import { robotJourney } from "./navigator";
-import { Journey } from "../types/robot.type";
+import { Journey, MissionRobot } from "../types/robot.type";
 import { plateau, positionIsAvailable } from "./plateau";
-class Robot {
-  id: string = "";
-  name: string = "";
-  position: PlateauCoordinates = [];
-  direction: string = "";
-  move: string = "";
-}
+
 export const robot = (function () {
-  const myRobot = new Robot();
+  const myRobot: MissionRobot = {
+    id: "",
+    name: "",
+    position: [],
+    direction: "",
+    move: ""
+  };
   return {
     setId: (thisId: string) => (myRobot.id = thisId),
     getId: (): string => myRobot.id,
