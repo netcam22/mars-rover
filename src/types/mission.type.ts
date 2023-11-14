@@ -11,7 +11,6 @@ export type RobotData = {
   journey: Array<Move> | undefined;
 };
 export type PlateauData = {
-  name: string;
   gridSize: string;
   plateau: PlateauLayout;
 };

@@ -23,10 +23,9 @@ export const mission = (function () {
 })();
 
 export function newPlateau(gridSize: string, style: string): PlateauLayout {
-  const name = "Bumpy ground";
   const id = mission.getPlateauArray().length;
-  const plateau = createPlateau(gridSize, id, name, style);
-  mission.addPlateau({ name, gridSize, plateau });
+  const plateau = createPlateau(gridSize, id, style);
+  mission.addPlateau({ gridSize, plateau });
   return plateau;
 }
 
