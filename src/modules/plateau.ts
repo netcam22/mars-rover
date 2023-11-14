@@ -32,8 +32,10 @@ export const plateau = (function () {
     getStyle: (): string => myPlateau.style,
     setLayout: (layout: PlateauLayout) => (myPlateau.layout = layout),
     getLayout: (): PlateauLayout => myPlateau.layout,
-    setOccupied: (position: PlateauCoordinates) =>
-      setOccupiedPosition(position),
+    setOccupied: (
+      newPosition: PlateauCoordinates,
+      currentPosition: PlateauCoordinates
+    ) => setOccupiedPosition(newPosition, currentPosition),
     isOccupied: (thisPosition: PlateauCoordinates): boolean =>
       positionIsAvailable(thisPosition)
   };
@@ -111,25 +113,44 @@ export function makeGridSize(string: string): GridSize {
   return [parseInt(string[0]), parseInt(string[1])];
 }
 
-export function setOccupiedPosition([x, y]: PlateauCoordinates) {
+export function setOccupiedPosition(
+  [x, y]: PlateauCoordinates,
+  currentPosition: PlateauCoordinates
+) {
   if (positionIsAvailable([x, y])) {
     const layout = [...plateau.getLayout()];
     const yAxis = layout.length;
-    const robotInitial = robot.getName()[0];
-    const yVal = yAxis - y - 1;
+    const robotInitial = robot.getId();
+    let [prevX, prevY]: PlateauCoordinates = [];
+    if (currentPosition.length) {
+      const [a, b] = currentPosition;
+      (prevY = yAxis - b - 1), (prevX = a);
+    }
+    const newY = yAxis - y - 1,
+      newX = x;
     const newLayout = layout.map((row, rowIndex) =>
       row.map((col, colIndex) =>
-        rowIndex === yVal && colIndex === x ? robotInitial : col
+        rowIndex === newY && colIndex === newX
+          ? robotInitial
+          : currentPosition.length && rowIndex === prevY && colIndex === prevX
+          ? 0
+          : col
       )
     );
     plateau.setLayout(newLayout);
   }
 }
+
 export function positionIsAvailable([x, y]: PlateauCoordinates): boolean {
   if (x < 0 || y < 0) return false;
   const layout = plateau.getLayout();
   const yAxis = layout.length;
-  if (y < yAxis && x < layout[y].length && layout[yAxis - y - 1][x] === 0) {
+  if (
+    y < yAxis &&
+    x < layout[y].length &&
+    (layout[yAxis - y - 1][x] === 0 ||
+      layout[yAxis - y - 1][x] === robot.getId())
+  ) {
     return true;
   }
   return false;

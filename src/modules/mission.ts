@@ -18,33 +18,56 @@ export const mission = (function () {
     addPlateau: (plateau: PlateauData) => myMission.plateauArray.push(plateau),
     getPlateauArray: (): Array<PlateauData> => myMission.plateauArray,
     addRobot: (thisRobot: RobotData) => myMission.robotArray.push(thisRobot),
-    getRobotArray: (): Array<RobotData> => myMission.robotArray
+    updateCurrentRobot: (thisRobot: RobotData) =>
+      (myMission.robotArray[myMission.robotArray.length - 1] = thisRobot),
+    getRobotArray: (): Array<RobotData> => myMission.robotArray,
+    emptyRobotArray: () => (myMission.robotArray = [])
   };
 })();
 
 export function newPlateau(gridSize: string, style: string): PlateauLayout {
+  mission.emptyRobotArray();
   const id = mission.getPlateauArray().length;
   const plateau = createPlateau(gridSize, id, style);
-  mission.addPlateau({ gridSize, plateau, style });
+  mission.addPlateau({ gridSize, plateau, style, id });
   return plateau;
 }
 
-export function newRobot(name: string, start: string) {
+export function newRobot(name: string, start: string): string | undefined {
   const robotStart = processRobotStart(start);
   const { position, direction } = robotStart;
-  const id = mission.getRobotArray.length;
-  return createRobot(id, name, position, direction);
+  const index = mission.getRobotArray().length;
+  const robotId = createRobot(index, name, position, direction);
+  if (robotId) {
+  }
+  const robotData: RobotData = {
+    id: robot.getId(),
+    name: name,
+    position: position,
+    direction: direction,
+    move: undefined,
+    destination: undefined,
+    layout: plateau.getLayout(),
+    journey: undefined
+  };
+  mission.addRobot(robotData);
+  return robotId;
 }
 
-export function createRobotJourney(move: string): RobotData | undefined {
+export function createRobotJourney(
+  move: string,
+  robotId: string
+): RobotData | undefined {
   const myJourney: Journey = createJourney(
     robot.getPosition(),
     robot.getDirection(),
-    move
+    move,
+    robotId
   );
   if (myJourney) {
     const { journey, destination } = myJourney;
     const robotData: RobotData = {
+      id: robot.getId(),
       name: robot.getName(),
       position: robot.getPosition(),
       direction: robot.getDirection(),
@@ -53,7 +76,7 @@ export function createRobotJourney(move: string): RobotData | undefined {
       layout: plateau.getLayout(),
       journey
     };
-    mission.addRobot(robotData);
+    mission.updateCurrentRobot(robotData);
     return robotData;
   }
 }
@@ -64,12 +87,12 @@ function processRobotStart(start: string): RobotStart {
   return { position, direction };
 }
 
-function getRobot(thisId: number) {
+export function getRobot(thisIndex: number) {
   const robots = mission.getRobotArray();
-  return robots[thisId];
+  return robots[thisIndex];
 }
 
-function getPlateaus(thisId: number) {
+export function getPlateaus(thisIndex: number) {
   const plateaus = mission.getPlateauArray();
-  return plateaus[thisId];
+  return plateaus[thisIndex];
 }

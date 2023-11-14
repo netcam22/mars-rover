@@ -1,7 +1,7 @@
 import { PlateauCoordinates, PlateauLayout } from "./plateau.type";
 import { Move } from "./navigator.type";
 export interface MissionRobot {
-  id: number;
+  id: string;
   name: string;
   style: string;
   position: PlateauCoordinates;

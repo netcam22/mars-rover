@@ -2,26 +2,28 @@ import { robot, createJourney } from "../src/modules/robot";
 import { newRobot } from "../src/modules/mission";
 
 describe("test robot object properties", () => {
-  test("set robot id", () => {
-    expect(robot.setId(2)).toBe(2);
-  });
   test("set robot name", () => {
     expect(robot.setName("Rowan")).toBe("Rowan");
   });
+  test("set robot id", () => {
+    expect(robot.setId("R0")).toBe("R0");
+  });
   test("get robot id", () => {
-    expect(robot.getId()).toBe(2);
+    expect(robot.getId()).toBe("R0");
   });
   test("get robot name", () => {
     expect(robot.getName()).toBe("Rowan");
   });
-  test("set robot id", () => {
-    expect(robot.setId(1)).toBe(1);
-  });
+
   test("set robot name", () => {
     expect(robot.setName("Mandy")).toBe("Mandy");
   });
+  test("set robot id", () => {
+    expect(robot.setId("M1")).toBe("M1");
+  });
+
   test("get robot id", () => {
-    expect(robot.getId()).toBe(1);
+    expect(robot.getId()).toBe("M1");
   });
   test("get robot name", () => {
     expect(robot.getName()).toBe("Mandy");
@@ -29,10 +31,10 @@ describe("test robot object properties", () => {
 });
 describe("test create robots with default square 6x6 grid", () => {
   test("create new robot Fred", () => {
-    expect(newRobot("Fred", "12N")).toBe(true);
+    expect(newRobot("Fred", "12N")).toBe("F0");
   });
   test("create journey for new robot Fred", () => {
-    expect(createJourney([1, 2], "N", "LMLMLMLMM")).toEqual({
+    expect(createJourney([1, 2], "N", "LMLMLMLMM", "F0")).toEqual({
       destination: "13N",
       journey: [
         {
@@ -114,11 +116,11 @@ describe("test create robots with default square 6x6 grid", () => {
   });
 });
 test("create new robot Bob", () => {
-  expect(newRobot("Bob", "33E")).toBe(true);
+  expect(newRobot("Bob", "33E")).toBe("B1");
 });
 describe("test create robot 2", () => {
   test("create new robot Bob", () => {
-    expect(createJourney([3, 3], "E", "MMRMMRMRRM")).toEqual({
+    expect(createJourney([3, 3], "E", "MMRMMRMRRM", "B1")).toEqual({
       destination: "51E",
       journey: [
         {

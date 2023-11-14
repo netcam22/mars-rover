@@ -3,17 +3,17 @@ import { robotJourney } from "./navigator";
 import { Journey } from "../types/robot.type";
 import { plateau, positionIsAvailable } from "./plateau";
 class Robot {
-  id: number = 0;
+  id: string = "";
   name: string = "";
-  position: PlateauCoordinates = [0, 0];
+  position: PlateauCoordinates = [];
   direction: string = "";
   move: string = "";
 }
 export const robot = (function () {
   const myRobot = new Robot();
   return {
-    setId: (thisId: number) => (myRobot.id = thisId),
-    getId: (): number => myRobot.id,
+    setId: (thisId: string) => (myRobot.id = thisId),
+    getId: (): string => myRobot.id,
     setName: (thisName: string) => (myRobot.name = thisName),
     getName: (): string => myRobot.name,
     setPosition: (thisPosition: PlateauCoordinates) =>
@@ -28,34 +28,36 @@ export const robot = (function () {
 })();
 
 export function createRobot(
-  id: number,
+  index: number,
   name: string,
   position: PlateauCoordinates,
   direction: string
-): boolean {
+): string | undefined {
+  const robotId = `${name[0]}${index}`;
   if (
-    (robot.setId(id),
+    (robot.setId(robotId),
     robot.setName(name),
     robot.setPosition(position),
     robot.setDirection(direction))
   ) {
-    return true;
+    return robotId;
   }
-  return false;
+  return undefined;
 }
 
 export function createJourney(
   position: PlateauCoordinates,
   direction: string,
-  move: string
+  move: string,
+  robotId: string
 ): Journey {
   if (positionIsAvailable(position)) {
     const journey = robotJourney(position, direction, move);
-    const [a, b] = journey[journey.length - 1].coordinates;
+    const [x, y] = journey[journey.length - 1].coordinates;
     const d = journey[journey.length - 1].direction;
-    const destination = `${a}${b}${d}`;
-    plateau.setOccupied([a, b]);
-    robot.setPosition([a, b]);
+    const destination = `${x}${y}${d}`;
+    plateau.setOccupied([x, y], robot.getPosition());
+    robot.setPosition([x, y]);
     robot.setDirection(d);
     return { journey, destination };
   }
