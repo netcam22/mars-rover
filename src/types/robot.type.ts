@@ -5,7 +5,6 @@ export type MissionRobot = {
   name: string;
   position: PlateauCoordinates;
   direction: string;
-  move: string;
 };
 export type Journey = {
   journey: Array<Move> | undefined;
