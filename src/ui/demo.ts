@@ -72,7 +72,6 @@ function start(demoData: InputData) {
     );
     const robotId = makeRobot(name, start);
     if (robotId) {
-      console.log("moves", moves);
       if (moves === "animate") {
         showOutput(moveRobot(moveInput, robotId), name, start);
       } else {
