@@ -34,7 +34,7 @@ describe("test create robots with default square 6x6 grid", () => {
     expect(newRobot("Fred", "12N")).toBe("F0");
   });
   test("create journey for new robot Fred", () => {
-    expect(createJourney([1, 2], "N", "LMLMLMLMM", "F0")).toEqual({
+    expect(createJourney([1, 2], "N", "LMLMLMLMM")).toEqual({
       destination: "13N",
       journey: [
         {
@@ -120,7 +120,7 @@ test("create new robot Bob", () => {
 });
 describe("test create robot 2", () => {
   test("create new robot Bob", () => {
-    expect(createJourney([3, 3], "E", "MMRMMRMRRM", "B1")).toEqual({
+    expect(createJourney([3, 3], "E", "MMRMMRMRRM")).toEqual({
       destination: "51E",
       journey: [
         {

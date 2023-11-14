@@ -48,8 +48,7 @@ export function createRobot(
 export function createJourney(
   position: PlateauCoordinates,
   direction: string,
-  move: string,
-  robotId: string
+  move: string
 ): Journey {
   if (positionIsAvailable(position)) {
     const journey = robotJourney(position, direction, move);
