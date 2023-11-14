@@ -1,15 +1,19 @@
 import { PlateauCoordinates, PlateauLayout } from "../types/plateau.type";
-import { PlateauData, RobotData, RobotStart } from "../types/mission.type";
+import {
+  Mission,
+  PlateauData,
+  RobotData,
+  RobotStart
+} from "../types/mission.type";
 import { createPlateau, makeCoordinates, plateau } from "./plateau";
 import { robot, createRobot, createJourney } from "./robot";
 import { Journey } from "../types/robot.type";
-class Mission {
-  robotArray: Array<RobotData> = [];
-  plateauArray: Array<PlateauData> = [];
-}
 
 export const mission = (function () {
-  const myMission = new Mission();
+  const myMission: Mission = {
+    robotArray: [],
+    plateauArray: []
+  };
   return {
     addPlateau: (plateau: PlateauData) => myMission.plateauArray.push(plateau),
     getPlateauArray: (): Array<PlateauData> => myMission.plateauArray,

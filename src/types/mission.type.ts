@@ -1,6 +1,6 @@
 import { PlateauCoordinates, PlateauLayout } from "./plateau.type";
-export type RobotInput = Array<string>;
 import { Move } from "./navigator.type";
+export type RobotInput = Array<string>;
 export type RobotData = {
   name: string;
   position: PlateauCoordinates;
@@ -14,6 +14,10 @@ export type PlateauData = {
   name: string;
   gridSize: string;
   plateau: PlateauLayout;
+};
+export type Mission = {
+  robotArray: Array<RobotData>;
+  plateauArray: Array<PlateauData>;
 };
 export type RobotStart = {
   position: PlateauCoordinates;
