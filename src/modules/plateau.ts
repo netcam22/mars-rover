@@ -72,10 +72,9 @@ export function selectGrid(style: string, [x, y]: GridSize): PlateauLayout {
 
 export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
   const arrayRow = new Array(x);
-  const row = arrayRow.fill(0, 0, x);
+  const row = arrayRow.fill(0);
   const columnArray = new Array(y);
-  const grid = columnArray.fill(row);
-  return grid;
+  return columnArray.fill(row);
 }
 
 export function makeCircularGrid(radius: number): PlateauLayout {
@@ -120,7 +119,6 @@ export function setOccupiedPosition(
   if (positionIsAvailable([x, y])) {
     const layout = [...plateau.getLayout()];
     const yAxis = layout.length;
-    const robotInitial = robot.getId();
     let [prevX, prevY]: PlateauCoordinates = [];
     if (currentPosition.length) {
       const [a, b] = currentPosition;
@@ -131,7 +129,7 @@ export function setOccupiedPosition(
     const newLayout = layout.map((row, rowIndex) =>
       row.map((col, colIndex) =>
         rowIndex === newY && colIndex === newX
-          ? robotInitial
+          ? robot.getId()
           : currentPosition.length && rowIndex === prevY && colIndex === prevX
           ? 0
           : col
