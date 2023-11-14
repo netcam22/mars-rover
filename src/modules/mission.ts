@@ -87,12 +87,12 @@ function processRobotStart(start: string): RobotStart {
   return { position, direction };
 }
 
-export function getRobot(thisIndex: number) {
+export function getRobot(index: number) {
   const robots = mission.getRobotArray();
-  return robots[thisIndex];
+  return robots[index];
 }
 
-export function getPlateaus(thisIndex: number) {
+export function getPlateaus(index: number) {
   const plateaus = mission.getPlateauArray();
-  return plateaus[thisIndex];
+  return plateaus[index];
 }
