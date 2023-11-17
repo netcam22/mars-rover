@@ -1,3 +1,4 @@
+/*
 import { RobotData, PlateauData } from "./types/mission.type";
 import { PlateauLayout } from "./types/plateau.type";
 import { createRobotJourney, newPlateau } from "./modules/mission";
@@ -11,15 +12,15 @@ type InputData = {
 };
 
 export function makePlateau(
-  gridSize: string,
-  plateauStyle: string
+  gridSize: string | undefined,
+  plateauStyle: string | undefined
 ): PlateauLayout | undefined {
   /*
   const style = plateauStyle as unknown;
   const thisStyle = style as string;
   const size = gridSize as unknown;
   const thisSize = size as string;
-  */
+  
   if (gridSize && plateauStyle) {
     return newPlateau(gridSize, plateauStyle);
   }
@@ -43,22 +44,7 @@ export function getPlateau(thisId: number): PlateauData {
 export function getRobot(thisId: number): RobotData {
   return getRobot(thisId);
 }
-
-function makeGrid(plateau: PlateauLayout) {
-  const gridContainer = document.getElementById("mission");
-  console.log(gridContainer);
-  if (gridContainer) {
-    plateau.forEach((row, rowIndex) =>
-      row.map((col, colIndex) => {
-        const gridItem = document.createElement("div");
-        gridItem.className = "grid-item";
-        gridItem.id = `${rowIndex}${colIndex}`;
-        gridContainer.appendChild(gridItem);
-      })
-    );
-  }
-}
-
+/*
 const rectangleDemo: InputData = {
   gridSize: "66",
   gridStyle: "rectangle",
@@ -68,20 +54,7 @@ const rectangleDemo: InputData = {
   ],
   moves: "animate"
 };
-/*
-document.getElementById("plateau-form")?.addEventListener("click", () => {
-  const plateauShape = document.getElementById("plateau-shape")?.innerHTML;
-  const plateauSize = document.getElementById("plateau-size")?.innerHTML;
-  makePlateau(rectangleDemo.gridSize, rectangleDemo.gridStyle);
-  const demoContent = document.getElementById("demo")?.innerHTML;
-  const layout = makePlateau(plateauSize, plateauShape);
-  //console.log(layout);
-  if (layout) {
-    console.log(layout);
-    //makeGrid(layout);
-  }
-});
-*/
+
 function showOutput(
   output: RobotData | undefined,
   name: string,
@@ -101,6 +74,7 @@ function showOutput(
   return outputText;
 }
 
+makePlateau(rectangleDemo.gridSize, rectangleDemo.gridStyle);
 const htmlcontent = rectangleDemo.inputs.map(robot => {
   const [name, start, moveInput] = robot;
   const robotId = makeRobot(name, start);
@@ -114,27 +88,8 @@ const htmlcontent = rectangleDemo.inputs.map(robot => {
     }
   }
 });
-
-document.getElementById("robot-button")?.addEventListener("click", () => {
-  const plateauShape: HTMLInputElement = document.getElementById(
-    "plateau-shape"
-  ) as HTMLInputElement;
-  const plateauSize: HTMLInputElement = document.getElementById(
-    "plateau-size"
-  ) as HTMLInputElement;
-  const myPlateauStuff: HTMLElement | null =
-    document.getElementById("plateau-data");
-  if (myPlateauStuff) {
-    myPlateauStuff.innerHTML = `${plateauShape.value} ${plateauSize.value}`;
-  }
-
-  if (plateauShape && plateauSize) {
-    const layout = makePlateau(plateauSize.value, plateauShape.value);
-    if (layout) {
-      console.log("layout", layout);
-      makeGrid(layout);
-    }
-  }
+/*
+document.getElementById("demo")?.addEventListener("click", () => {
   const myRobotStuff: HTMLElement | null =
     document.getElementById("robot-data");
   const content = htmlcontent ? htmlcontent : "no content found";
@@ -145,3 +100,36 @@ document.getElementById("robot-button")?.addEventListener("click", () => {
     }
   }
 });
+*/
+/*
+function makeGrid(plateau: PlateauLayout) {
+  const gridContainer = document.getElementById("mission");
+  if (gridContainer) {
+    plateau.forEach((row, rowIndex) =>
+      row.map((col, colIndex) => {
+        const gridItem = document.createElement("div");
+        gridItem.className = "grid-item";
+        gridItem.id = `${rowIndex * colIndex}`;
+        gridContainer.appendChild(gridItem);
+      })
+    );
+  }
+}
+
+document.getElementById("plateau_button")?.addEventListener("click", () => {
+  const plateauShape: string | undefined =
+    document.getElementById("plateau-shape")?.innerHTML;
+  console.log(plateauShape);
+  const plateauSize: string | undefined =
+    document.getElementById("plateau-size")?.innerHTML;
+  console.log(plateauSize);
+  const mission: HTMLElement | null = document.getElementById("mission");
+  const layout = makePlateau(plateauSize, plateauShape);
+  if (layout) {
+    console.log(layout);
+    if (mission) {
+      makeGrid(layout);
+    }
+  }
+});
+*/

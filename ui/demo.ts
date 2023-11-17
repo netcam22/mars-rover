@@ -1,3 +1,4 @@
+/*
 import { makePlateau, makeRobot, moveRobot } from "..";
 import { RobotData } from "../types/mission.type";
 import { Move } from "../types/navigator.type";
@@ -123,3 +124,4 @@ console.log(
   "Example of circular plateau with multiple robots with multiple consecutive moves, some of which wil not be accomodated on the plateau due to their requested space being occupied or out of range."
 );
 start(circleDemo);
+*/

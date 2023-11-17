@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+    <script src="./static/bundle/script.js" defer></script>
+  </head>
+  <body>
+    <form id="plateau-form" action="">
+      <label for="plateau-shape">Choose a plateau shape</label>
+      <select id="plateau-shape" form="mission">
+        <option value="rectangle">Rectangle</option>
+        <option value="circle">Circle</option>
+        <option value="kite">Kite</option>
+      </select>
+      <input
+        type="text"
+        id="plateau-size"
+        class="form-control"
+        placeholder="Enter plateau size..."
+        required />
+    </form>
+    <button id="robot-button" type="submit">Submit rover details</button>
+    <p id="plateau-data"></p>
+    <p id="robot-data"></p>
+    <!----
+    <form id="robot" action="">
+      <label for="robot-name">Choose a robot name</label>
+      <input
+        type="text"
+        id="robot-name"
+        class="form-control"
+        placeholder="Enter robot name..."
+        required />
+      <label for="robot-start">Choose start coordinates</label>
+      <input
+        type="text"
+        id="robot-start"
+        class="form-control"
+        placeholder="Enter start coordinates..."
+        required />
+      <button id="robot-button" type="submit">Submit rover details</button>
+    </form>
+    <form id="move" action="">
+      <input
+        type="text"
+        id="robot-move"
+        class="form-control"
+        placeholder="Enter robot move(s)..."
+        required />
+      <button id="move-button" type="submit">Submit robot move(s)</button>
+    </form>
+  -->
+    <section id="mission"></section>
+    <p id="demo"></p>
+  </body>
+</html>
