@@ -45,17 +45,27 @@ export function getRobot(thisId: number): RobotData {
 }
 
 function makeGrid(plateau: PlateauLayout) {
-  const gridContainer = document.getElementById("mission");
-  console.log(gridContainer);
-  if (gridContainer) {
-    plateau.forEach((row, rowIndex) =>
-      row.map((col, colIndex) => {
-        const gridItem = document.createElement("div");
-        gridItem.className = "grid-item";
-        gridItem.id = `${rowIndex}${colIndex}`;
-        gridContainer.appendChild(gridItem);
-      })
-    );
+  const plateauContainer: HTMLElement | null =
+    document.getElementById("plateau-container");
+  console.log(plateauContainer);
+  if (plateauContainer) {
+    plateauContainer.innerHTML = "";
+    plateau.forEach((row, rowIndex) => {
+      const gridRow = document.createElement("div");
+      gridRow.className = "grid-container";
+      gridRow.id = `${rowIndex}}`;
+      plateauContainer.appendChild(gridRow);
+      const columns = row.map((square: string | number) => "auto");
+      gridRow.style.gridTemplateColumns = columns.join(" ");
+      row.forEach((col, colIndex) => {
+        if (col !== 1) {
+          const gridItem = document.createElement("div");
+          gridItem.className = "grid-item";
+          gridItem.id = `${rowIndex}${colIndex}`;
+          gridRow.appendChild(gridItem);
+        }
+      });
+    });
   }
 }
 
