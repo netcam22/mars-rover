@@ -1,7 +1,7 @@
 import {
   getAngle,
   getDirection,
-  convertAngles,
+  normaliseAngle,
   degreesToRadians,
   radiansToDegrees,
   getVector,
@@ -44,42 +44,42 @@ describe("test compass points", () => {
 
 describe("test conversion of angles outside range", () => {
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(450)).toBe(90);
+    expect(normaliseAngle(450)).toBe(90);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(-450)).toBe(270);
+    expect(normaliseAngle(-450)).toBe(270);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(-3700)).toBe(260);
+    expect(normaliseAngle(-3700)).toBe(260);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(460)).toBe(100);
+    expect(normaliseAngle(460)).toBe(100);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(0)).toBe(0);
+    expect(normaliseAngle(0)).toBe(0);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(360)).toBe(0);
+    expect(normaliseAngle(360)).toBe(0);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(110)).toBe(110);
+    expect(normaliseAngle(110)).toBe(110);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(-10)).toBe(350);
+    expect(normaliseAngle(-10)).toBe(350);
   });
 
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(-270)).toBe(90);
+    expect(normaliseAngle(-270)).toBe(90);
   });
   test("test modulus to revert angles within 0 - 360 range", () => {
-    expect(convertAngles(90)).toBe(90);
+    expect(normaliseAngle(90)).toBe(90);
   });
 });
 

@@ -5,7 +5,7 @@ import { Vector, Move } from "../types/navigator.type";
 import { positionIsAvailable } from "./plateau";
 
 export function rotateRobot(point: string, direction: string): string {
-  return getDirection(convertAngles(COMPASS[point] + ROTATOR[direction]));
+  return getDirection(normaliseAngle(COMPASS[point] + ROTATOR[direction]));
 }
 
 export function getDirection(angle: number): string {
@@ -33,7 +33,7 @@ export function getVector(point: string): Vector {
   return [X, Y];
 }
 
-export function convertAngles(angle: number) {
+export function normaliseAngle(angle: number) {
   return angle >= 360 ? angle % 360 : angle < 0 ? 360 + (angle % 360) : angle;
 }
 export function createSingleMove(
@@ -57,7 +57,7 @@ export function createSingleMove(
     } else {
       let originalAngle = getAngle(thisDirection);
       originalAngle = originalAngle ? originalAngle + 180 : 180;
-      newDirection = getDirection(convertAngles(originalAngle));
+      newDirection = getDirection(normaliseAngle(originalAngle));
       vector = [0, 0];
     }
   } else {
