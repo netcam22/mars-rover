@@ -8,24 +8,35 @@
     <script src="./static/bundle/script.js" defer></script>
   </head>
   <body>
-    <form id="plateau-form" action="">
-      <label for="plateau-shape">Choose a plateau shape</label>
-      <select id="plateau-shape" form="mission">
-        <option value="rectangle">Rectangle</option>
-        <option value="circle">Circle</option>
-        <option value="kite">Kite</option>
-      </select>
-      <input
-        type="text"
-        id="plateau-size"
-        class="form-control"
-        placeholder="Enter plateau size..."
-        required />
-    </form>
-    <button id="robot-button" type="submit">Submit rover details</button>
-    <p id="plateau-data"></p>
-    <section class="mission" id="plateau-container"></section>
-    <p id="robot-data"></p>
+    <section class="mission">
+      <div class="column input">
+        <form id="plateau-form" action="">
+          <label for="plateau-shape">Choose a plateau shape</label>
+          <select id="plateau-shape" form="mission">
+            <option value="rectangle">Rectangle</option>
+            <option value="circle">Circle</option>
+            <option value="kite">Kite</option>
+          </select>
+          <select id="plateau-size" form="mission">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </form>
+        <button id="robot-button" type="submit">Submit rover details</button>
+        <p id="plateau-data"></p>
+      </div>
+      <div class="column planet" id="my-planet">
+        <div class="matrix" id="plateau-container"></div>
+      </div>
+      <div class="column sidebar">stuff in here</div>
+    </section>
+    <section class="info"><p id="robot-data"></p></section>
+
     <!----
     <form id="robot" action="">
       <label for="robot-name">Choose a robot name</label>

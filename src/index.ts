@@ -21,7 +21,8 @@ export function makePlateau(
   const thisSize = size as string;
   */
   if (gridSize && plateauStyle) {
-    return newPlateau(gridSize, plateauStyle);
+    const gridInput = `${gridSize}${gridSize}`;
+    return newPlateau(gridInput, plateauStyle);
   }
 }
 
@@ -44,13 +45,20 @@ export function getRobot(thisId: number): RobotData {
   return getRobot(thisId);
 }
 
+function makeGridBackground(plateauStyle: string) {
+  const planet: HTMLElement | null = document.getElementById("my-planet");
+  if (planet) {
+    planet.classList.remove("circle", "rectangle", "kite");
+    planet.classList.add(plateauStyle);
+  }
+}
+
 function makeGrid(plateau: PlateauLayout) {
   const plateauContainer: HTMLElement | null =
     document.getElementById("plateau-container");
-  console.log(plateauContainer);
   if (plateauContainer) {
     plateauContainer.innerHTML = "";
-    plateau.forEach((row, rowIndex) => {
+    plateau.forEach((row, rowIndex, rows) => {
       const gridRow = document.createElement("div");
       gridRow.className = "grid-container";
       gridRow.id = `${rowIndex}}`;
@@ -59,9 +67,12 @@ function makeGrid(plateau: PlateauLayout) {
       gridRow.style.gridTemplateColumns = columns.join(" ");
       row.forEach((col, colIndex) => {
         if (col !== 1) {
-          const gridItem = document.createElement("div");
+          let gridItem = document.createElement("div");
           gridItem.className = "grid-item";
-          gridItem.id = `${rowIndex}${colIndex}`;
+          gridItem.classList.add("grid-circle");
+          gridItem.id = `robot_${rows.length - rowIndex - 1}_${colIndex}`;
+          gridItem.style.width = `${100 / rows.length}%`;
+          gridItem.style.padding = `${100 / rows.length}% 0 0 0`;
           gridRow.appendChild(gridItem);
         }
       });
@@ -69,15 +80,6 @@ function makeGrid(plateau: PlateauLayout) {
   }
 }
 
-const rectangleDemo: InputData = {
-  gridSize: "66",
-  gridStyle: "rectangle",
-  inputs: [
-    ["Fred", "12N", "LMLMLMLMM"],
-    ["Bob", "33E", "MMRMMRMRRM"]
-  ],
-  moves: "animate"
-};
 /*
 document.getElementById("plateau-form")?.addEventListener("click", () => {
   const plateauShape = document.getElementById("plateau-shape")?.innerHTML;
@@ -111,20 +113,6 @@ function showOutput(
   return outputText;
 }
 
-const htmlcontent = rectangleDemo.inputs.map(robot => {
-  const [name, start, moveInput] = robot;
-  const robotId = makeRobot(name, start);
-  if (robotId) {
-    if (rectangleDemo.moves === "animate") {
-      return showOutput(moveRobot(moveInput, robotId), name, start);
-    } else {
-      return moveInput
-        .split("")
-        .forEach(move => showOutput(moveRobot(move, robotId), name, start));
-    }
-  }
-});
-
 document.getElementById("robot-button")?.addEventListener("click", () => {
   const plateauShape: HTMLInputElement = document.getElementById(
     "plateau-shape"
@@ -142,7 +130,9 @@ document.getElementById("robot-button")?.addEventListener("click", () => {
     const layout = makePlateau(plateauSize.value, plateauShape.value);
     if (layout) {
       console.log("layout", layout);
+      makeGridBackground(plateauShape.value);
       makeGrid(layout);
+      placeRobot(layout);
     }
   }
   const myRobotStuff: HTMLElement | null =
@@ -152,6 +142,48 @@ document.getElementById("robot-button")?.addEventListener("click", () => {
     console.log(content[0]);
     if (myRobotStuff) {
       myRobotStuff.innerHTML = content[0];
+    }
+  }
+});
+
+function placeRobot(layout: PlateauLayout) {
+  const [startX, startY] = rectangleDemo.inputs[0][1].split("");
+  const myRobotStart: HTMLElement | null = document.getElementById(
+    `robot_${parseInt(startX)}_${parseInt(startY)}`
+  );
+  if (myRobotStart) {
+    console.log(`robot_${parseInt(startX)}_${parseInt(startY)}`);
+    const newRobot = document.createElement("img");
+    newRobot.className = "grid-robot";
+    newRobot.id = `start_${startX}_${startY}`;
+    newRobot.style.position = "absolute";
+    newRobot.style.width = "100%";
+    newRobot.style.padding = "100% 0 0 0";
+    myRobotStart.prepend(newRobot);
+    myRobotStart.classList.remove("grid-circle");
+  }
+}
+
+const rectangleDemo: InputData = {
+  gridSize: "66",
+  gridStyle: "rectangle",
+  inputs: [
+    ["Fred", "12N", "LMLMLMLMM"],
+    ["Bob", "33E", "MMRMMRMRRM"]
+  ],
+  moves: "animate"
+};
+
+const htmlcontent = rectangleDemo.inputs.map(robot => {
+  const [name, start, moveInput] = robot;
+  const robotId = makeRobot(name, start);
+  if (robotId) {
+    if (rectangleDemo.moves === "animate") {
+      return showOutput(moveRobot(moveInput, robotId), name, start);
+    } else {
+      return moveInput
+        .split("")
+        .forEach(move => showOutput(moveRobot(move, robotId), name, start));
     }
   }
 });
