@@ -69,7 +69,7 @@ function makeGrid(plateau: PlateauLayout) {
         if (col !== 1) {
           let gridItem = document.createElement("div");
           gridItem.className = "grid-item";
-          gridItem.classList.add("grid-circle");
+          gridItem.classList.add("grid-circle-faded");
           gridItem.id = `robot_${rows.length - rowIndex - 1}_${colIndex}`;
           gridItem.style.width = `${100 / rows.length}%`;
           gridItem.style.padding = `${100 / rows.length}% 0 0 0`;
@@ -80,20 +80,6 @@ function makeGrid(plateau: PlateauLayout) {
   }
 }
 
-/*
-document.getElementById("plateau-form")?.addEventListener("click", () => {
-  const plateauShape = document.getElementById("plateau-shape")?.innerHTML;
-  const plateauSize = document.getElementById("plateau-size")?.innerHTML;
-  makePlateau(rectangleDemo.gridSize, rectangleDemo.gridStyle);
-  const demoContent = document.getElementById("demo")?.innerHTML;
-  const layout = makePlateau(plateauSize, plateauShape);
-  //console.log(layout);
-  if (layout) {
-    console.log(layout);
-    //makeGrid(layout);
-  }
-});
-*/
 function showOutput(
   output: RobotData | undefined,
   name: string,
@@ -160,7 +146,7 @@ function placeRobot(layout: PlateauLayout) {
     newRobot.style.width = "100%";
     newRobot.style.padding = "100% 0 0 0";
     myRobotStart.prepend(newRobot);
-    myRobotStart.classList.remove("grid-circle");
+    myRobotStart.classList.remove("grid-circle-faded");
   }
 }
 
