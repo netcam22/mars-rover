@@ -58,11 +58,15 @@ function makeGrid(plateau: PlateauLayout) {
     document.getElementById("plateau-container");
   if (plateauContainer) {
     plateauContainer.innerHTML = "";
+    let width = 1,
+      height = 1;
     plateau.forEach((row, rowIndex, rows) => {
+      width = perspectiveWidth(width, height);
+      height = perspectiveHeight(width);
       const gridRow = document.createElement("div");
       gridRow.className = "grid-container";
-      gridRow.id = `${rowIndex}}`;
-      plateauContainer.appendChild(gridRow);
+      gridRow.id = `row_${rowIndex}}`;
+      plateauContainer.prepend(gridRow);
       const columns = row.map((square: string | number) => "auto");
       gridRow.style.gridTemplateColumns = columns.join(" ");
       row.forEach((col, colIndex) => {
@@ -70,14 +74,33 @@ function makeGrid(plateau: PlateauLayout) {
           let gridItem = document.createElement("div");
           gridItem.className = "grid-item";
           gridItem.classList.add("grid-circle-faded");
-          gridItem.id = `robot_${rows.length - rowIndex - 1}_${colIndex}`;
-          gridItem.style.width = `${100 / rows.length}%`;
-          gridItem.style.padding = `${100 / rows.length}% 0 0 0`;
+          gridItem.id = `robot_${colIndex}_${rowIndex}`;
+          gridItem.style.width = `${(100 * width) / rows.length}%`;
+          gridItem.style.padding = `${(100 * height) / rows.length}% 0 0 0`;
           gridRow.appendChild(gridItem);
         }
       });
     });
   }
+}
+
+function perspectiveWidth(width: number, height: number): number {
+  const X = 3;
+  const DEG = Math.PI / 180;
+  const newWidth =
+    (Math.sin((45 - X) * DEG) *
+      Math.sqrt(Math.pow(height, 2) + Math.pow(width, 2))) /
+    Math.sin((X + 90) * DEG);
+  return newWidth;
+}
+
+function perspectiveHeight(newWidth: number): number {
+  const X = 3;
+  const DEG = Math.PI / 180;
+  const newHeight =
+    (newWidth * Math.sin((90 - X) * DEG) * Math.sin(45 * DEG)) /
+    Math.sin((X + 45) * DEG);
+  return newHeight;
 }
 
 function showOutput(
@@ -133,15 +156,14 @@ document.getElementById("robot-button")?.addEventListener("click", () => {
 });
 
 function placeRobot(layout: PlateauLayout) {
-  const [startX, startY] = rectangleDemo.inputs[0][1].split("");
+  const [startCol, startRow] = rectangleDemo.inputs[0][1].split("");
   const myRobotStart: HTMLElement | null = document.getElementById(
-    `robot_${parseInt(startX)}_${parseInt(startY)}`
+    `robot_${parseInt(startCol)}_${parseInt(startRow)}`
   );
   if (myRobotStart) {
-    console.log(`robot_${parseInt(startX)}_${parseInt(startY)}`);
     const newRobot = document.createElement("img");
     newRobot.className = "grid-robot";
-    newRobot.id = `start_${startX}_${startY}`;
+    newRobot.id = `coords_${startCol}_${startRow}`;
     newRobot.style.position = "absolute";
     newRobot.style.width = "100%";
     newRobot.style.padding = "100% 0 0 0";

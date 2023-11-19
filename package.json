@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "demo": "nodemon data/demo.ts"
   },
   "keywords": [],
   "author": "",
