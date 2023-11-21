@@ -29,29 +29,19 @@ export function getRobot(thisId: number): RobotData {
   return getRobot(thisId);
 }
 
-const rectangleDemo: InputData = {
-  gridSize: "66",
-  gridStyle: "rectangle",
-  inputs: [
-    ["Fred", "12N", "M"]
-    // ["Bob", "33S", "MMLMRMMRMRRMM"]
-  ],
-  moves: "single"
-};
-
 document.getElementById("L")?.addEventListener("click", () => {
-  const myRobot = document.getElementById("my-robot");
-  moveRobot("L", "F0");
+  //const myRobot = document.getElementById("my-robot");
+  moveRobot("L");
 });
 
 document.getElementById("R")?.addEventListener("click", () => {
-  const myRobot = document.getElementById("my-robot");
-  moveRobot("R", "F0");
+  //const myRobot = document.getElementById("my-robot");
+  moveRobot("R");
 });
 
 document.getElementById("M")?.addEventListener("click", () => {
-  const myRobot = document.getElementById("my-robot");
-  moveRobot("M", "F0");
+  //const myRobot = document.getElementById("my-robot");
+  moveRobot("M");
 });
 
 document.getElementById("robot-button")?.addEventListener("click", () => {
@@ -66,13 +56,12 @@ document.getElementById("robot-button")?.addEventListener("click", () => {
   if (myPlateauStuff) {
     myPlateauStuff.innerHTML = `${plateauShape.value} ${plateauSize.value}`;
   }
-
   if (plateauShape && plateauSize) {
     const layout = makePlateau(plateauSize.value, plateauShape.value);
     if (layout) {
       showGridBackground(plateauShape.value);
       createMatrix(layout);
-      setUpRobot(rectangleDemo);
+      setUpRobot();
     }
   }
 });

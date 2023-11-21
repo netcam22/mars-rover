@@ -6,30 +6,35 @@ import { Move } from "../types/navigator.type";
 import { robot } from "../modules/robot";
 import { makeDraggable } from "./draggable";
 
-export function setUpRobot(robotData: InputData) {
-  const myData = robotData.inputs.forEach(robot => {
-    const [name, start, moveInput] = robot;
-    const robotId = newRobot(name, start);
-    if (robotId) {
-      placeRobot(robotId);
-      makeDraggable(robotId);
-    }
-  });
+export function setUpRobot() {
+  const name = "Fred",
+    start = "00N";
+  const robotId = newRobot(name, start);
+  if (robotId) {
+    placeRobot(robotId);
+    makeDraggable(robotId);
+  }
 }
 
 export function placeRobot(robotId: string): HTMLElement | undefined {
   const waitingStation: HTMLElement | null =
     document.getElementById("robot-waiting-area");
+
   if (waitingStation) {
     const newRobot = document.createElement("div");
     newRobot.className = "grid-robot";
     newRobot.id = robotId;
+    const targetDiv: HTMLElement | null = document.querySelector(".grid-item");
+    if (targetDiv?.offsetWidth) {
+      newRobot.style.width = `${targetDiv?.offsetWidth}px`;
+      newRobot.style.padding = `${targetDiv?.offsetWidth}px 0 0 0`;
+    }
     waitingStation.append(newRobot);
     return newRobot;
   }
 }
-
-export function moveRobot(move: string, robotId: string) {
+/*
+export function moveRobot(move: string) {
   const robotMoveData = createRobotJourney(move, robot.getId());
   if (robotMoveData) {
     if (robotMoveData && robotMoveData.journey) {
@@ -41,15 +46,28 @@ export function moveRobot(move: string, robotId: string) {
       });
     }
   }
+}*/
+
+export function moveRobot(move: string) {
+  const robotId = robot.getId();
+  const robotMoveData = createRobotJourney(move, robotId);
+  if (robotMoveData) {
+    if (robotMoveData && robotMoveData.journey) {
+      robotMoveData.journey.forEach((move: Move) => {
+        console.log(move);
+        animateRobot(move.vector, move.coordinates, move.rotate, robotId);
+      });
+    }
+  }
 }
 
 export function animateRobot(
   vector: Vector,
   coordinates: PlateauCoordinates,
   rotate: number | undefined,
-  delayRobot: number
+  robotId: string
 ) {
-  const myRobot = document.getElementById(`my-robot`);
+  const myRobot = document.getElementById(robotId);
   const [vectorX, vectorY] = vector;
 
   const t =
@@ -70,7 +88,6 @@ export function animateRobot(
       ],
       {
         duration: 2000,
-        delay: delayRobot,
         easing: "ease-in-out",
         fill: "forwards"
       }

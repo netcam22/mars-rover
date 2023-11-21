@@ -5,13 +5,6 @@ export function makeDraggable(thisRobotId: string) {
       const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
       const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
 
-      thisRobot.style.position = "absolute";
-      const targetDiv: HTMLElement | null =
-        document.querySelector(".grid-item");
-      if (targetDiv?.offsetWidth) {
-        thisRobot.style.width = `${targetDiv?.offsetWidth}px`;
-        thisRobot.style.padding = `${targetDiv?.offsetWidth}px 0 0 0`;
-      }
       document.body.append(thisRobot);
       moveAt(event.pageX, event.pageY);
 
@@ -25,7 +18,7 @@ export function makeDraggable(thisRobotId: string) {
 
       thisRobot.onmouseup = function () {
         document.removeEventListener("mousemove", onMouseEnd);
-        thisRobot.ondragend = null;
+        thisRobot.onmouseup = null;
       };
 
       function onMouseEnd(event: any) {
@@ -54,7 +47,7 @@ export function makeDraggable(thisRobotId: string) {
               droppableBelow.prepend(thisRobot);
               if (thisRobot.parentNode === droppableBelow) {
                 document.removeEventListener("mousemove", onMouseEnd);
-                return;
+                return true;
               }
             }
           }
@@ -62,4 +55,5 @@ export function makeDraggable(thisRobotId: string) {
       }
     };
   }
+  return false;
 }

@@ -22,23 +22,26 @@ export function createMatrix(plateau: PlateauLayout) {
       gridRow.className = "grid-container";
       gridRow.id = `row_${rowIndex}}`;
       plateauContainer.append(gridRow);
-      const columns = row.map((square: string | number) => "auto");
+      const columns = row.map(
+        (square: string | number, index: number) => "auto"
+      );
       gridRow.style.gridTemplateColumns = columns.join(" ");
+      const rowLength = rows.length;
       row.forEach((col, colIndex) => {
         if (col !== 1) {
           let gridItem = document.createElement("div");
           gridItem.className = "grid-item";
           gridItem.classList.add("grid-circle-faded");
-          gridItem.id = `matrix_${colIndex}_${rowIndex}`;
-          gridItem.style.width = `${(100 * width) / rows.length}%`;
-          gridItem.style.padding = `${(100 * height) / rows.length}% 0 0 0`;
-          gridRow.prepend(gridItem);
+          gridItem.id = `matrix_${colIndex}_${rowLength - rowIndex - 1}`;
+          gridItem.style.width = `${(100 * width) / rowLength}%`;
+          gridItem.style.padding = `${(100 * height) / rowLength}% 0 0 0`;
+          gridRow.append(gridItem);
           let gridLayer = document.createElement("div");
           gridLayer.className = "grid-layer";
-          gridLayer.id = `${colIndex}_${rowIndex}`;
+          gridLayer.id = `${colIndex}_${rowLength - rowIndex - 1}`;
           gridLayer.style.height = `${100 * height}%`;
-          gridLayer.style.padding = `${(100 * height) / rows.length}% 0 0 0`;
-          gridItem.prepend(gridLayer);
+          gridLayer.style.padding = `${(100 * height) / rowLength}% 0 0 0`;
+          gridItem.append(gridLayer);
         }
       });
     });
