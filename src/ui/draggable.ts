@@ -1,3 +1,5 @@
+import { robot } from "../modules/robot";
+import { makeCoordinates } from "../modules/plateau";
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
   if (thisRobot) {
@@ -44,10 +46,13 @@ export function makeDraggable(thisRobotId: string) {
               document.body.removeChild(thisRobot);
               thisRobot.style.left = "0%";
               thisRobot.style.top = "-20%";
-              droppableBelow.prepend(thisRobot);
+              droppableBelow.append(thisRobot);
               if (thisRobot.parentNode === droppableBelow) {
                 document.removeEventListener("mousemove", onMouseEnd);
-                return true;
+                const newPosition = droppableBelow.id.split("_").join("");
+                if (newPosition) {
+                  robot.setPosition(makeCoordinates(newPosition));
+                }
               }
             }
           }
@@ -55,5 +60,4 @@ export function makeDraggable(thisRobotId: string) {
       }
     };
   }
-  return false;
 }

@@ -8,7 +8,7 @@ import { makeDraggable } from "./draggable";
 
 export function setUpRobot() {
   const name = "Fred",
-    start = "00N";
+    start = "22N";
   const robotId = newRobot(name, start);
   if (robotId) {
     placeRobot(robotId);
