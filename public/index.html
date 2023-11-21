@@ -9,7 +9,7 @@
   </head>
   <body>
     <section class="mission">
-      <div class="column input">
+      <div class="column sidebar">
         <form id="plateau-form" action="">
           <label for="plateau-shape">Choose a plateau shape</label>
           <select id="plateau-shape" form="mission">
@@ -29,13 +29,16 @@
         </form>
         <button id="robot-button" type="submit">Submit rover details</button>
         <p id="plateau-data"></p>
+        <div class="info"><p id="robot-data"></p></div>
+        <button id="L" class="move-button" type="submit">L</button>
+        <button id="R" class="move-button">R</button>
+        <button id="M" class="move-button">M</button>
+        <div class="robot-sidebar" id="robot-waiting-area"></div>
       </div>
       <div class="column planet" id="my-planet">
         <div class="matrix" id="plateau-container"></div>
       </div>
-      <div class="column sidebar">stuff in here</div>
     </section>
-    <section class="info"><p id="robot-data"></p></section>
 
     <!----
     <form id="robot" action="">

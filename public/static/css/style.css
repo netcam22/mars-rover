@@ -15,10 +15,12 @@
 }
 
 body {
-  background-color: var(--mid-blue);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-image: url("../../assets/space.png");
+  background-size: 100%;
+  background-repeat: repeat;
 }
 
 p {
@@ -37,18 +39,19 @@ p {
 }
 
 .column {
+  position: relative;
   box-sizing: border-box;
-  display: inline-flex;
+  display: inline-block;
   justify-content: center;
   flex-direction: row;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   padding: 0;
   margin: 0;
   align-items: stretch;
   flex-shrink: initial;
 }
 
-.input {
+.sidebar {
   width: 30%;
   align-items: center;
   position: fixed;
@@ -57,18 +60,7 @@ p {
   margin: 0;
   padding: 2%;
   box-sizing: border-box;
-  border: solid 1px var(--strong-orange);
-}
-
-.sidebar {
-  width: 30%;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 2%;
-  box-sizing: border-box;
+  background-color: var(--med-orange);
   border: solid 1px var(--strong-orange);
 }
 
@@ -76,24 +68,15 @@ p {
   z-index: 10;
   position: sticky;
   top: 0;
-  left: 30.5%;
-  width: 40%;
+  left: 40%;
+  width: 50%;
   padding: 0;
   box-sizing: border-box;
-  background-image: url("../../assets/mars-circle.png");
-  background-size: 100%;
+  background-image: url("../../assets/mars-image.png");
+  background-size: contain;
   background-repeat: no-repeat;
   height: 0;
   padding-bottom: 100%;
-}
-
-.circle {
-  background-image: url("../../assets/mars-circle.png");
-}
-
-.kite,
-.rectangle {
-  background-image: url("../../assets/mars-square.png");
 }
 
 .matrix {
@@ -109,7 +92,7 @@ p {
   grid-template-columns: auto;
   padding: 0;
   margin: 0 auto;
-  z-index: 100;
+  z-index: -1;
   border: none;
   display: flex;
   align-items: center;
@@ -123,17 +106,36 @@ p {
   height: 0;
   margin: 0;
   padding: 0;
-  background-color: var(--mid-orange);
+  background-color: rgba(249, 168, 81, 0.5);
   opacity: 100%;
   text-align: center;
+  z-index: -1;
   border-radius: 50%;
 }
 
-.grid-circle-faded {
-  opacity: 60%;
+.hide-grid-circle {
+  opacity: 100%;
+  z-index: -1;
 }
 
-.info {
+.grid-layer {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  background-size: cover;
+  opacity: 100%;
+  text-align: center;
+  border-radius: 50%;
+  width: 100%;
+  z-index: -1;
+}
+
+.info,
+.form,
+.robot-sidebar,
+button {
   float: left;
   clear: both;
   position: relative;
@@ -141,19 +143,20 @@ p {
   font-size: 1.2em;
 }
 
-img.grid-robot {
+div.grid-robot {
   position: absolute;
   z-index: 1000;
   height: 0;
   margin: 0;
-  padding: 0;
-  top: 2%;
+  padding: 100% 0 0 0;
+  top: -20%;
   left: 0%;
   width: 100%;
   background-image: url("../../assets/robot-south.png");
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 100%;
+  opacity: 1;
+  z-index: 1000;
 }
 
 /*animation*/
@@ -162,24 +165,14 @@ img.grid-robot {
   animation-duration: 2s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  opacity: 0;
+  opacity: 1;
   position: sticky;
   width: 100%;
   margin: 0 auto;
   padding: 0;
 }
 
-.move-right {
-  animation-delay: 1s;
-  animation-name: move-step-right;
-}
-
-.move-left {
-  animation-delay: 1s;
-  animation-name: move-step-left;
-}
-
-@keyframes move-step-right {
+@keyframes move-in-from-left {
   0% {
     transform: translateX(-100%);
     opacity: 0;
@@ -193,7 +186,7 @@ img.grid-robot {
   }
 }
 
-@keyframes move-step-left {
+@keyframes move-in-from-right {
   0% {
     transform: translateX(100%);
     opacity: 0;
