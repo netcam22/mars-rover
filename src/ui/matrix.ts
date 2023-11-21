@@ -21,7 +21,7 @@ export function createMatrix(plateau: PlateauLayout) {
       const gridRow = document.createElement("div");
       gridRow.className = "grid-container";
       gridRow.id = `row_${rowIndex}}`;
-      plateauContainer.prepend(gridRow);
+      plateauContainer.append(gridRow);
       const columns = row.map((square: string | number) => "auto");
       gridRow.style.gridTemplateColumns = columns.join(" ");
       row.forEach((col, colIndex) => {
@@ -32,13 +32,13 @@ export function createMatrix(plateau: PlateauLayout) {
           gridItem.id = `matrix_${colIndex}_${rowIndex}`;
           gridItem.style.width = `${(100 * width) / rows.length}%`;
           gridItem.style.padding = `${(100 * height) / rows.length}% 0 0 0`;
-          gridRow.appendChild(gridItem);
+          gridRow.prepend(gridItem);
           let gridLayer = document.createElement("div");
           gridLayer.className = "grid-layer";
           gridLayer.id = `${colIndex}_${rowIndex}`;
           gridLayer.style.height = `${100 * height}%`;
           gridLayer.style.padding = `${(100 * height) / rows.length}% 0 0 0`;
-          gridItem.appendChild(gridLayer);
+          gridItem.prepend(gridLayer);
         }
       });
     });
