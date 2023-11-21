@@ -1,5 +1,3 @@
-import { robot } from "../modules/robot";
-import { makeCoordinates } from "../modules/plateau";
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
   if (thisRobot) {
@@ -49,10 +47,6 @@ export function makeDraggable(thisRobotId: string) {
               droppableBelow.append(thisRobot);
               if (thisRobot.parentNode === droppableBelow) {
                 document.removeEventListener("mousemove", onMouseEnd);
-                const newPosition = droppableBelow.id.split("_").join("");
-                if (newPosition) {
-                  robot.setPosition(makeCoordinates(newPosition));
-                }
               }
             }
           }
