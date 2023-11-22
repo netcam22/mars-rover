@@ -29,15 +29,12 @@ export function makeDraggable(thisRobotId: string) {
             event.clientY
           );
           thisRobot.hidden = false;
-
-          console.log(elemBelow);
           if (elemBelow) {
             const droppableBelow: Element | null = elemBelow.classList.contains(
               "grid-layer"
             )
               ? elemBelow
               : null;
-            //console.log(droppableBelow);
             if (droppableBelow) {
               if (thisRobot.parentNode === document.body) {
                 document.body.removeChild(thisRobot);
