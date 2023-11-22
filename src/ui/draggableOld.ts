@@ -14,14 +14,16 @@ export function makeDraggable(thisRobotId: string) {
           thisRobot.style.top = pageY - shiftY + "px";
         }
       }
+      document.addEventListener("mousemove", onMouseEnd);
 
-      function onMouseMove(event: any) {
+      thisRobot.onmouseup = function () {
+        document.removeEventListener("mousemove", onMouseEnd);
+        thisRobot.onmouseup = null;
+      };
+
+      function onMouseEnd(event: any) {
+        console.log("here");
         moveAt(event.pageX, event.pageY);
-      }
-
-      document.addEventListener("mousemove", onMouseMove);
-
-      function onMouseUp(event: any) {
         if (thisRobot) {
           thisRobot.hidden = true;
           const elemBelow: Element | null = document.elementFromPoint(
@@ -37,33 +39,19 @@ export function makeDraggable(thisRobotId: string) {
             )
               ? elemBelow
               : null;
-            //console.log(droppableBelow);
-            if (droppableBelow) {
-              if (thisRobot.parentNode === document.body) {
-                document.body.removeChild(thisRobot);
-              }
+            console.log(droppableBelow);
+            if (droppableBelow && thisRobot.parentNode === document.body) {
+              document.body.removeChild(thisRobot);
               thisRobot.style.left = "0%";
               thisRobot.style.top = "-20%";
               droppableBelow.append(thisRobot);
               if (thisRobot.parentNode === droppableBelow) {
-                document.removeEventListener("mousemove", onMouseMove);
-                event.preventDefault();
+                document.removeEventListener("mousemove", onMouseEnd);
               }
             }
           }
         }
       }
-
-      document.addEventListener("mouseup", onMouseUp);
-
-      thisRobot.onmouseup = function () {
-        document.removeEventListener("mousemove", onMouseMove);
-        thisRobot.onmouseup = null;
-      };
-
-      thisRobot.ondragstart = function () {
-        return false;
-      };
     };
   }
 }

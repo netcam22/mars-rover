@@ -1,7 +1,7 @@
 import { PlateauCoordinates } from "../types/plateau.type";
+import { makeCoordinates } from "../modules/plateau";
 import { Vector } from "../types/navigator.type";
 import { newRobot, createRobotJourney } from "../modules/mission";
-import { InputData } from "..";
 import { Move } from "../types/navigator.type";
 import { robot } from "../modules/robot";
 import { makeDraggable } from "./draggable";
@@ -13,6 +13,16 @@ export function setUpRobot() {
   if (robotId) {
     placeRobot(robotId);
     makeDraggable(robotId);
+  }
+}
+
+export function getRobotLocation(robotId: string) {
+  const myRobot = document.getElementById(robotId);
+  if (myRobot && myRobot.parentElement) {
+    const parentId = myRobot.parentElement.id;
+    if (parentId) {
+      return makeCoordinates(parentId.replace("_", ""));
+    }
   }
 }
 
@@ -50,13 +60,17 @@ export function moveRobot(move: string) {
 
 export function moveRobot(move: string) {
   const robotId = robot.getId();
-  const robotMoveData = createRobotJourney(move, robotId);
-  if (robotMoveData) {
-    if (robotMoveData && robotMoveData.journey) {
-      robotMoveData.journey.forEach((move: Move) => {
-        console.log(move);
-        animateRobot(move.vector, move.coordinates, move.rotate, robotId);
-      });
+  const currentLocation: PlateauCoordinates | undefined =
+    getRobotLocation(robotId);
+  if (currentLocation && robot.setPosition(currentLocation)) {
+    const robotMoveData = createRobotJourney(move, robotId);
+    if (robotMoveData) {
+      if (robotMoveData && robotMoveData.journey) {
+        robotMoveData.journey.forEach((move: Move) => {
+          console.log(move);
+          animateRobot(move.vector, move.coordinates, move.rotate, robotId);
+        });
+      }
     }
   }
 }
