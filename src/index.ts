@@ -2,14 +2,16 @@ import { createMatrix, showGridBackground, makePlateau } from "./ui/matrix";
 import { plateau } from "./modules/plateau";
 import {
   setUpRobot,
-  disableMakeRobotButton,
   moveRobot,
   terminateRobotJourney,
-  hideRobotButtons,
-  removeAllRobots,
-  enableMakeRobotButton,
   resizeAllRobots
 } from "./ui/robot-ui";
+import {
+  disableMakeRobotButton,
+  hideRobotButtons,
+  removeAllRobots,
+  enableMakeRobotButton
+} from "./ui/buttons";
 export type InputData = {
   gridSize: string | undefined;
   gridStyle: string | undefined;
