@@ -87,14 +87,9 @@ export function animateRobot(
   const [vectorX, vectorY] = vector;
   const [positionX, positionY] = currentLocation;
   if (myRobot) {
-    myRobot.classList.add("move");
-    myRobot.classList.remove("N");
-    myRobot.classList.remove("S");
-    myRobot.classList.remove("E");
-    myRobot.classList.remove("W");
+    myRobot.classList.remove("N", "S", "E", "W");
     const direction = robot.getDirection();
-    myRobot.classList.add(direction);
-    myRobot.classList.add("move-bounce");
+    myRobot.classList.add(direction, "move", "move-bounce");
     relocateRobot([vectorX + positionX, vectorY + positionY], myRobot);
   }
 }
