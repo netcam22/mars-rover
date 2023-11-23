@@ -16,6 +16,12 @@ export function getMoveButtons(): NodeListOf<HTMLElement> | null {
   return document.querySelectorAll(".move-button");
 }
 
+export function showMoveButtons() {
+  getMoveButtons()?.forEach(
+    (button: HTMLElement) => (button.style.display = "block")
+  );
+}
+
 export function disableMakeRobotButton() {
   const makeRobotButton = getMakeRobotButton();
   makeRobotButton.disabled = true;

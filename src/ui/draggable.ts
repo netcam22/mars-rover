@@ -1,3 +1,4 @@
+import { showMoveButtons } from "./buttons";
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
   if (thisRobot) {
@@ -45,13 +46,7 @@ export function makeDraggable(thisRobotId: string) {
               if (thisRobot.parentNode === droppableBelow) {
                 document.removeEventListener("mousemove", onMouseMove);
                 event.preventDefault();
-                const moveButtons: NodeListOf<HTMLElement> | null =
-                  document.querySelectorAll(".move-button");
-                if (moveButtons) {
-                  moveButtons.forEach(
-                    (button: HTMLElement) => (button.style.display = "block")
-                  );
-                }
+                showMoveButtons();
               }
             }
           }
