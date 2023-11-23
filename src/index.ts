@@ -1,6 +1,10 @@
 import { createMatrix, showGridBackground, makePlateau } from "./ui/matrix";
-import { setUpRobot } from "./ui/rover";
-import { moveRobot } from "./ui/rover";
+import {
+  setUpRobot,
+  moveRobot,
+  enableRobotButton,
+  disableRobotButton
+} from "./ui/robot-ui";
 export type InputData = {
   gridSize: string | undefined;
   gridStyle: string | undefined;
@@ -26,6 +30,7 @@ document.getElementById("plateau-button")?.addEventListener("click", () => {
 });
 
 document.getElementById("robot-button")?.addEventListener("click", () => {
+  disableRobotButton();
   setUpRobot();
 });
 

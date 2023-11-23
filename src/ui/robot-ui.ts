@@ -96,3 +96,17 @@ export function relocateRobot(
     targetGridItem.appendChild(myRobot);
   }
 }
+
+export function enableRobotButton() {
+  const makeRobotButton = document.getElementById(
+    "robot-button"
+  ) as HTMLInputElement;
+  makeRobotButton.disabled = true;
+}
+
+export function disableRobotButton() {
+  const makeRobotButton = document.getElementById(
+    "robot-button"
+  ) as HTMLInputElement;
+  makeRobotButton.disabled = false;
+}
