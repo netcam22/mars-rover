@@ -61,6 +61,28 @@ export function moveRobot(move: string) {
   }
 }
 
+export function animateRobot(
+  currentLocation: PlateauCoordinates,
+  vector: Vector,
+  rotate: number | undefined,
+  robotId: string
+) {
+  const myRobot = document.getElementById(robotId);
+  const [vectorX, vectorY] = vector;
+  const [positionX, positionY] = currentLocation;
+  if (myRobot) {
+    myRobot.classList.add("move");
+    myRobot.classList.remove("N");
+    myRobot.classList.remove("S");
+    myRobot.classList.remove("E");
+    myRobot.classList.remove("W");
+    const direction = robot.getDirection();
+    myRobot.classList.add(direction);
+    myRobot.classList.add("move-bounce");
+    relocateRobot([vectorX + positionX, vectorY + positionY], myRobot);
+  }
+}
+
 export function relocateRobot(
   coordinates: PlateauCoordinates,
   myRobot: HTMLElement
@@ -72,30 +94,5 @@ export function relocateRobot(
   if (targetGridItem) {
     myRobot.parentNode?.removeChild(myRobot);
     targetGridItem.appendChild(myRobot);
-  }
-}
-
-export function animateRobot(
-  currentLocation: PlateauCoordinates,
-  vector: Vector,
-  rotate: number | undefined,
-  robotId: string
-) {
-  const myRobot = document.getElementById(robotId);
-  const [vectorX, vectorY] = vector;
-  const [positionX, positionY] = currentLocation;
-  if (myRobot) {
-    relocateRobot([vectorX + positionX, vectorY + positionY], myRobot);
-    myRobot.classList.add("move");
-    myRobot.classList.remove("N");
-    myRobot.classList.remove("S");
-    myRobot.classList.remove("E");
-    myRobot.classList.remove("W");
-    const direction = robot.getDirection();
-    console.log("direction", direction);
-    //const direction = "east";
-    myRobot.classList.add(direction);
-    myRobot.classList.add("move-bounce");
-    myRobot.style.transform = `rotate(${rotate}deg)`;
   }
 }
