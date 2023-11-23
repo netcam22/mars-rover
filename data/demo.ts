@@ -62,7 +62,7 @@ const circleDemo = {
   moves: "animate"
 };
 
-function start(demoData: InputData) {
+function runDemo(demoData: InputData) {
   const { gridSize, gridStyle, inputs, moves } = demoData;
   console.log(
     "Here is the plateau to navigate:",
@@ -116,16 +116,19 @@ function showOutput(
 console.log(
   "Example of rectangular plateau with 2 robots with multiple consecutive moves."
 );
-start(rectangleDemo);
+runDemo(rectangleDemo);
+
 console.log(
   "Example of rectangular plateau with 2 robots with each move requested separately."
 );
-start(rectangleDemoSingleMoves);
+runDemo(rectangleDemoSingleMoves);
+
 console.log(
   "Example of kite shaped plateau with 3 robots with multiple consecutive moves."
 );
-start(kiteDemo);
+runDemo(kiteDemo);
+
 console.log(
   "Example of circular plateau with multiple robots with multiple consecutive moves, some of which wil not be accomodated on the plateau due to their requested space being occupied or out of range."
 );
-start(circleDemo);
+runDemo(circleDemo);
