@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mars Rover</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+    <script src="./static/bundle/script.js" defer></script>
+  </head>
+  <body>
+    <section class="mission">
+      <div class="column sidebar">
+        <h1>Welcome to Mars!</h1>
+        <form id="plateau-form" action="">
+          <label for="plateau-shape">Select a plateau shape...</label>
+          <select id="plateau-shape" form="mission">
+            <option value="rectangle">Rectangle</option>
+            <option value="circle">Circle</option>
+            <option value="kite">Kite</option>
+          </select>
+          <label for="plateau-size">and size...</label>
+          <select id="plateau-size" form="mission">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </form>
+        <button id="plateau-button" type="submit">New Plateau</button>
+        <button id="robot-button" type="submit" disabled>New Rover</button>
+        <h2>Drag your rover to the plateau...</h2>
+        <h3 class="move-button">and navigate...</h3>
+        <button id="L" class="move-button" type="submit">Left</button>
+        <button id="R" class="move-button">Right</button>
+        <button id="M" class="move-button">Move</button>
+        <button id="T" class="move-button">Terminate</button>
+        <div class="robot-sidebar" id="robot-waiting-area"></div>
+      </div>
+      <div class="column planet" id="my-planet">
+        <div class="matrix" id="plateau-container"></div>
+      </div>
+    </section>
+    <p id="demo"></p>
+  </body>
+</html>

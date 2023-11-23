@@ -1,6 +1,10 @@
-import { makePlateau, makeRobot, moveRobot } from "..";
-import { RobotData } from "../types/mission.type";
-import { Move } from "../types/navigator.type";
+import {
+  newPlateau,
+  newRobot,
+  createRobotJourney
+} from "../src/modules/mission";
+import { RobotData } from "../src/types/mission.type";
+import { Move } from "../src/types/navigator.type";
 export type InputData = {
   gridSize: string;
   gridStyle: string;
@@ -58,11 +62,11 @@ const circleDemo = {
   moves: "animate"
 };
 
-function start(demoData: InputData) {
+function runDemo(demoData: InputData) {
   const { gridSize, gridStyle, inputs, moves } = demoData;
   console.log(
     "Here is the plateau to navigate:",
-    makePlateau(gridSize, gridStyle)
+    newPlateau(gridSize, gridStyle)
   );
   const outputs = inputs.map((input: Array<string>) => {
     const [name, start, moveInput] = input;
@@ -70,14 +74,16 @@ function start(demoData: InputData) {
     console.log(
       `Hello, I am a ${robotType} called ${name} and I plan to start at direction ${start[2]} at map co-ordinates (${start[0]}, ${start[1]})`
     );
-    const robotId = makeRobot(name, start);
+    const robotId = newRobot(name, start);
     if (robotId) {
       if (moves === "animate") {
-        showOutput(moveRobot(moveInput, robotId), name, start);
+        showOutput(createRobotJourney(moveInput, robotId), name, start);
       } else {
         moveInput
           .split("")
-          .forEach(move => showOutput(moveRobot(move, robotId), name, start));
+          .forEach(move =>
+            showOutput(createRobotJourney(move, robotId), name, start)
+          );
       }
     }
   });
@@ -110,16 +116,19 @@ function showOutput(
 console.log(
   "Example of rectangular plateau with 2 robots with multiple consecutive moves."
 );
-start(rectangleDemo);
+runDemo(rectangleDemo);
+
 console.log(
   "Example of rectangular plateau with 2 robots with each move requested separately."
 );
-start(rectangleDemoSingleMoves);
+runDemo(rectangleDemoSingleMoves);
+
 console.log(
   "Example of kite shaped plateau with 3 robots with multiple consecutive moves."
 );
-start(kiteDemo);
+runDemo(kiteDemo);
+
 console.log(
   "Example of circular plateau with multiple robots with multiple consecutive moves, some of which wil not be accomodated on the plateau due to their requested space being occupied or out of range."
 );
-start(circleDemo);
+runDemo(circleDemo);

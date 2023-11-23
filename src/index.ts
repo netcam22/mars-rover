@@ -1,30 +1,58 @@
-import { RobotData, PlateauData } from "./types/mission.type";
-import { PlateauLayout } from "./types/plateau.type";
-import { createRobotJourney, newPlateau } from "./modules/mission";
-import { newRobot } from "./modules/mission";
+import { createMatrix, showGridBackground, makePlateau } from "./ui/matrix";
+import {
+  setUpRobot,
+  moveRobot,
+  terminateRobotJourney,
+  resizeAllRobots
+} from "./ui/robot-ui";
+import {
+  disableMakeRobotButton,
+  hideRobotButtons,
+  removeAllRobots,
+  enableMakeRobotButton
+} from "./ui/buttons";
 
-export function makePlateau(
-  gridSize: string,
-  plateauStyle: string
-): PlateauLayout {
-  return newPlateau(gridSize, plateauStyle);
-}
+addEventListener("resize", event => {
+  resizeAllRobots();
+});
 
-export function makeRobot(name: string, start: string): string | undefined {
-  return newRobot(name, start);
-}
+document.getElementById("plateau-button")?.addEventListener("click", () => {
+  const plateauShape: HTMLInputElement = document.getElementById(
+    "plateau-shape"
+  ) as HTMLInputElement;
+  const plateauSize: HTMLInputElement = document.getElementById(
+    "plateau-size"
+  ) as HTMLInputElement;
 
-export function moveRobot(
-  move: string,
-  robotId: string
-): RobotData | undefined {
-  return createRobotJourney(move, robotId);
-}
+  if (plateauShape && plateauSize) {
+    const layout = makePlateau(plateauSize.value, plateauShape.value);
+    if (layout) {
+      removeAllRobots();
+      hideRobotButtons();
+      enableMakeRobotButton();
+      showGridBackground(plateauShape.value);
+      createMatrix(layout);
+    }
+  }
+});
 
-export function getPlateau(thisId: number): PlateauData {
-  return getPlateau(thisId);
-}
+document.getElementById("robot-button")?.addEventListener("click", () => {
+  disableMakeRobotButton();
+  setUpRobot();
+});
 
-export function getRobot(thisId: number): RobotData {
-  return getRobot(thisId);
-}
+document.getElementById("L")?.addEventListener("click", () => {
+  moveRobot("L");
+});
+
+document.getElementById("R")?.addEventListener("click", () => {
+  moveRobot("R");
+});
+
+document.getElementById("M")?.addEventListener("click", () => {
+  moveRobot("M");
+});
+
+document.getElementById("T")?.addEventListener("click", () => {
+  terminateRobotJourney();
+});
