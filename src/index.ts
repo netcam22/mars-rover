@@ -12,13 +12,6 @@ import {
   enableMakeRobotButton
 } from "./ui/buttons";
 
-export type InputData = {
-  gridSize: string | undefined;
-  gridStyle: string | undefined;
-  inputs: Array<Array<string>>;
-  moves: string;
-};
-
 addEventListener("resize", event => {
   resizeAllRobots();
 });

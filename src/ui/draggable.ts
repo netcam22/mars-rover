@@ -1,6 +1,8 @@
 import { showMoveButtons } from "./buttons";
+
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
+
   if (thisRobot) {
     thisRobot.onmousedown = function (event) {
       const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
@@ -43,6 +45,7 @@ export function makeDraggable(thisRobotId: string) {
               thisRobot.style.left = "0%";
               thisRobot.style.top = "-20%";
               droppableBelow.append(thisRobot);
+
               if (thisRobot.parentNode === droppableBelow) {
                 document.removeEventListener("mousemove", onMouseMove);
                 event.preventDefault();

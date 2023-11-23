@@ -26,13 +26,13 @@ export function createMatrix(plateau: PlateauLayout) {
       const rowLength = rows.length;
       row.forEach((col, colIndex) => {
         if (col !== 1) {
-          let gridItem = document.createElement("div");
+          const gridItem = document.createElement("div");
           gridItem.className = "grid-item";
           gridItem.id = `matrix_${colIndex}_${rowLength - rowIndex - 1}`;
           gridItem.style.width = `${100 / rowLength}%`;
           gridItem.style.padding = `${100 / rowLength}% 0 0 0`;
           gridRow.append(gridItem);
-          let gridLayer = document.createElement("div");
+          const gridLayer = document.createElement("div");
           gridLayer.className = "grid-layer";
           gridLayer.id = `${colIndex}_${rowLength - rowIndex - 1}`;
           gridLayer.style.height = `${100}%`;
