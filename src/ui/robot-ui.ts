@@ -79,12 +79,16 @@ export function relocateRobot(
 }
 
 export function terminateRobotJourney() {
+  const robotId = robot.getId();
+  const thisRobot = document.getElementById(robotId);
+  if (thisRobot) {
+    thisRobot.onmousedown = null;
+  }
   hideRobotButtons();
   enableMakeRobotButton();
   disableRobotMoves();
-  const robotLocation: PlateauCoordinates | undefined = getRobotLocation(
-    robot.getId()
-  );
+  const robotLocation: PlateauCoordinates | undefined =
+    getRobotLocation(robotId);
   if (robotLocation) {
     const [x, y] = robotLocation;
     plateau.setOccupied([x, y], robotLocation);
