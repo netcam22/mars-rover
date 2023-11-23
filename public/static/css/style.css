@@ -142,11 +142,6 @@ p {
   border-radius: 50%;
 }
 
-.hide-grid-circle {
-  opacity: 100%;
-  z-index: -1;
-}
-
 .grid-layer {
   position: absolute;
   top: 0px;

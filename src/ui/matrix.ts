@@ -28,7 +28,6 @@ export function createMatrix(plateau: PlateauLayout) {
         if (col !== 1) {
           let gridItem = document.createElement("div");
           gridItem.className = "grid-item";
-          gridItem.classList.add("grid-circle-faded");
           gridItem.id = `matrix_${colIndex}_${rowLength - rowIndex - 1}`;
           gridItem.style.width = `${100 / rowLength}%`;
           gridItem.style.padding = `${100 / rowLength}% 0 0 0`;

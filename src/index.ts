@@ -1,5 +1,4 @@
 import { createMatrix, showGridBackground, makePlateau } from "./ui/matrix";
-import { plateau } from "./modules/plateau";
 import {
   setUpRobot,
   moveRobot,
@@ -12,6 +11,7 @@ import {
   removeAllRobots,
   enableMakeRobotButton
 } from "./ui/buttons";
+
 export type InputData = {
   gridSize: string | undefined;
   gridStyle: string | undefined;
@@ -58,7 +58,6 @@ document.getElementById("R")?.addEventListener("click", () => {
 
 document.getElementById("M")?.addEventListener("click", () => {
   moveRobot("M");
-  console.log(plateau.getLayout());
 });
 
 document.getElementById("T")?.addEventListener("click", () => {
