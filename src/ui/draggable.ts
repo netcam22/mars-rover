@@ -2,10 +2,6 @@ export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
   if (thisRobot) {
     thisRobot.onmousedown = function (event) {
-      const makeRobotButton = document.getElementById(
-        "robot-button"
-      ) as HTMLInputElement;
-      makeRobotButton.disabled = true;
       const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
       const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
 

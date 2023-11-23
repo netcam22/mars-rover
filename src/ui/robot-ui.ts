@@ -98,12 +98,9 @@ export function relocateRobot(
 }
 
 export function terminateRobotJourney() {
-  const makeRobotButton = document.getElementById(
-    "robot-button"
-  ) as HTMLInputElement;
-  makeRobotButton.removeAttribute("disabled");
   hideRobotButtons();
-  // remove attrribute move
+  enableMakeRobotButton();
+  disableRobotMoves();
   // save occupied position in plateau
 }
 
@@ -123,6 +120,38 @@ export function showRobotButtons() {
   if (moveButtons) {
     moveButtons.forEach(
       (button: HTMLElement) => (button.style.display = "block")
+    );
+  }
+}
+
+export function disableMakeRobotButton() {
+  const makeRobotButton = document.getElementById(
+    "robot-button"
+  ) as HTMLInputElement;
+  makeRobotButton.disabled = true;
+}
+
+export function enableMakeRobotButton() {
+  const makeRobotButton = document.getElementById(
+    "robot-button"
+  ) as HTMLInputElement;
+  makeRobotButton.removeAttribute("disabled");
+}
+
+export function removeAllRobots() {
+  const robots: NodeListOf<HTMLElement> | null =
+    document.querySelectorAll(".grid-robot");
+  if (robots) {
+    robots.forEach((robot: HTMLElement) => robot.remove());
+  }
+}
+
+export function disableRobotMoves() {
+  const robots: NodeListOf<HTMLElement> | null =
+    document.querySelectorAll(".grid-robot");
+  if (robots) {
+    robots.forEach((robot: HTMLElement) =>
+      robot.classList.remove("move-bounce")
     );
   }
 }
