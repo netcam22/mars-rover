@@ -12,6 +12,8 @@ export type InputData = {
   moves: string;
 };
 
+hideRobotButtons();
+
 document.getElementById("plateau-button")?.addEventListener("click", () => {
   const plateauShape: HTMLInputElement = document.getElementById(
     "plateau-shape"
@@ -26,6 +28,7 @@ document.getElementById("plateau-button")?.addEventListener("click", () => {
       hideRobotButtons();
       showGridBackground(plateauShape.value);
       createMatrix(layout);
+      terminateRobotJourney();
     }
   }
 });
