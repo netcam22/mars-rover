@@ -1,5 +1,9 @@
 import { PlateauCoordinates } from "../types/plateau.type";
-import { makeCoordinates } from "../modules/plateau";
+import {
+  makeCoordinates,
+  plateau,
+  setOccupiedPosition
+} from "../modules/plateau";
 import { Vector } from "../types/navigator.type";
 import { newRobot, createRobotJourney } from "../modules/mission";
 import { Move } from "../types/navigator.type";
@@ -16,7 +20,9 @@ export function setUpRobot() {
   }
 }
 
-export function getRobotLocation(robotId: string) {
+export function getRobotLocation(
+  robotId: string
+): PlateauCoordinates | undefined {
   const myRobot = document.getElementById(robotId);
   if (myRobot && myRobot.parentElement) {
     const parentId = myRobot.parentElement.id;
@@ -24,12 +30,12 @@ export function getRobotLocation(robotId: string) {
       return makeCoordinates(parentId.replace("_", ""));
     }
   }
+  return undefined;
 }
 
 export function placeRobot(robotId: string): HTMLElement | undefined {
   const waitingStation: HTMLElement | null =
     document.getElementById("robot-waiting-area");
-
   if (waitingStation) {
     const newRobot = document.createElement("div");
     newRobot.className = "grid-robot";
@@ -111,6 +117,13 @@ export function terminateRobotJourney() {
   hideRobotButtons();
   enableMakeRobotButton();
   disableRobotMoves();
+  const robotLocation: PlateauCoordinates | undefined = getRobotLocation(
+    robot.getId()
+  );
+  if (robotLocation) {
+    const [x, y] = robotLocation;
+    plateau.setOccupied([x, y], robotLocation);
+  }
 }
 
 export function hideRobotButtons() {
