@@ -34,14 +34,24 @@ export function placeRobot(robotId: string): HTMLElement | undefined {
     const newRobot = document.createElement("div");
     newRobot.className = "grid-robot";
     newRobot.id = robotId;
-    const targetDiv: HTMLElement | null = document.querySelector(".grid-item");
-    if (targetDiv?.offsetWidth) {
-      newRobot.style.width = `${targetDiv?.offsetWidth}px`;
-      newRobot.style.padding = `${targetDiv?.offsetWidth}px 0 0 0`;
-    }
+    resizeRobot(newRobot);
     waitingStation.append(newRobot);
     return newRobot;
   }
+}
+
+export function resizeRobot(myRobot: HTMLElement) {
+  const targetDiv: HTMLElement | null = document.querySelector(".grid-item");
+  if (targetDiv?.offsetWidth) {
+    myRobot.style.width = `${targetDiv?.offsetWidth}px`;
+    myRobot.style.padding = `${targetDiv?.offsetWidth}px 0 0 0`;
+  }
+}
+
+export function resizeAllRobots() {
+  getAllRobots()?.forEach((robot: HTMLElement) => {
+    resizeRobot(robot);
+  });
 }
 
 export function moveRobot(move: string) {
@@ -101,7 +111,6 @@ export function terminateRobotJourney() {
   hideRobotButtons();
   enableMakeRobotButton();
   disableRobotMoves();
-  // save occupied position in plateau
 }
 
 export function hideRobotButtons() {
@@ -125,33 +134,28 @@ export function showRobotButtons() {
 }
 
 export function disableMakeRobotButton() {
-  const makeRobotButton = document.getElementById(
-    "robot-button"
-  ) as HTMLInputElement;
+  const makeRobotButton = getMakeRobotButton();
   makeRobotButton.disabled = true;
 }
 
 export function enableMakeRobotButton() {
-  const makeRobotButton = document.getElementById(
-    "robot-button"
-  ) as HTMLInputElement;
-  makeRobotButton.removeAttribute("disabled");
+  getMakeRobotButton()?.removeAttribute("disabled");
+}
+
+export function getMakeRobotButton(): HTMLInputElement {
+  return document.getElementById("robot-button") as HTMLInputElement;
 }
 
 export function removeAllRobots() {
-  const robots: NodeListOf<HTMLElement> | null =
-    document.querySelectorAll(".grid-robot");
-  if (robots) {
-    robots.forEach((robot: HTMLElement) => robot.remove());
-  }
+  getAllRobots()?.forEach((robot: HTMLElement) => robot.remove());
 }
 
 export function disableRobotMoves() {
-  const robots: NodeListOf<HTMLElement> | null =
-    document.querySelectorAll(".grid-robot");
-  if (robots) {
-    robots.forEach((robot: HTMLElement) =>
-      robot.classList.remove("move-bounce")
-    );
-  }
+  getAllRobots()?.forEach((robot: HTMLElement) =>
+    robot.classList.remove("move-bounce")
+  );
+}
+
+export function getAllRobots(): NodeListOf<HTMLElement> | null {
+  return document.querySelectorAll(".grid-robot");
 }

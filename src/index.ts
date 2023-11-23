@@ -6,8 +6,8 @@ import {
   terminateRobotJourney,
   hideRobotButtons,
   removeAllRobots,
-  showRobotButtons,
-  enableMakeRobotButton
+  enableMakeRobotButton,
+  resizeAllRobots
 } from "./ui/robot-ui";
 export type InputData = {
   gridSize: string | undefined;
@@ -15,6 +15,10 @@ export type InputData = {
   inputs: Array<Array<string>>;
   moves: string;
 };
+
+addEventListener("resize", event => {
+  resizeAllRobots();
+});
 
 document.getElementById("plateau-button")?.addEventListener("click", () => {
   const plateauShape: HTMLInputElement = document.getElementById(
