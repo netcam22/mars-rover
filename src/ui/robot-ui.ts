@@ -103,6 +103,8 @@ export function terminateRobotJourney() {
   ) as HTMLInputElement;
   makeRobotButton.removeAttribute("disabled");
   hideRobotButtons();
+  // remove attrribute move
+  // save occupied position in plateau
 }
 
 export function hideRobotButtons() {
