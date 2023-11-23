@@ -1,9 +1,11 @@
-import { enableRobotButton, disableRobotButton } from "./robot-ui";
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
-  enableRobotButton();
   if (thisRobot) {
     thisRobot.onmousedown = function (event) {
+      const makeRobotButton = document.getElementById(
+        "robot-button"
+      ) as HTMLInputElement;
+      makeRobotButton.disabled = true;
       const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
       const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
 
@@ -19,7 +21,6 @@ export function makeDraggable(thisRobotId: string) {
 
       function onMouseMove(event: any) {
         moveAt(event.pageX, event.pageY);
-        disableRobotButton();
       }
 
       document.addEventListener("mousemove", onMouseMove);
@@ -48,6 +49,13 @@ export function makeDraggable(thisRobotId: string) {
               if (thisRobot.parentNode === droppableBelow) {
                 document.removeEventListener("mousemove", onMouseMove);
                 event.preventDefault();
+                const moveButtons: NodeListOf<HTMLElement> | null =
+                  document.querySelectorAll(".move-button");
+                if (moveButtons) {
+                  moveButtons.forEach(
+                    (button: HTMLElement) => (button.style.display = "block")
+                  );
+                }
               }
             }
           }

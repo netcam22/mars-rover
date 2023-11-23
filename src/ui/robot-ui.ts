@@ -97,16 +97,30 @@ export function relocateRobot(
   }
 }
 
-export function enableRobotButton() {
+export function terminateRobotJourney() {
   const makeRobotButton = document.getElementById(
     "robot-button"
   ) as HTMLInputElement;
-  makeRobotButton.disabled = true;
+  makeRobotButton.removeAttribute("disabled");
+  hideRobotButtons();
 }
 
-export function disableRobotButton() {
-  const makeRobotButton = document.getElementById(
-    "robot-button"
-  ) as HTMLInputElement;
-  makeRobotButton.disabled = false;
+export function hideRobotButtons() {
+  const moveButtons: NodeListOf<HTMLElement> | null =
+    document.querySelectorAll(".move-button");
+  if (moveButtons) {
+    moveButtons.forEach(
+      (button: HTMLElement) => (button.style.display = "none")
+    );
+  }
+}
+
+export function showRobotButtons() {
+  const moveButtons: NodeListOf<HTMLElement> | null =
+    document.querySelectorAll(".move-button");
+  if (moveButtons) {
+    moveButtons.forEach(
+      (button: HTMLElement) => (button.style.display = "block")
+    );
+  }
 }

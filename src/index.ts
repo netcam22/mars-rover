@@ -2,8 +2,8 @@ import { createMatrix, showGridBackground, makePlateau } from "./ui/matrix";
 import {
   setUpRobot,
   moveRobot,
-  enableRobotButton,
-  disableRobotButton
+  terminateRobotJourney,
+  hideRobotButtons
 } from "./ui/robot-ui";
 export type InputData = {
   gridSize: string | undefined;
@@ -23,6 +23,7 @@ document.getElementById("plateau-button")?.addEventListener("click", () => {
   if (plateauShape && plateauSize) {
     const layout = makePlateau(plateauSize.value, plateauShape.value);
     if (layout) {
+      hideRobotButtons();
       showGridBackground(plateauShape.value);
       createMatrix(layout);
     }
@@ -30,7 +31,6 @@ document.getElementById("plateau-button")?.addEventListener("click", () => {
 });
 
 document.getElementById("robot-button")?.addEventListener("click", () => {
-  disableRobotButton();
   setUpRobot();
 });
 
@@ -44,4 +44,8 @@ document.getElementById("R")?.addEventListener("click", () => {
 
 document.getElementById("M")?.addEventListener("click", () => {
   moveRobot("M");
+});
+
+document.getElementById("T")?.addEventListener("click", () => {
+  terminateRobotJourney();
 });
