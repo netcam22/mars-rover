@@ -8,39 +8,39 @@ export function makeDraggable(thisRobotId: string) {
       startDragging(event, thisRobot);
     };
   }
+}
 
-  function startDragging(event: MouseEvent, thisRobot: HTMLElement) {
-    const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
-    const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
+function startDragging(event: MouseEvent, thisRobot: HTMLElement) {
+  const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
+  const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
 
-    document.body.append(thisRobot);
+  document.body.append(thisRobot);
 
-    function dragThisRobot(event: MouseEvent) {
-      shiftRobot(thisRobot, event.pageX, event.pageY, shiftX, shiftY);
-    }
-
-    function dropThisRobot(event: MouseEvent) {
-      if (thisRobot && robotDropped(event, thisRobot)) {
-        document.removeEventListener("mouseup", dropThisRobot);
-        thisRobot.onmousedown = null;
-        event.preventDefault();
-        showMoveButtons();
-      }
-    }
-
-    document.addEventListener("mousemove", dragThisRobot);
-
-    document.addEventListener("mouseup", dropThisRobot);
-
-    thisRobot.onmouseup = function () {
-      document.removeEventListener("mousemove", dragThisRobot);
-      thisRobot.onmousemove = null;
-    };
-
-    thisRobot.ondragstart = function () {
-      return false;
-    };
+  function dragThisRobot(event: MouseEvent) {
+    shiftRobot(thisRobot, event.pageX, event.pageY, shiftX, shiftY);
   }
+
+  document.addEventListener("mousemove", dragThisRobot);
+
+  function dropThisRobot(event: MouseEvent) {
+    if (thisRobot && robotDropped(event, thisRobot)) {
+      document.removeEventListener("mouseup", dropThisRobot);
+      thisRobot.onmousedown = null;
+      event.preventDefault();
+      showMoveButtons();
+    }
+  }
+
+  document.addEventListener("mouseup", dropThisRobot);
+
+  thisRobot.onmouseup = function () {
+    document.removeEventListener("mousemove", dragThisRobot);
+    thisRobot.onmousemove = null;
+  };
+
+  thisRobot.ondragstart = function () {
+    return false;
+  };
 }
 
 function shiftRobot(
