@@ -47,7 +47,8 @@ export function makeDraggable(thisRobotId: string) {
               droppableBelow.append(thisRobot);
 
               if (thisRobot.parentNode === droppableBelow) {
-                document.removeEventListener("mousemove", onMouseMove);
+                document.removeEventListener("mouseup", onMouseUp);
+                thisRobot.onmousedown = null;
                 event.preventDefault();
                 showMoveButtons();
               }
@@ -60,7 +61,7 @@ export function makeDraggable(thisRobotId: string) {
 
       thisRobot.onmouseup = function () {
         document.removeEventListener("mousemove", onMouseMove);
-        thisRobot.onmouseup = null;
+        thisRobot.onmousemove = null;
       };
 
       thisRobot.ondragstart = function () {
