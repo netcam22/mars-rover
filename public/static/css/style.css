@@ -280,3 +280,16 @@ button {
 .move-button {
   display: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    top: 100%;
+  }
+
+  .planet {
+    left: 0;
+    width: 100%;
+  }
+}
