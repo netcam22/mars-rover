@@ -5,18 +5,27 @@ export function makeDraggable(thisRobotId: string) {
 
   if (thisRobot) {
     thisRobot.onmousedown = function (event) {
-      startMove(event, thisRobot);
+      startDragging(event, thisRobot);
     };
   }
 
-  function startMove(event: MouseEvent, thisRobot: HTMLElement) {
+  function startDragging(event: MouseEvent, thisRobot: HTMLElement) {
     const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
     const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
 
     document.body.append(thisRobot);
 
-    function dragThisRobot(event: any) {
+    function dragThisRobot(event: MouseEvent) {
       shiftRobot(thisRobot, event.pageX, event.pageY, shiftX, shiftY);
+    }
+
+    function dropThisRobot(event: MouseEvent) {
+      if (thisRobot && robotDropped(event, thisRobot)) {
+        document.removeEventListener("mouseup", dropThisRobot);
+        thisRobot.onmousedown = null;
+        event.preventDefault();
+        showMoveButtons();
+      }
     }
 
     document.addEventListener("mousemove", dragThisRobot);
@@ -32,26 +41,6 @@ export function makeDraggable(thisRobotId: string) {
       return false;
     };
   }
-
-  function dropThisRobot(event: any) {
-    if (thisRobot) {
-      thisRobot.hidden = true;
-      const elemBelow: Element | null = document.elementFromPoint(
-        event.clientX,
-        event.clientY
-      );
-      thisRobot.hidden = false;
-      if (elemBelow) {
-        const dropZone = attachRobot(elemBelow, thisRobot);
-        if (dropZone && thisRobot.parentNode === dropZone) {
-          document.removeEventListener("mouseup", dropThisRobot);
-          thisRobot.onmousedown = null;
-          event.preventDefault();
-          showMoveButtons();
-        }
-      }
-    }
-  }
 }
 
 function shiftRobot(
@@ -65,6 +54,22 @@ function shiftRobot(
     thisRobot.style.left = pageX - shiftX + "px";
     thisRobot.style.top = pageY - shiftY + "px";
   }
+}
+
+function robotDropped(event: MouseEvent, thisRobot: HTMLElement): boolean {
+  thisRobot.hidden = true;
+  const elemBelow: Element | null = document.elementFromPoint(
+    event.clientX,
+    event.clientY
+  );
+  thisRobot.hidden = false;
+  if (elemBelow) {
+    const dropZone = attachRobot(elemBelow, thisRobot);
+    if (dropZone && thisRobot.parentNode === dropZone) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function attachRobot(
