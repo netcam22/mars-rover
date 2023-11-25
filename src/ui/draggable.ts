@@ -26,6 +26,7 @@ function startMoving(event: MouseEvent, thisRobot: HTMLElement) {
   function dropThisRobot(event: MouseEvent) {
     if (thisRobot && robotDropped(event, thisRobot)) {
       document.removeEventListener("mouseup", dropThisRobot);
+      document.removeEventListener("mousemove", moveThisRobot);
       thisRobot.onmousedown = null;
       event.preventDefault();
       showMoveButtons();
@@ -33,11 +34,6 @@ function startMoving(event: MouseEvent, thisRobot: HTMLElement) {
   }
 
   document.addEventListener("mouseup", dropThisRobot);
-
-  thisRobot.onmouseup = function () {
-    document.removeEventListener("mousemove", moveThisRobot);
-    thisRobot.onmousemove = null;
-  };
 
   thisRobot.ondragstart = function () {
     return false;
@@ -69,8 +65,8 @@ function robotDropped(event: MouseEvent, thisRobot: HTMLElement): boolean {
 function addToDropZone(thisRobot: HTMLElement, elemBelow: Element | null) {
   thisRobot.hidden = false;
   if (elemBelow) {
-    const dropZone = attachRobot(elemBelow, thisRobot);
-    if (dropZone && thisRobot.parentNode === dropZone) {
+    const attached = attachRobot(elemBelow, thisRobot);
+    if (attached && thisRobot.parentNode === attached) {
       return true;
     }
   }
