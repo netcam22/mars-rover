@@ -77,8 +77,7 @@ export function makeRectangularGrid([x, y]: GridSize): PlateauLayout {
   return columnArray.fill(row);
 }
 
-export function makeCircularGrid(diameter: number): PlateauLayout {
-  const radius = Math.floor(diameter / 2);
+export function makeCircularGrid(radius: number): PlateauLayout {
   const squareGrid = makeRectangularGrid([radius * 2 + 1, radius * 2 + 1]);
   const circularGrid = squareGrid.map(
     (row: Array<string | number>, y: number) =>
