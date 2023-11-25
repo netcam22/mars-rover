@@ -17,7 +17,7 @@ export function createMatrix(plateau: PlateauLayout) {
     plateau.forEach((row, rowIndex, rows) => {
       const gridRow = document.createElement("div");
       gridRow.className = "grid-container";
-      gridRow.id = `row_${rowIndex}}`;
+      gridRow.id = `row_${rowIndex}`;
       plateauContainer.append(gridRow);
       const columns = row.map(
         (square: string | number, index: number) => "auto"
