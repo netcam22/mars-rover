@@ -16,11 +16,8 @@ function startMoving(event: MouseEvent, thisRobot: HTMLElement) {
   document.body.append(thisRobot);
 
   function moveThisRobot(event: MouseEvent) {
-    if (event.type === "mousemove") {
-      shiftRobot(thisRobot, event.pageX, event.pageY, shiftX, shiftY);
-    }
+    shiftRobot(thisRobot, event.pageX, event.pageY, shiftX, shiftY);
   }
-
   document.addEventListener("mousemove", moveThisRobot);
 
   function dropThisRobot(event: MouseEvent) {
@@ -32,7 +29,6 @@ function startMoving(event: MouseEvent, thisRobot: HTMLElement) {
       showMoveButtons();
     }
   }
-
   document.addEventListener("mouseup", dropThisRobot);
 
   thisRobot.ondragstart = function () {
