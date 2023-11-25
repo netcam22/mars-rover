@@ -45,7 +45,7 @@ const kiteDemo = {
 };
 
 const circleDemo = {
-  gridSize: "2",
+  gridSize: "4",
   gridStyle: "circle",
   inputs: [
     ["A", "12N", "LMLMLMLMM"],
