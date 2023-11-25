@@ -98,7 +98,8 @@ export function getRobotLocation(
   if (myRobot && myRobot.parentElement) {
     const parentId = myRobot.parentElement.id;
     if (parentId) {
-      return makeCoordinates(parentId.replace("_", ""));
+      const idArray = parentId.split("_");
+      return [parseInt(idArray[0]), parseInt(idArray[1])];
     }
   }
   return undefined;
