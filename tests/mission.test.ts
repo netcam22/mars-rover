@@ -2,7 +2,7 @@ import { newPlateau } from "../src/modules/mission";
 
 describe("test mission object properties", () => {
   test("new circle plateau from mission", () => {
-    expect(newPlateau("5", "circle")).toEqual([
+    expect(newPlateau("2", "circle")).toEqual([
       [1, 1, 0, 1, 1],
       [1, 0, 0, 0, 1],
       [0, 0, 0, 0, 0],
