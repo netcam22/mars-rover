@@ -3,33 +3,33 @@ import { showMoveButtons } from "./buttons";
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
   if (thisRobot) {
-    thisRobot.onmousedown = function (event) {
+    thisRobot.onpointerdown = function (event) {
       startMoving(event, thisRobot);
     };
   }
 }
 
-function startMoving(event: MouseEvent, thisRobot: HTMLElement) {
+function startMoving(event: PointerEvent, thisRobot: HTMLElement) {
   const shiftX = event.clientX - thisRobot.getBoundingClientRect().left;
   const shiftY = event.clientY - thisRobot.getBoundingClientRect().top;
 
   document.body.append(thisRobot);
 
-  function moveThisRobot(event: MouseEvent) {
+  function moveThisRobot(event: PointerEvent) {
     shiftRobot(thisRobot, event.pageX, event.pageY, shiftX, shiftY);
   }
-  document.addEventListener("mousemove", moveThisRobot);
+  document.addEventListener("pointermove", moveThisRobot);
 
-  function dropThisRobot(event: MouseEvent) {
+  function dropThisRobot(event: PointerEvent) {
     if (thisRobot && robotDropped(event, thisRobot)) {
-      document.removeEventListener("mouseup", dropThisRobot);
-      document.removeEventListener("mousemove", moveThisRobot);
-      thisRobot.onmousedown = null;
+      document.removeEventListener("pointerup", dropThisRobot);
+      document.removeEventListener("pointermove", moveThisRobot);
+      thisRobot.onpointerdown = null;
       event.preventDefault();
       showMoveButtons();
     }
   }
-  document.addEventListener("mouseup", dropThisRobot);
+  document.addEventListener("pointerup", dropThisRobot);
 
   thisRobot.ondragstart = function () {
     return false;
@@ -49,7 +49,7 @@ function shiftRobot(
   }
 }
 
-function robotDropped(event: MouseEvent, thisRobot: HTMLElement): boolean {
+function robotDropped(event: PointerEvent, thisRobot: HTMLElement): boolean {
   thisRobot.hidden = true;
   const elemBelow: Element | null = document.elementFromPoint(
     event.clientX,
