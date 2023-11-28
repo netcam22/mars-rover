@@ -3,7 +3,9 @@ import { showMoveButtons } from "./buttons";
 export function makeDraggable(thisRobotId: string) {
   const thisRobot = document.getElementById(thisRobotId);
   if (thisRobot) {
+    thisRobot.ondragstart = () => false;
     thisRobot.onpointerdown = function (event) {
+      thisRobot.setPointerCapture(event.pointerId);
       startMoving(event, thisRobot);
     };
   }
@@ -30,10 +32,6 @@ function startMoving(event: PointerEvent, thisRobot: HTMLElement) {
     }
   }
   document.addEventListener("pointerup", dropThisRobot);
-
-  thisRobot.ondragstart = function () {
-    return false;
-  };
 }
 
 function shiftRobot(
