@@ -73,10 +73,10 @@ p {
 }
 
 .sidebar {
-  width: 30%;
+  position: relative;
+  width: 100%;
+  top: 100%;
   align-items: center;
-  position: fixed;
-  top: 0;
   left: 0;
   margin: 0;
   padding: 2%;
@@ -89,8 +89,8 @@ p {
   z-index: 10;
   position: sticky;
   top: 0;
-  left: 42%;
-  width: 48%;
+  left: 0;
+  width: 100%;
   padding: 0;
   box-sizing: border-box;
   background-image: url("../../assets/mars-image.png");
@@ -279,15 +279,15 @@ button {
   display: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   .sidebar {
-    position: relative;
-    width: 100%;
-    top: 100%;
+    position: fixed;
+    width: 30%;
+    top: 0;
   }
 
   .planet {
-    left: 0;
-    width: 100%;
+    left: 42%;
+    width: 48%;
   }
 }
